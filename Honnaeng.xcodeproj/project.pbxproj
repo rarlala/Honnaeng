@@ -10,13 +10,12 @@
 		D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6AF2B971844001B0BE0 /* AppDelegate.swift */; };
 		D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B12B971844001B0BE0 /* SceneDelegate.swift */; };
 		D069E6B42B971844001B0BE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B32B971844001B0BE0 /* ViewController.swift */; };
-		D069E6B72B971844001B0BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D069E6B52B971844001B0BE0 /* Main.storyboard */; };
-		D069E6BA2B971844001B0BE0 /* Honnaeng.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B82B971844001B0BE0 /* Honnaeng.xcdatamodeld */; };
 		D069E6BC2B971847001B0BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D069E6BB2B971847001B0BE0 /* Assets.xcassets */; };
-		D069E6BF2B971847001B0BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D069E6BD2B971847001B0BE0 /* LaunchScreen.storyboard */; };
 		D069E6CA2B971847001B0BE0 /* HonnaengTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6C92B971847001B0BE0 /* HonnaengTests.swift */; };
 		D069E6D42B971847001B0BE0 /* HonnaengUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6D32B971847001B0BE0 /* HonnaengUITests.swift */; };
 		D069E6D62B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6D52B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift */; };
+		D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */; };
+		D069E6E92B971FC4001B0BE0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D069E6E82B971FC4001B0BE0 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,16 +40,15 @@
 		D069E6AF2B971844001B0BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D069E6B12B971844001B0BE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D069E6B32B971844001B0BE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D069E6B62B971844001B0BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D069E6B92B971844001B0BE0 /* Honnaeng.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Honnaeng.xcdatamodel; sourceTree = "<group>"; };
 		D069E6BB2B971847001B0BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D069E6BE2B971847001B0BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D069E6C02B971847001B0BE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D069E6C52B971847001B0BE0 /* HonnaengTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HonnaengTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D069E6C92B971847001B0BE0 /* HonnaengTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonnaengTests.swift; sourceTree = "<group>"; };
 		D069E6CF2B971847001B0BE0 /* HonnaengUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HonnaengUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D069E6D32B971847001B0BE0 /* HonnaengUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonnaengUITests.swift; sourceTree = "<group>"; };
 		D069E6D52B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonnaengUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D069E6E52B971EEF001B0BE0 /* Honnaeng.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Honnaeng.xcdatamodel; sourceTree = "<group>"; };
+		D069E6E82B971FC4001B0BE0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,14 +99,10 @@
 		D069E6AE2B971844001B0BE0 /* Honnaeng */ = {
 			isa = PBXGroup;
 			children = (
-				D069E6AF2B971844001B0BE0 /* AppDelegate.swift */,
-				D069E6B12B971844001B0BE0 /* SceneDelegate.swift */,
+				D069E6E22B97185D001B0BE0 /* Application */,
 				D069E6B32B971844001B0BE0 /* ViewController.swift */,
-				D069E6B52B971844001B0BE0 /* Main.storyboard */,
-				D069E6BB2B971847001B0BE0 /* Assets.xcassets */,
-				D069E6BD2B971847001B0BE0 /* LaunchScreen.storyboard */,
-				D069E6C02B971847001B0BE0 /* Info.plist */,
-				D069E6B82B971844001B0BE0 /* Honnaeng.xcdatamodeld */,
+				D069E6E32B971E6A001B0BE0 /* Resource */,
+				D069E6E72B971F22001B0BE0 /* Model */,
 			);
 			path = Honnaeng;
 			sourceTree = "<group>";
@@ -128,6 +122,33 @@
 				D069E6D52B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift */,
 			);
 			path = HonnaengUITests;
+			sourceTree = "<group>";
+		};
+		D069E6E22B97185D001B0BE0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D069E6AF2B971844001B0BE0 /* AppDelegate.swift */,
+				D069E6B12B971844001B0BE0 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D069E6E32B971E6A001B0BE0 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D069E6BB2B971847001B0BE0 /* Assets.xcassets */,
+				D069E6E82B971FC4001B0BE0 /* Colors.xcassets */,
+				D069E6C02B971847001B0BE0 /* Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		D069E6E72B971F22001B0BE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,9 +255,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D069E6BF2B971847001B0BE0 /* LaunchScreen.storyboard in Resources */,
 				D069E6BC2B971847001B0BE0 /* Assets.xcassets in Resources */,
-				D069E6B72B971844001B0BE0 /* Main.storyboard in Resources */,
+				D069E6E92B971FC4001B0BE0 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,7 +284,7 @@
 				D069E6B42B971844001B0BE0 /* ViewController.swift in Sources */,
 				D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */,
 				D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */,
-				D069E6BA2B971844001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
+				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,25 +319,6 @@
 			targetProxy = D069E6D02B971847001B0BE0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		D069E6B52B971844001B0BE0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D069E6B62B971844001B0BE0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D069E6BD2B971847001B0BE0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D069E6BE2B971847001B0BE0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D069E6D72B971847001B0BE0 /* Debug */ = {
@@ -370,7 +371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -424,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -443,10 +444,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JPCDXBVSAH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Honnaeng/Info.plist;
+				INFOPLIST_FILE = Honnaeng/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -471,10 +471,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JPCDXBVSAH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Honnaeng/Info.plist;
+				INFOPLIST_FILE = Honnaeng/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -608,12 +607,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D069E6B82B971844001B0BE0 /* Honnaeng.xcdatamodeld */ = {
+		D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D069E6B92B971844001B0BE0 /* Honnaeng.xcdatamodel */,
+				D069E6E52B971EEF001B0BE0 /* Honnaeng.xcdatamodel */,
 			);
-			currentVersion = D069E6B92B971844001B0BE0 /* Honnaeng.xcdatamodel */;
+			currentVersion = D069E6E52B971EEF001B0BE0 /* Honnaeng.xcdatamodel */;
 			path = Honnaeng.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
