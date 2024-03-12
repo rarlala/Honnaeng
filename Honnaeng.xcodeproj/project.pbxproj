@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */; };
 		D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6AF2B971844001B0BE0 /* AppDelegate.swift */; };
 		D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B12B971844001B0BE0 /* SceneDelegate.swift */; };
 		D069E6B42B971844001B0BE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B32B971844001B0BE0 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D069E6AC2B971844001B0BE0 /* Honnaeng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honnaeng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D069E6AF2B971844001B0BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D069E6B12B971844001B0BE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D057AD702B9ED26000D929FD /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
 		D069E6A32B971844001B0BE0 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 			children = (
 				D069E6E22B97185D001B0BE0 /* Application */,
 				D069E6B32B971844001B0BE0 /* ViewController.swift */,
+				D057AD702B9ED26000D929FD /* Launch */,
 				D069E6E32B971E6A001B0BE0 /* Resource */,
 				D069E6E72B971F22001B0BE0 /* Model */,
 			);
@@ -255,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */,
 				D069E6BC2B971847001B0BE0 /* Assets.xcassets in Resources */,
 				D069E6E92B971FC4001B0BE0 /* Colors.xcassets in Resources */,
 			);
@@ -446,7 +458,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Honnaeng/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -473,7 +485,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Honnaeng/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
