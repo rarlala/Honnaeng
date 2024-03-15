@@ -139,6 +139,7 @@ final class MainView: UIView {
     // MARK: - function
     private func setUp() {
         configureUI()
+        configureSegmentControl()
         configureFilter()
     }
     
@@ -219,6 +220,16 @@ final class MainView: UIView {
         listSortFilter.menu = UIMenu(options: .displayInline, children: sortMenuChildren)
         listSortFilter.showsMenuAsPrimaryAction =  true
         listSortFilter.changesSelectionAsPrimaryAction =  true
+    }
+    
+    // MARK: - segment control
+    private func configureSegmentControl() {
+        self.segmentControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        self.segmentChanged(_: self.segmentControl)
+    }
+    
+    @objc private func segmentChanged(_ sender: UISegmentedControl) {
+        // TODO: 클릭 시 list filtering 처리 (sender.selectedSegmentIndex 활용)
     }
 }
 
