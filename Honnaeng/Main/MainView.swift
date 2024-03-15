@@ -1,0 +1,207 @@
+//
+//  MainView.swift
+//  Honnaeng
+//
+//  Created by Rarla on 3/15/24.
+//
+
+import UIKit
+
+final class MainView: UIView {
+    
+    // MARK: - init
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setUp()
+    }
+    
+    // MARK: - UI Components
+    private let mainView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 12
+        view.backgroundColor = UIColor(named: "white")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let headerView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
+        view.spacing = 20
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let plusRefrigeratorButton: UIButton = {
+        let button = UIButton()
+        let largeFont = UIFont.systemFont(ofSize: 20)
+        let configuration = UIImage.SymbolConfiguration(font: largeFont)
+        button.setImage(UIImage(systemName: "plus.app", withConfiguration: configuration), for: .normal)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let logoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "혼냉"
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let alertButton: UIButton = {
+        let button = UIButton()
+        let largeFont = UIFont.systemFont(ofSize: 20)
+        let configuration = UIImage.SymbolConfiguration(font: largeFont)
+        button.setImage(UIImage(systemName: "bell", withConfiguration: configuration), for: .normal)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let listBoxView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let segmentControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: ["전체", "💧 냉장", "🧊 냉동"])
+        control.selectedSegmentIndex = 0
+        control.translatesAutoresizingMaskIntoConstraints = false
+        return control
+    }()
+    
+    private let filterBox: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 10
+        view.distribution = .equalSpacing
+        return view
+    }()
+    
+    private let refrigeraterFilter: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor(named: "black"), for: .normal)
+        button.backgroundColor = .red
+        return button
+    }()
+    
+    private let listSortFilter: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor(named: "black"), for: .normal)
+        button.backgroundColor = .blue
+        return button
+    }()
+    
+    private lazy var foodListView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
+        collectionView.backgroundColor = UIColor(named: "blue00")
+        collectionView.layer.cornerRadius = 10
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    private let searchBox: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .equalSpacing
+        view.backgroundColor = UIColor(named: "gray00")
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let searchField: UITextField = {
+        let textField = UITextField()
+        textField.textAlignment = .center
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private let searchIcon: UIButton = {
+        let largeFont = UIFont.systemFont(ofSize: 14)
+        let configuration = UIImage.SymbolConfiguration(font: largeFont)
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "magnifyingglass", withConfiguration: configuration), for: .normal)
+        button.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    // MARK: - private function
+    private func setUp() {
+        headerView.addArrangedSubview(plusRefrigeratorButton)
+        headerView.addArrangedSubview(logoLabel)
+        headerView.addArrangedSubview(alertButton)
+        
+        searchBox.addSubview(searchField)
+        searchBox.addSubview(searchIcon)
+        
+        filterBox.addArrangedSubview(refrigeraterFilter)
+        filterBox.addArrangedSubview(listSortFilter)
+        
+        mainView.addArrangedSubview(headerView)
+        mainView.addArrangedSubview(segmentControl)
+        mainView.addArrangedSubview(filterBox)
+        
+        mainView.addArrangedSubview(foodListView)
+        mainView.addArrangedSubview(searchBox)
+        
+        self.addSubview(mainView)
+        
+        NSLayoutConstraint.activate([
+            mainView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            mainView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            mainView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            mainView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            
+            headerView.heightAnchor.constraint(equalToConstant: 50),
+            
+            refrigeraterFilter.heightAnchor.constraint(equalToConstant: 30),
+            
+            foodListView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            foodListView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            
+            searchBox.heightAnchor.constraint(equalToConstant: 30),
+            searchBox.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            searchBox.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            searchBox.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
+            
+            searchField.topAnchor.constraint(equalTo: searchBox.topAnchor, constant: 2),
+            searchField.widthAnchor.constraint(equalTo: searchBox.widthAnchor, multiplier: 0.9),
+
+            searchIcon.widthAnchor.constraint(equalTo: searchBox.widthAnchor, multiplier: 0.1),
+            searchIcon.topAnchor.constraint(equalTo: searchBox.topAnchor, constant: 2),
+            searchIcon.trailingAnchor.constraint(equalTo: searchBox.trailingAnchor),
+        ])
+    }
+}
+
+// MARK: - Collection View
+extension UIView {
+    private func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .absolute(100))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+            
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 4)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            return section
+        }
+        return layout
+    }
+}
