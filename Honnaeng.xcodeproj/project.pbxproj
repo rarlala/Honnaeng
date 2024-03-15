@@ -22,6 +22,9 @@
 		D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE012BA44E90005D8110 /* FoodGroup.swift */; };
 		D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE032BA45064005D8110 /* FoodUnit.swift */; };
 		D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE052BA49F18005D8110 /* FoodCell.swift */; };
+		D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE0B2BA4A4F7005D8110 /* Font.swift */; };
+		D08ACE0F2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D08ACE0D2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf */; };
+		D08ACE102BA4A6DE005D8110 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		D08ACE012BA44E90005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodGroup.swift; path = ../../../../../../../Documents/FoodGroup.swift; sourceTree = "<group>"; };
 		D08ACE032BA45064005D8110 /* FoodUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
 		D08ACE052BA49F18005D8110 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		D08ACE0B2BA4A4F7005D8110 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		D08ACE0D2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				D069E6E22B97185D001B0BE0 /* Application */,
 				D08ACDFB2BA420D5005D8110 /* Main */,
 				D057AD702B9ED26000D929FD /* Launch */,
+				D08ACE0A2BA4A4E0005D8110 /* Constatnt */,
 				D069E6E32B971E6A001B0BE0 /* Resource */,
 				D069E6E72B971F22001B0BE0 /* Model */,
 			);
@@ -157,6 +164,7 @@
 		D069E6E32B971E6A001B0BE0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D08ACE092BA4A463005D8110 /* Fonts */,
 				D069E6BB2B971847001B0BE0 /* Assets.xcassets */,
 				D069E6E82B971FC4001B0BE0 /* Colors.xcassets */,
 				D069E6C02B971847001B0BE0 /* Info.plist */,
@@ -191,6 +199,23 @@
 				D08ACE032BA45064005D8110 /* FoodUnit.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D08ACE092BA4A463005D8110 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D08ACE0D2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf */,
+				D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D08ACE0A2BA4A4E0005D8110 /* Constatnt */ = {
+			isa = PBXGroup;
+			children = (
+				D08ACE0B2BA4A4F7005D8110 /* Font.swift */,
+			);
+			path = Constatnt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,8 +323,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */,
+				D08ACE0F2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf in Resources */,
 				D069E6BC2B971847001B0BE0 /* Assets.xcassets in Resources */,
 				D069E6E92B971FC4001B0BE0 /* Colors.xcassets in Resources */,
+				D08ACE102BA4A6DE005D8110 /* NotoSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +353,7 @@
 			files = (
 				D069E6B42B971844001B0BE0 /* MainViewController.swift in Sources */,
 				D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */,
+				D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */,
 				D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */,
 				D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */,
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,

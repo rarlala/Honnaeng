@@ -12,8 +12,8 @@ final class FoodCell: UICollectionViewCell {
     private let foodBox: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.distribution = .fillEqually
-        view.alignment = .fill
+        view.distribution = .equalCentering
+//        view.alignment = .center
         view.spacing = 4
         view.layer.borderColor = UIColor(named: "blue02")?.cgColor
         view.layer.borderWidth = 1
@@ -47,6 +47,7 @@ final class FoodCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .Paragraph4
         return label
     }()
     
@@ -70,16 +71,22 @@ final class FoodCell: UICollectionViewCell {
         
         if food.emogi != nil {
             foodBox.addSubview(foodEmoji)
+            
+            NSLayoutConstraint.activate([
+                foodEmoji.topAnchor.constraint(equalTo: foodBox.topAnchor),
+                foodEmoji.leadingAnchor.constraint(equalTo: foodBox.leadingAnchor),
+                foodEmoji.trailingAnchor.constraint(equalTo: foodBox.trailingAnchor),
+            ])
         }
         
         if food.image != nil {
+            foodBox.addSubview(foodImage)
+            
             NSLayoutConstraint.activate([
                 foodImage.topAnchor.constraint(equalTo: foodBox.topAnchor),
                 foodImage.leadingAnchor.constraint(equalTo: foodBox.leadingAnchor),
                 foodImage.trailingAnchor.constraint(equalTo: foodBox.trailingAnchor),
             ])
-            
-            foodBox.addSubview(foodImage)
         }
         
         foodBox.addSubview(foodName)

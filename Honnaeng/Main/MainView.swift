@@ -85,6 +85,7 @@ final class MainView: UIView {
     private let logoLabel: UILabel = {
         let label = UILabel()
         label.text = "혼냉"
+        label.font = .Heading3
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -125,12 +126,14 @@ final class MainView: UIView {
     private let refrigeraterFilter: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
+        button.titleLabel?.font = .Paragraph4
         return button
     }()
     
     private let listSortFilter: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
+        button.titleLabel?.font = .Paragraph4
         return button
     }()
     
@@ -160,7 +163,7 @@ final class MainView: UIView {
     }()
     
     private let searchIcon: UIButton = {
-        let largeFont = UIFont.systemFont(ofSize: 14)
+        let largeFont = UIFont.systemFont(ofSize: 16)
         let configuration = UIImage.SymbolConfiguration(font: largeFont)
         let button = UIButton()
         button.setImage(UIImage(systemName: "magnifyingglass", withConfiguration: configuration), for: .normal)
