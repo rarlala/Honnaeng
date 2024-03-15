@@ -13,7 +13,7 @@ final class FoodCell: UICollectionViewCell {
         let view = UIStackView()
         view.axis = .vertical
         view.distribution = .equalCentering
-//        view.alignment = .center
+        view.alignment = .center
         view.spacing = 4
         view.layer.borderColor = UIColor(named: "blue02")?.cgColor
         view.layer.borderWidth = 1
@@ -39,6 +39,7 @@ final class FoodCell: UICollectionViewCell {
     private let foodEmoji: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font.withSize(30)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -61,7 +62,6 @@ final class FoodCell: UICollectionViewCell {
                         
             foodName.leadingAnchor.constraint(equalTo: foodBox.leadingAnchor),
             foodName.trailingAnchor.constraint(equalTo: foodBox.trailingAnchor),
-            foodName.bottomAnchor.constraint(equalTo: foodBox.bottomAnchor),
         ])
     }
     
@@ -69,27 +69,16 @@ final class FoodCell: UICollectionViewCell {
         foodName.text = food.name
         foodEmoji.text = food.emogi
         
+        foodBox.addSubview(foodName)
+        
         if food.emogi != nil {
             foodBox.addSubview(foodEmoji)
-            
-            NSLayoutConstraint.activate([
-                foodEmoji.topAnchor.constraint(equalTo: foodBox.topAnchor),
-                foodEmoji.leadingAnchor.constraint(equalTo: foodBox.leadingAnchor),
-                foodEmoji.trailingAnchor.constraint(equalTo: foodBox.trailingAnchor),
-            ])
         }
         
         if food.image != nil {
             foodBox.addSubview(foodImage)
-            
-            NSLayoutConstraint.activate([
-                foodImage.topAnchor.constraint(equalTo: foodBox.topAnchor),
-                foodImage.leadingAnchor.constraint(equalTo: foodBox.leadingAnchor),
-                foodImage.trailingAnchor.constraint(equalTo: foodBox.trailingAnchor),
-            ])
         }
         
-        foodBox.addSubview(foodName)
         contentView.addSubview(foodBox)
         
         configuration()
