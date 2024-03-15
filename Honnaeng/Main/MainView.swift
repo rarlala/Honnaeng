@@ -92,14 +92,12 @@ final class MainView: UIView {
     private let refrigeraterFilter: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
-        button.backgroundColor = .red
         return button
     }()
     
     private let listSortFilter: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
-        button.backgroundColor = .blue
         return button
     }()
     
@@ -138,8 +136,13 @@ final class MainView: UIView {
         return button
     }()
     
-    // MARK: - private function
+    // MARK: - function
     private func setUp() {
+        configureUI()
+        configureFilter()
+    }
+    
+    private func configureUI() {
         headerView.addArrangedSubview(plusRefrigeratorButton)
         headerView.addArrangedSubview(logoLabel)
         headerView.addArrangedSubview(alertButton)
@@ -185,11 +188,43 @@ final class MainView: UIView {
             searchIcon.trailingAnchor.constraint(equalTo: searchBox.trailingAnchor),
         ])
     }
+    
+    // MARK: - Drop down filter Setting
+    // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
+    var refrigeraterList: [String] = ["전체 냉장고", "냉장고1", "냉장고2"]
+    var menuChildren: [UIMenuElement] = []
+    
+    var sortList: [String] = ["유통기한 남은 순", "최근 추가 순"]
+    var sortMenuChildren: [UIMenuElement] = []
+    
+    private func configureFilter() {
+        for refrigerater in refrigeraterList {
+            menuChildren.append(UIAction(title: refrigerater, handler: { _ in
+                // TODO: 클릭에 따른 처리 필요
+                print("")
+            }))
+        }
+        
+        refrigeraterFilter.menu = UIMenu(options: .displayInline, children: menuChildren)
+        refrigeraterFilter.showsMenuAsPrimaryAction =  true
+        refrigeraterFilter.changesSelectionAsPrimaryAction =  true
+        
+        for sort in sortList {
+            sortMenuChildren.append(UIAction(title: sort, handler: { _ in
+                // TODO: 클릭에 따른 처리 필요
+                print("")
+            }))
+        }
+        
+        listSortFilter.menu = UIMenu(options: .displayInline, children: sortMenuChildren)
+        listSortFilter.showsMenuAsPrimaryAction =  true
+        listSortFilter.changesSelectionAsPrimaryAction =  true
+    }
 }
 
 // MARK: - Collection View
 extension UIView {
-    private func createLayout() -> UICollectionViewLayout {
+    func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .absolute(100))
