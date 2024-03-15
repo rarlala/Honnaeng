@@ -9,6 +9,39 @@ import UIKit
 
 final class MainView: UIView {
     
+    // MARK: - Diffable DataSource
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, FoodData>
+    
+    enum Section {
+        case main
+    }
+    
+    private var dataSource: DataSource?
+    private var foodData: [FoodData] = [
+        //    TODO: - 첫번째 아이템 추가 버튼으로 구성
+        //    FoodData(name: "➕"),
+            FoodData(name: "사과",
+                     emogi: "🍎",
+                     count: 3,
+                     unit: .quantity,
+                     group: .fruit),
+            FoodData(name: "포도",
+                     emogi: "🍇",
+                     count: 100,
+                     unit: .weight,
+                     group: .fruit),
+            FoodData(name: "계란",
+                     emogi: "🥚",
+                     count: 8,
+                     unit: .quantity,
+                     group: .dairy),
+            FoodData(name: "오징어",
+                     emogi: "🦑",
+                     count: 5,
+                     unit: .quantity,
+                     group: .seaFood),
+        ]
+    
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -141,6 +174,8 @@ final class MainView: UIView {
         configureUI()
         configureSegmentControl()
         configureFilter()
+        configurationCell()
+        setUpSnapshot()
     }
     
     private func configureUI() {
@@ -231,9 +266,33 @@ final class MainView: UIView {
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
         // TODO: 클릭 시 list filtering 처리 (sender.selectedSegmentIndex 활용)
     }
+    
+    // MARK: - snapshot
+    private func setUpSnapshot() {
+        let foods = self.getData()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, FoodData>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(foods)
+        dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func configurationCell() {
+        let foodBoxRegistration = UICollectionView.CellRegistration<FoodCell, FoodData> { cell, indexPath, itemIdentifier in
+            cell.setFoodCell(food: itemIdentifier)
+        }
+                
+        dataSource = DataSource(collectionView: foodListView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
+            return collectionView.dequeueConfiguredReusableCell(using: foodBoxRegistration, for: indexPath, item: identifier)
+        }
+    }
+    
+    // TODO: VM로 분리
+    func getData() -> [FoodData] {
+        return self.foodData
+    }
 }
 
-// MARK: - Collection View
+// MARK: - Collection View Layout
 extension UIView {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
