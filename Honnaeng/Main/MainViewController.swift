@@ -119,37 +119,17 @@ final class MainViewController: UIViewController, MainViewDelegate {
     
     private lazy var foodListView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
-//        collectionView.backgroundColor = UIColor(named: "blue00")
-//        collectionView.layer.cornerRadius = 10
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
-    private let searchBox: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.distribution = .equalSpacing
-        view.backgroundColor = UIColor(named: "gray00")
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    let searchField: UITextField = {
-        let textField = UITextField()
-        textField.textAlignment = .center
+    private let searchField: UISearchTextField = {
+        let textField = UISearchTextField()
+        textField.textAlignment = .left
+        textField.clearButtonMode = .whileEditing
+        textField.backgroundColor = UIColor(named: "gray00")
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
-    }()
-    
-    private let searchIcon: UIButton = {
-        let largeFont = UIFont.systemFont(ofSize: 16)
-        let configuration = UIImage.SymbolConfiguration(font: largeFont)
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "magnifyingglass", withConfiguration: configuration), for: .normal)
-        button.tintColor = .black
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
     
     // MARK: - function
@@ -162,6 +142,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         configurationCell()
         setUpSnapshot()
         configureAddFoodButton()
+        configureSearch()
     }
     
     private func configureUI() {
@@ -174,15 +155,12 @@ final class MainViewController: UIViewController, MainViewDelegate {
         filterBox.addArrangedSubview(refrigeraterFilter)
         filterBox.addArrangedSubview(listSortFilter)
         
-        searchBox.addSubview(searchField)
-        searchBox.addSubview(searchIcon)
-        
         mainView.addArrangedSubview(headerView)
         mainView.addArrangedSubview(segmentControl)
         mainView.addArrangedSubview(filterBox)
         mainView.addArrangedSubview(addFoodButton)
         mainView.addArrangedSubview(foodListView)
-        mainView.addArrangedSubview(searchBox)
+        mainView.addArrangedSubview(searchField)
         
         
         self.view.addSubview(mainView)
@@ -199,18 +177,6 @@ final class MainViewController: UIViewController, MainViewDelegate {
             
             foodListView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
             foodListView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
-            
-            searchBox.heightAnchor.constraint(equalToConstant: 30),
-            searchBox.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
-            searchBox.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
-            searchBox.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
-            
-            searchField.topAnchor.constraint(equalTo: searchBox.topAnchor, constant: 2),
-            searchField.widthAnchor.constraint(equalTo: searchBox.widthAnchor, multiplier: 0.9),
-            
-            searchIcon.widthAnchor.constraint(equalTo: searchBox.widthAnchor, multiplier: 0.1),
-            searchIcon.topAnchor.constraint(equalTo: searchBox.topAnchor, constant: 2),
-            searchIcon.trailingAnchor.constraint(equalTo: searchBox.trailingAnchor),
         ])
     }
     
@@ -293,6 +259,11 @@ final class MainViewController: UIViewController, MainViewDelegate {
         viewModel.addFoodData(food: food)
         setUpSnapshot()
     }
+    
+    // MARK: - search
+    private func configureSearch() {
+        searchField.delegate = self
+    }
 }
 
 
@@ -315,12 +286,26 @@ extension MainViewController {
     }
 }
 
-
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.row
         let uid = viewModel.getFoodData()[idx].uuid
         viewModel.deleteFoodData(uid: uid)
         setUpSnapshot()
+    }
+}
+
+extension MainViewController: UISearchTextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let searchText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+        viewModel.changeSearchText(text: searchText)
+        setUpSnapshot()
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        viewModel.changeSearchText(text: "")
+        setUpSnapshot()
+        return true
     }
 }
