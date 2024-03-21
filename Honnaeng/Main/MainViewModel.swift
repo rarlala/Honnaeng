@@ -55,6 +55,10 @@ final class MainViewModel {
         foodData.append(food)
     }
     
+    func deleteFoodData(idx: Int) {
+        foodData.remove(at: idx)
+    }
+    
     func getFilteringData(type: StorageType) -> [FoodData] {
         switch type {
         case .all:

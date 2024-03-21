@@ -264,6 +264,8 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     private func configurationCell() {
+        foodListView.delegate = self
+        
         let foodBoxRegistration = UICollectionView.CellRegistration<FoodCell, FoodData> { cell, indexPath, itemIdentifier in
             cell.setFoodCell(food: itemIdentifier)
         }
@@ -308,5 +310,14 @@ extension MainViewController {
             return section
         }
         return layout
+    }
+}
+
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        viewModel.deleteFoodData(idx: indexPath.row)
+        setUpSnapshot()
     }
 }
