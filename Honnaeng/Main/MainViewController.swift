@@ -316,8 +316,9 @@ extension MainViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-        viewModel.deleteFoodData(idx: indexPath.row)
+        let idx = indexPath.row
+        let uid = viewModel.getFoodData()[idx].uuid
+        viewModel.deleteFoodData(uid: uid)
         setUpSnapshot()
     }
 }

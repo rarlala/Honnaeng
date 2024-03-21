@@ -55,7 +55,8 @@ final class MainViewModel {
         foodData.append(food)
     }
     
-    func deleteFoodData(idx: Int) {
+    func deleteFoodData(uid: UUID) {
+        guard let idx = foodData.firstIndex(where: { $0.uuid == uid }) else { return }
         foodData.remove(at: idx)
     }
     
