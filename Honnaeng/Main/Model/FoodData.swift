@@ -13,11 +13,11 @@ struct FoodData: Hashable {
     var count: Int
     var unit: FoodUnit
     var group: FoodGroup
+    var exDate: Date
     var storageType: StorageType
     var storageName: String?
     var image: UIImage?
     var emogi: String?
-    var dueDate: Date?
     var memo: String?
     
     static func == (lhs: FoodData, rhs: FoodData) -> Bool {

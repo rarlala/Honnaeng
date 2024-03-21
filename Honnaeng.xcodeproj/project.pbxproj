@@ -17,7 +17,6 @@
 		D069E6D62B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6D52B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift */; };
 		D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */; };
 		D069E6E92B971FC4001B0BE0 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D069E6E82B971FC4001B0BE0 /* Colors.xcassets */; };
-		D08ACDFD2BA42173005D8110 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACDFC2BA42173005D8110 /* MainView.swift */; };
 		D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACDFF2BA44E59005D8110 /* FoodData.swift */; };
 		D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE012BA44E90005D8110 /* FoodGroup.swift */; };
 		D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE032BA45064005D8110 /* FoodUnit.swift */; };
@@ -62,7 +61,6 @@
 		D069E6D52B971847001B0BE0 /* HonnaengUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HonnaengUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D069E6E52B971EEF001B0BE0 /* Honnaeng.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Honnaeng.xcdatamodel; sourceTree = "<group>"; };
 		D069E6E82B971FC4001B0BE0 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		D08ACDFC2BA42173005D8110 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D08ACDFF2BA44E59005D8110 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		D08ACE012BA44E90005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodGroup.swift; path = ../../../../../../../Documents/FoodGroup.swift; sourceTree = "<group>"; };
 		D08ACE032BA45064005D8110 /* FoodUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 			children = (
 				D08ACDFE2BA44E51005D8110 /* Model */,
 				D069E6B32B971844001B0BE0 /* MainViewController.swift */,
-				D08ACDFC2BA42173005D8110 /* MainView.swift */,
 				D08ACE052BA49F18005D8110 /* FoodCell.swift */,
 				D08ACE132BA7E66E005D8110 /* MainViewModel.swift */,
 				D08ACE172BA7F0B8005D8110 /* FoodAddViewController.swift */,
@@ -369,7 +366,6 @@
 				D08ACE122BA4B06D005D8110 /* StorageType.swift in Sources */,
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
-				D08ACDFD2BA42173005D8110 /* MainView.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
 				D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */,

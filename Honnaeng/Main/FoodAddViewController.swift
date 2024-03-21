@@ -127,15 +127,25 @@ final class FoodAddViewController: UIViewController {
         return control
     }()
     
+    private let dateLineStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.text = "date"
+        label.text = "유통기한"
         return label
     }()
     
-    private let dateTextField: UICalendarView = {
-        let textField = UICalendarView()
-        return textField
+    private let datePicker: UIDatePicker = {
+        let view = UIDatePicker()
+        view.datePickerMode = .date
+        view.locale = Locale(identifier: "ko-KR")
+        return view
     }()
     
     private let memoLineStackView: UIStackView = {
@@ -198,6 +208,9 @@ final class FoodAddViewController: UIViewController {
         countLineStackView.addArrangedSubview(countTextField)
         countLineStackView.addArrangedSubview(countControl)
         
+        dateLineStackView.addArrangedSubview(dateLabel)
+        dateLineStackView.addArrangedSubview(datePicker)
+        
         memoLineStackView.addArrangedSubview(memoLabel)
         memoLineStackView.addArrangedSubview(memoTextField)
         
@@ -209,6 +222,7 @@ final class FoodAddViewController: UIViewController {
         mainView.addArrangedSubview(typeLabel)
         mainView.addArrangedSubview(nameLineStackView)
         mainView.addArrangedSubview(countLineStackView)
+        mainView.addArrangedSubview(dateLineStackView)
         mainView.addArrangedSubview(memoLineStackView)
         mainView.addArrangedSubview(buttonLineStackView)
         
@@ -269,18 +283,18 @@ final class FoodAddViewController: UIViewController {
         
         let type = typeLabel.selectedSegmentIndex == 0 ? StorageType.fridge : StorageType.fridge
         
-        // TODO : 추가할 수 있을때만
+        // TODO : 추가할 수 있을때만, error 처리
         if let name = nameTextField.text,
            let count = countTextField.text,
            let countNum = Int(count),
            let selectGroup = groupFilter.currentTitle,
            let group = FoodGroup(rawValue: selectGroup),
            let memo = memoTextField.text {
-            
             let food = FoodData(name: name,
                                 count: countNum,
                                 unit: .quantity,
                                 group: group,
+                                exDate: datePicker.date,
                                 storageType: type,
                                 memo: memo)
             

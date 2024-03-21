@@ -80,7 +80,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }()
     
     private let segmentControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["전체", "💧 냉장", "🧊 냉동"])
+        let control = UISegmentedControl(items: ["전체", "💨 냉장", "❄️ 냉동"])
         control.selectedSegmentIndex = 0
         control.translatesAutoresizingMaskIntoConstraints = false
         return control

@@ -8,11 +8,13 @@
 import Foundation
 
 final class MainViewModel {
+    
     private var foodData: [FoodData] = [
         FoodData(name: "사과",
                  count: 3,
                  unit: .quantity,
                  group: .fruit,
+                 exDate: Calendar.current.date(byAdding: .day, value: 10, to: Date()) ?? Date(),
                  storageType: .fridge,
                  storageName: "냉장고1",
                  emogi: "🍎"),
@@ -20,6 +22,7 @@ final class MainViewModel {
                  count: 100,
                  unit: .weight,
                  group: .fruit,
+                 exDate: Calendar.current.date(byAdding: .day, value: 7, to: Date()) ?? Date(),
                  storageType: .fridge,
                  storageName: "냉장고2",
                  emogi: "🍇"),
@@ -27,6 +30,7 @@ final class MainViewModel {
                  count: 8,
                  unit: .quantity,
                  group: .dairy,
+                 exDate: Calendar.current.date(byAdding: .day, value: 5, to: Date()) ?? Date(),
                  storageType: .fridge,
                  storageName: "냉장고1",
                  emogi: "🥚"),
@@ -34,6 +38,7 @@ final class MainViewModel {
                  count: 5,
                  unit: .quantity,
                  group: .seaFood,
+                 exDate: Calendar.current.date(byAdding: .day, value: 1, to: Date()) ?? Date(),
                  storageType: .frozen,
                  storageName: "냉장고2",
                  emogi: "🦑"),
