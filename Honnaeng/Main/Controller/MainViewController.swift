@@ -10,6 +10,7 @@ import UIKit
 protocol MainViewDelegate {
     func addFoodData(food: FoodData)
     func updateFoodData(food: FoodData)
+    func deleteFoodData(uid: UUID)
 }
 
 final class MainViewController: UIViewController, MainViewDelegate {
@@ -266,6 +267,11 @@ final class MainViewController: UIViewController, MainViewDelegate {
         setUpSnapshot()
     }
     
+    func deleteFoodData(uid: UUID) {
+        viewModel.deleteFoodData(uid: uid)
+        setUpSnapshot()
+    }
+    
     // MARK: - search
     private func configureSearch() {
         searchField.delegate = self
@@ -302,12 +308,6 @@ extension MainViewController: UICollectionViewDelegate {
         foodAddView.savedData = foodData
         foodAddView.delegate = self
         present(foodAddView, animated: true)
-        
-//        MARK: - 삭제 필요 시 아래 코드 사용
-//        let idx = indexPath.row
-//        let uid = viewModel.getFoodData()[idx].uuid
-//        viewModel.deleteFoodData(uid: uid)
-//        setUpSnapshot()
     }
 }
 

@@ -44,6 +44,13 @@ final class FoodDetailViewController: UIViewController {
         return label
     }()
     
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("삭제", for: .normal)
+        button.setTitleColor(UIColor(named: "red02"), for: .normal)
+        return button
+    }()
+    
     private let storageLineStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -267,16 +274,20 @@ final class FoodDetailViewController: UIViewController {
         mainView.addArrangedSubview(dateLineStackView)
         mainView.addArrangedSubview(emojiLineStackView)
         mainView.addArrangedSubview(memoLineStackView)
+        
+        mainView.addArrangedSubview(deleteButton)
         mainView.addArrangedSubview(buttonLineStackView)
         
-        view.addSubview(mainView)
         view.backgroundColor = UIColor(named: "white")
+        view.addSubview(mainView)
         
         NSLayoutConstraint.activate([
             mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10),
             mainView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            
+            deleteButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
             
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
             groupFilter.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.3),
@@ -339,8 +350,18 @@ final class FoodDetailViewController: UIViewController {
     }
     
     private func configureButton() {
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        deleteButton.isHidden = mode == .add ? true : false
+        
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func deleteButtonTapped() {
+        // TODO: 삭제 전 안내 팝업
+        guard let uid = savedData?.uuid else { return }
+        self.delegate?.deleteFoodData(uid: uid)
+        self.dismiss(animated: true)
     }
     
     @objc private func cancelButtonTapped() {
