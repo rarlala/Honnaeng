@@ -349,7 +349,7 @@ final class FoodDetailViewController: UIViewController {
     
     @objc private func confirmButtonTapped() {
         
-        let type = typeLabel.selectedSegmentIndex == 0 ? StorageType.fridge : StorageType.fridge
+        let type: StorageType = typeLabel.selectedSegmentIndex == 0 ? .fridge : .frozen
         
         // TODO : 추가할 수 있을때만, error 처리
         if let name = nameTextField.text,
