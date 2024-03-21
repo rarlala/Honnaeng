@@ -15,9 +15,6 @@ final class FoodCell: UICollectionViewCell {
         view.distribution = .equalCentering
         view.alignment = .center
         view.spacing = 4
-        view.layer.borderColor = UIColor(named: "blue02")?.cgColor
-        view.layer.borderWidth = 1
-        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

@@ -119,8 +119,8 @@ final class MainViewController: UIViewController, MainViewDelegate {
     
     private lazy var foodListView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
-        collectionView.backgroundColor = UIColor(named: "blue00")
-        collectionView.layer.cornerRadius = 10
+//        collectionView.backgroundColor = UIColor(named: "blue00")
+//        collectionView.layer.cornerRadius = 10
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -171,11 +171,11 @@ final class MainViewController: UIViewController, MainViewDelegate {
         headerView.addArrangedSubview(logoLabel)
         headerView.addArrangedSubview(alertButton)
         
-        searchBox.addSubview(searchField)
-        searchBox.addSubview(searchIcon)
-        
         filterBox.addArrangedSubview(refrigeraterFilter)
         filterBox.addArrangedSubview(listSortFilter)
+        
+        searchBox.addSubview(searchField)
+        searchBox.addSubview(searchIcon)
         
         mainView.addArrangedSubview(headerView)
         mainView.addArrangedSubview(segmentControl)
@@ -183,6 +183,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         mainView.addArrangedSubview(addFoodButton)
         mainView.addArrangedSubview(foodListView)
         mainView.addArrangedSubview(searchBox)
+        
         
         self.view.addSubview(mainView)
         
