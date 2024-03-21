@@ -214,15 +214,12 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     // MARK: - Drop down filter Setting
-    // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
-    var refrigeraterList: [String] = ["전체 냉장고", "냉장고1", "냉장고2"]
-    var menuChildren: [UIMenuElement] = []
     
-    var sortList: [String] = ["유통기한 남은 순", "최근 추가 순"]
+    var menuChildren: [UIMenuElement] = []
     var sortMenuChildren: [UIMenuElement] = []
     
     private func configureFilter() {
-        for refrigerater in refrigeraterList {
+        for refrigerater in viewModel.getRefrigeraterList() {
             menuChildren.append(UIAction(title: refrigerater, handler: { _ in
                 // TODO: 클릭에 따른 처리 필요
                 print("")
@@ -233,7 +230,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         refrigeraterFilter.showsMenuAsPrimaryAction =  true
         refrigeraterFilter.changesSelectionAsPrimaryAction =  true
         
-        for sort in sortList {
+        for sort in viewModel.getSortList() {
             sortMenuChildren.append(UIAction(title: sort, handler: { _ in
                 // TODO: 클릭에 따른 처리 필요
                 print("")
@@ -252,7 +249,9 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     @objc private func segmentChanged(_ sender: UISegmentedControl) {
-        // TODO: 클릭 시 list filtering 처리 (sender.selectedSegmentIndex 활용)
+        guard let type = StorageType(rawValue: sender.selectedSegmentIndex) else { return }
+        viewModel.changeStorageType(type: type)
+        setUpSnapshot()
     }
     
     // MARK: - snapshot

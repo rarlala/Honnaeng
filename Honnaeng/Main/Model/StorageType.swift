@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum StorageType {
+enum StorageType: Int {
     case all, fridge, frozen
 }

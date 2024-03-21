@@ -39,11 +39,42 @@ final class MainViewModel {
                  emogi: "🦑"),
     ]
     
+    private var storageType: StorageType = .all
+    
+    // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
+    private var refrigeraterList: [String] = ["전체 냉장고", "냉장고1", "냉장고2"]
+    
+    private var sortList: [String] = ["유통기한 남은 순", "최근 추가 순"]
+    
     func getFoodData() -> [FoodData] {
-        return foodData
+        let food = getFilteringData(type: storageType)
+        return food
     }
     
     func addFoodData(food: FoodData) {
         foodData.append(food)
+    }
+    
+    func getFilteringData(type: StorageType) -> [FoodData] {
+        switch type {
+        case .all:
+            return foodData
+        case .fridge:
+            return foodData.filter{ $0.storageType == .fridge }
+        case .frozen:
+            return foodData.filter{ $0.storageType == .frozen }
+        }
+    }
+    
+    func changeStorageType(type: StorageType) {
+        self.storageType = type
+    }
+    
+    func getRefrigeraterList() -> [String] {
+        return self.refrigeraterList
+    }
+    
+    func getSortList() -> [String] {
+        return self.sortList
     }
 }
