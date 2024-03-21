@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainViewDelegate {
     func addFoodData(food: FoodData)
+    func updateFoodData(food: FoodData)
 }
 
 final class MainViewController: UIViewController, MainViewDelegate {
@@ -249,7 +250,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     @objc func addFood() {
-        let foodAddView = FoodAddViewController()
+        let foodAddView = FoodDetailViewController()
         foodAddView.modalPresentationStyle = .fullScreen
         foodAddView.delegate = self
         present(foodAddView, animated: true)
@@ -260,12 +261,16 @@ final class MainViewController: UIViewController, MainViewDelegate {
         setUpSnapshot()
     }
     
+    func updateFoodData(food: FoodData) {
+        viewModel.updateFoodData(food: food)
+        setUpSnapshot()
+    }
+    
     // MARK: - search
     private func configureSearch() {
         searchField.delegate = self
     }
 }
-
 
 // MARK: - Collection View Layout
 extension MainViewController {
@@ -289,9 +294,20 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.row
-        let uid = viewModel.getFoodData()[idx].uuid
-        viewModel.deleteFoodData(uid: uid)
-        setUpSnapshot()
+        let foodData = viewModel.getFoodData()[idx]
+        
+        let foodAddView = FoodDetailViewController()
+        foodAddView.modalPresentationStyle = .fullScreen
+        foodAddView.mode = .update
+        foodAddView.savedData = foodData
+        foodAddView.delegate = self
+        present(foodAddView, animated: true)
+        
+//        MARK: - 삭제 필요 시 아래 코드 사용
+//        let idx = indexPath.row
+//        let uid = viewModel.getFoodData()[idx].uuid
+//        viewModel.deleteFoodData(uid: uid)
+//        setUpSnapshot()
     }
 }
 

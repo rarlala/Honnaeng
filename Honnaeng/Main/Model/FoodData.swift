@@ -8,7 +8,7 @@
 import UIKit
 
 struct FoodData: Hashable {
-    let uuid = UUID()
+    var uuid = UUID()
     var createDate = Date.now
     let name: String
     var count: Int
@@ -22,7 +22,14 @@ struct FoodData: Hashable {
     var memo: String?
     
     static func == (lhs: FoodData, rhs: FoodData) -> Bool {
-        return lhs.uuid == rhs.uuid
+        return lhs.uuid == rhs.uuid &&
+                lhs.name == rhs.name &&
+                lhs.count == rhs.count &&
+                lhs.unit == rhs.unit &&
+                lhs.group == rhs.group &&
+                lhs.exDate == rhs.exDate &&
+                lhs.storageType == rhs.storageType &&
+                lhs.emogi == rhs.emogi
     }
     
     func hash(into hasher: inout Hasher) {

@@ -1,5 +1,5 @@
 //
-//  FoodAddViewController.swift
+//  FoodDetailViewController.swift
 //  Honnaeng
 //
 //  Created by Rarla on 3/18/24.
@@ -7,13 +7,22 @@
 
 import UIKit
 
-final class FoodAddViewController: UIViewController {
+final class FoodDetailViewController: UIViewController {
+    
+    enum pageMode {
+        case add, update
+    }
     
     var delegate: MainViewDelegate?
+    var mode: pageMode = .add
+    var savedData: FoodData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        if mode == .update {
+            setData()
+        }
         configureButton()
         configureFilter()
     }
@@ -22,14 +31,14 @@ final class FoodAddViewController: UIViewController {
         let view = UIStackView()
         view.axis = .vertical
         view.alignment = .fill
-        view.spacing = 10
+        view.spacing = 24
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "직접 입력"
+        label.text = mode == .add ? "직접 입력" : "재료 수정"
         label.textAlignment = .center
         label.font = .Heading3
         return label
@@ -81,6 +90,9 @@ final class FoodAddViewController: UIViewController {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
+        button.backgroundColor = UIColor(named: "purple02")
+        button.setTitleColor(UIColor(named: "white"), for: .normal)
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -88,6 +100,7 @@ final class FoodAddViewController: UIViewController {
     private let nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "이름"
+        textField.textAlignment = .right
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -116,6 +129,7 @@ final class FoodAddViewController: UIViewController {
     private let countTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "숫자를 입력하세요"
+        textField.textAlignment = .right
         textField.keyboardType = .numberPad
         return textField
     }()
@@ -130,6 +144,7 @@ final class FoodAddViewController: UIViewController {
     private let dateLineStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
+        //        view.distribution = .fillProportionally
         view.spacing = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -148,9 +163,32 @@ final class FoodAddViewController: UIViewController {
         return view
     }()
     
+    private let emojiLineStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let emojiLabel: UILabel = {
+        let label = UILabel()
+        label.text = "이모지"
+        return label
+    }()
+    
+    private let emojiTextField: EmojiTextField = {
+        let textField = EmojiTextField()
+        textField.placeholder = "이모지를 입력하세요."
+        textField.textAlignment = .right
+        return textField
+    }()
+    
     private let memoLineStackView: UIStackView = {
         let view = UIStackView()
-        view.axis = .vertical
+        view.axis = .horizontal
+        view.alignment = .leading
+        view.distribution = .fillProportionally
         view.spacing = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -189,17 +227,18 @@ final class FoodAddViewController: UIViewController {
         return button
     }()
     
-    private let addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let button = UIButton()
-        button.setTitle("추가", for: .normal)
+        let title = self.mode == .add ? "추가" : "저장"
+        button.setTitle(title, for: .normal)
         button.backgroundColor = UIColor(named: "blue03")
         button.layer.cornerRadius = 10
         return button
     }()
     
     private func configureUI() {
-//        storageLineStackView.addArrangedSubview(storageLabel)
-//        storageLineStackView.addArrangedSubview(storageTextField)
+        //        storageLineStackView.addArrangedSubview(storageLabel)
+        //        storageLineStackView.addArrangedSubview(storageTextField)
         
         nameLineStackView.addArrangedSubview(groupFilter)
         nameLineStackView.addArrangedSubview(nameTextField)
@@ -211,6 +250,9 @@ final class FoodAddViewController: UIViewController {
         dateLineStackView.addArrangedSubview(dateLabel)
         dateLineStackView.addArrangedSubview(datePicker)
         
+        emojiLineStackView.addArrangedSubview(emojiLabel)
+        emojiLineStackView.addArrangedSubview(emojiTextField)
+        
         memoLineStackView.addArrangedSubview(memoLabel)
         memoLineStackView.addArrangedSubview(memoTextField)
         
@@ -218,11 +260,12 @@ final class FoodAddViewController: UIViewController {
         buttonLineStackView.addArrangedSubview(addButton)
         
         mainView.addArrangedSubview(titleLabel)
-//        mainView.addArrangedSubview(storageLineStackView)
+        //        mainView.addArrangedSubview(storageLineStackView)
         mainView.addArrangedSubview(typeLabel)
         mainView.addArrangedSubview(nameLineStackView)
         mainView.addArrangedSubview(countLineStackView)
         mainView.addArrangedSubview(dateLineStackView)
+        mainView.addArrangedSubview(emojiLineStackView)
         mainView.addArrangedSubview(memoLineStackView)
         mainView.addArrangedSubview(buttonLineStackView)
         
@@ -242,27 +285,52 @@ final class FoodAddViewController: UIViewController {
             
             buttonLineStackView.heightAnchor.constraint(equalToConstant: 50),
             addButton.widthAnchor.constraint(equalTo: buttonLineStackView.widthAnchor, multiplier: 0.6),
-            
         ])
     }
     
+    private func setData() {
+        guard let type = savedData?.storageType,
+              let name = savedData?.name,
+              let count = savedData?.count,
+              let unit = savedData?.unit,
+              let exDate = savedData?.exDate
+        else { return }
+        
+        typeLabel.selectedSegmentIndex = type == .fridge ? 0 : 1
+        nameTextField.text = name
+        countTextField.text = String(count)
+        countControl.selectedSegmentIndex = unit == .quantity ? 0 : 1
+        datePicker.date = exDate
+        
+        if let emogi = savedData?.emogi {
+            emojiTextField.text = emogi
+        }
+        
+        if let memo = savedData?.memo {
+            memoTextField.text = memo
+        }
+    }
+    
     private func configureFilter() {
-//        for refrigerater in storageList {
-//            storageMenuChildren.append(UIAction(title: refrigerater, handler: { _ in
-//                // TODO: 클릭에 따른 처리 필요
-//                print("")
-//            }))
-//        }
-//        
-//        storageFilter.menu = UIMenu(options: .displayInline, children: storageMenuChildren)
-//        storageFilter.showsMenuAsPrimaryAction = true
-//        storageFilter.changesSelectionAsPrimaryAction = true
+        //        for refrigerater in storageList {
+        //            storageMenuChildren.append(UIAction(title: refrigerater, handler: { _ in
+        //                // TODO: 클릭에 따른 처리 필요
+        //                print("")
+        //            }))
+        //        }
+        //
+        //        storageFilter.menu = UIMenu(options: .displayInline, children: storageMenuChildren)
+        //        storageFilter.showsMenuAsPrimaryAction = true
+        //        storageFilter.changesSelectionAsPrimaryAction = true
+        
         
         for group in FoodGroup.allCases {
-            groupMenuChildren.append(UIAction(title: group.rawValue, handler: { _ in
-                // TODO: 클릭에 따른 처리 필요
-                print("")
-            }))
+            groupMenuChildren.append(UIAction(title: group.rawValue, handler: { _ in }))
+        }
+        
+        if mode == .update,
+           let idx = groupMenuChildren.firstIndex(where: {$0.title == savedData?.group.rawValue}) {
+            groupMenuChildren.swapAt(idx, 0)
         }
         
         groupFilter.menu = UIMenu(options: .displayInline, children: groupMenuChildren)
@@ -272,14 +340,14 @@ final class FoodAddViewController: UIViewController {
     
     private func configureButton() {
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
-        addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
     }
     
     @objc private func cancelButtonTapped() {
         self.dismiss(animated: true)
     }
     
-    @objc private func addButtonTapped() {
+    @objc private func confirmButtonTapped() {
         
         let type = typeLabel.selectedSegmentIndex == 0 ? StorageType.fridge : StorageType.fridge
         
@@ -289,16 +357,28 @@ final class FoodAddViewController: UIViewController {
            let countNum = Int(count),
            let selectGroup = groupFilter.currentTitle,
            let group = FoodGroup(rawValue: selectGroup),
+           let emoji = emojiTextField.text,
            let memo = memoTextField.text {
-            let food = FoodData(name: name,
+            
+            var food = FoodData(name: name,
                                 count: countNum,
                                 unit: .quantity,
                                 group: group,
                                 exDate: datePicker.date,
                                 storageType: type,
+                                emogi: emoji,
                                 memo: memo)
             
-            delegate?.addFoodData(food: food)
+            switch mode {
+            case .add:
+                delegate?.addFoodData(food: food)
+            case .update:
+                guard let data = savedData else { return }
+                food.uuid = data.uuid
+                food.createDate = data.createDate
+                delegate?.updateFoodData(food: food)
+            }
+            
             self.dismiss(animated: true)
         }
     }

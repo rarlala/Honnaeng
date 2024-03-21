@@ -26,8 +26,9 @@
 		D08ACE102BA4A6DE005D8110 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */; };
 		D08ACE122BA4B06D005D8110 /* StorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE112BA4B06D005D8110 /* StorageType.swift */; };
 		D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE132BA7E66E005D8110 /* MainViewModel.swift */; };
-		D08ACE182BA7F0B8005D8110 /* FoodAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE172BA7F0B8005D8110 /* FoodAddViewController.swift */; };
+		D08ACE182BA7F0B8005D8110 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE172BA7F0B8005D8110 /* FoodDetailViewController.swift */; };
 		D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE192BAC77A8005D8110 /* ListSortType.swift */; };
+		D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,9 +72,10 @@
 		D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Medium.ttf"; sourceTree = "<group>"; };
 		D08ACE112BA4B06D005D8110 /* StorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageType.swift; sourceTree = "<group>"; };
 		D08ACE132BA7E66E005D8110 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		D08ACE172BA7F0B8005D8110 /* FoodAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddViewController.swift; sourceTree = "<group>"; };
+		D08ACE172BA7F0B8005D8110 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
 		D08ACE192BAC77A8005D8110 /* ListSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSortType.swift; sourceTree = "<group>"; };
 		D08ACE1C2BAC781B005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroup.swift; sourceTree = "<group>"; };
+		D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +197,7 @@
 				D069E6B32B971844001B0BE0 /* MainViewController.swift */,
 				D08ACE052BA49F18005D8110 /* FoodCell.swift */,
 				D08ACE132BA7E66E005D8110 /* MainViewModel.swift */,
-				D08ACE172BA7F0B8005D8110 /* FoodAddViewController.swift */,
+				D08ACE172BA7F0B8005D8110 /* FoodDetailViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				D08ACE0B2BA4A4F7005D8110 /* Font.swift */,
+				D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */,
 			);
 			path = Constatnt;
 			sourceTree = "<group>";
@@ -374,10 +377,11 @@
 				D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */,
 				D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */,
 				D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */,
-				D08ACE182BA7F0B8005D8110 /* FoodAddViewController.swift in Sources */,
+				D08ACE182BA7F0B8005D8110 /* FoodDetailViewController.swift in Sources */,
 				D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */,
 				D08ACE122BA4B06D005D8110 /* StorageType.swift in Sources */,
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,
+				D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
 				D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */,
