@@ -83,5 +83,5 @@ final class FoodCell: UICollectionViewCell {
         
         configuration()
     }
-}
 
+}

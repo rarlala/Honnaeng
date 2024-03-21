@@ -21,25 +21,33 @@ final class MainView: UIView {
         //    TODO: - 첫번째 아이템 추가 버튼으로 구성
         //    FoodData(name: "➕"),
             FoodData(name: "사과",
-                     emogi: "🍎",
                      count: 3,
                      unit: .quantity,
-                     group: .fruit),
+                     group: .fruit,
+                     storageType: .fridge,
+                     storageName: "냉장고1",
+                     emogi: "🍎"),
             FoodData(name: "포도",
-                     emogi: "🍇",
                      count: 100,
                      unit: .weight,
-                     group: .fruit),
+                     group: .fruit,
+                     storageType: .fridge,
+                     storageName: "냉장고2",
+                     emogi: "🍇"),
             FoodData(name: "계란",
-                     emogi: "🥚",
                      count: 8,
                      unit: .quantity,
-                     group: .dairy),
+                     group: .dairy,
+                     storageType: .fridge,
+                     storageName: "냉장고1",
+                     emogi: "🥚"),
             FoodData(name: "오징어",
-                     emogi: "🦑",
                      count: 5,
                      unit: .quantity,
-                     group: .seaFood),
+                     group: .seaFood,
+                     storageType: .frozen,
+                     storageName: "냉장고2",
+                     emogi: "🦑"),
         ]
     
     // MARK: - init
@@ -155,7 +163,7 @@ final class MainView: UIView {
         return view
     }()
     
-    private let searchField: UITextField = {
+    let searchField: UITextField = {
         let textField = UITextField()
         textField.textAlignment = .center
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -296,7 +304,7 @@ final class MainView: UIView {
 }
 
 // MARK: - Collection View Layout
-extension UIView {
+extension MainView {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
