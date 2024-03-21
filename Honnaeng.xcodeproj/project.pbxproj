@@ -27,6 +27,7 @@
 		D08ACE122BA4B06D005D8110 /* StorageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE112BA4B06D005D8110 /* StorageType.swift */; };
 		D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE132BA7E66E005D8110 /* MainViewModel.swift */; };
 		D08ACE182BA7F0B8005D8110 /* FoodAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE172BA7F0B8005D8110 /* FoodAddViewController.swift */; };
+		D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE192BAC77A8005D8110 /* ListSortType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		D08ACE112BA4B06D005D8110 /* StorageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageType.swift; sourceTree = "<group>"; };
 		D08ACE132BA7E66E005D8110 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		D08ACE172BA7F0B8005D8110 /* FoodAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddViewController.swift; sourceTree = "<group>"; };
+		D08ACE192BAC77A8005D8110 /* ListSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSortType.swift; sourceTree = "<group>"; };
+		D08ACE1C2BAC781B005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +190,7 @@
 		D08ACDFB2BA420D5005D8110 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D08ACE1B2BAC7813005D8110 /* Enum */,
 				D08ACDFE2BA44E51005D8110 /* Model */,
 				D069E6B32B971844001B0BE0 /* MainViewController.swift */,
 				D08ACE052BA49F18005D8110 /* FoodCell.swift */,
@@ -201,8 +205,6 @@
 			children = (
 				D08ACDFF2BA44E59005D8110 /* FoodData.swift */,
 				D08ACE012BA44E90005D8110 /* FoodGroup.swift */,
-				D08ACE032BA45064005D8110 /* FoodUnit.swift */,
-				D08ACE112BA4B06D005D8110 /* StorageType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -222,6 +224,17 @@
 				D08ACE0B2BA4A4F7005D8110 /* Font.swift */,
 			);
 			path = Constatnt;
+			sourceTree = "<group>";
+		};
+		D08ACE1B2BAC7813005D8110 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				D08ACE1C2BAC781B005D8110 /* FoodGroup.swift */,
+				D08ACE032BA45064005D8110 /* FoodUnit.swift */,
+				D08ACE112BA4B06D005D8110 /* StorageType.swift */,
+				D08ACE192BAC77A8005D8110 /* ListSortType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,6 +380,7 @@
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
+				D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
 				D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */,
 			);

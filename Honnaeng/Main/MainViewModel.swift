@@ -45,15 +45,15 @@ final class MainViewModel {
     ]
     
     private var storageType: StorageType = .all
+    private var sortType: ListSortType = .expirationDateimminent
     
     // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
     private var refrigeraterList: [String] = ["전체 냉장고", "냉장고1", "냉장고2"]
     
-    private var sortList: [String] = ["유통기한 남은 순", "최근 추가 순"]
-    
     func getFoodData() -> [FoodData] {
-        let food = getFilteringData(type: storageType)
-        return food
+        let filteredFood = getFilteringData()
+        let sortedFood = sortedList(data: filteredFood)
+        return sortedFood
     }
     
     func addFoodData(food: FoodData) {
@@ -65,8 +65,8 @@ final class MainViewModel {
         foodData.remove(at: idx)
     }
     
-    func getFilteringData(type: StorageType) -> [FoodData] {
-        switch type {
+    func getFilteringData() -> [FoodData] {
+        switch self.storageType {
         case .all:
             return foodData
         case .fridge:
@@ -84,7 +84,24 @@ final class MainViewModel {
         return self.refrigeraterList
     }
     
-    func getSortList() -> [String] {
-        return self.sortList
+    func getSortTypeList() -> [String] {
+        var list: [String] = []
+        for type in ListSortType.allCases {
+            list.append(type.rawValue)
+        }
+        return list
+    }
+    
+    func changeSortType(type: ListSortType) {
+        sortType = type
+    }
+    
+    func sortedList(data: [FoodData]) -> [FoodData] {
+        switch sortType {
+        case .expirationDateimminent:
+            return data.sorted { $0.exDate < $1.exDate }
+        case .recentlyAdded:
+            return data.sorted { $0.createDate > $1.createDate }
+        }
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 struct FoodData: Hashable {
     let uuid = UUID()
+    var createDate = Date.now
     let name: String
     var count: Int
     var unit: FoodUnit

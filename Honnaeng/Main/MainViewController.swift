@@ -231,10 +231,11 @@ final class MainViewController: UIViewController, MainViewDelegate {
         refrigeraterFilter.showsMenuAsPrimaryAction =  true
         refrigeraterFilter.changesSelectionAsPrimaryAction =  true
         
-        for sort in viewModel.getSortList() {
-            sortMenuChildren.append(UIAction(title: sort, handler: { _ in
-                // TODO: 클릭에 따른 처리 필요
-                print("")
+        for sort in viewModel.getSortTypeList() {
+            sortMenuChildren.append(UIAction(title: sort, handler: { select in
+                guard let type = ListSortType(rawValue: select.title) else { return }
+                self.viewModel.changeSortType(type: type)
+                self.setUpSnapshot()
             }))
         }
         
