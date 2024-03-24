@@ -11,6 +11,7 @@ protocol MainViewDelegate {
     func addFoodData(food: FoodData)
     func updateFoodData(food: FoodData)
     func deleteFoodData(uid: UUID)
+    func updateStorageData()
 }
 
 final class MainViewController: UIViewController, MainViewDelegate {
@@ -110,6 +111,10 @@ final class MainViewController: UIViewController, MainViewDelegate {
         return button
     }()
     
+    func updateStorageData() {
+        configureRefrigeraterList()
+    }
+    
     private let addFoodButton: UIButton = {
         let button = UIButton()
         button.setTitle("➕", for: .normal)
@@ -139,6 +144,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         super.viewDidLoad()
         
         configureUI()
+        configurePlusRefrigeratorButton()
         configureSegmentControl()
         configureFilter()
         configurationCell()
@@ -182,12 +188,25 @@ final class MainViewController: UIViewController, MainViewDelegate {
         ])
     }
     
+    private func configurePlusRefrigeratorButton() {
+        plusRefrigeratorButton.addTarget(self, action: #selector(addRefrigerator), for: .touchUpInside)
+    }
+    
+    @objc private func addRefrigerator() {
+        let storageView = StorageListTableViewController(viewModel: viewModel, delegate: self)
+        storageView.modalPresentationStyle = .fullScreen
+        present(storageView, animated: true)
+    }
+    
     // MARK: - Drop down filter Setting
-    
-    var menuChildren: [UIMenuElement] = []
-    var sortMenuChildren: [UIMenuElement] = []
-    
     private func configureFilter() {
+        configureRefrigeraterList()
+        configureSortFilter()
+    }
+    
+    private func configureRefrigeraterList() {
+        var menuChildren: [UIMenuElement] = []
+        menuChildren.append(UIAction(title: "전체", handler: { _ in }))
         for refrigerater in viewModel.getRefrigeraterList() {
             menuChildren.append(UIAction(title: refrigerater, handler: { _ in
                 // TODO: 클릭에 따른 처리 필요
@@ -198,7 +217,10 @@ final class MainViewController: UIViewController, MainViewDelegate {
         refrigeraterFilter.menu = UIMenu(options: .displayInline, children: menuChildren)
         refrigeraterFilter.showsMenuAsPrimaryAction =  true
         refrigeraterFilter.changesSelectionAsPrimaryAction =  true
-        
+    }
+    
+    private func configureSortFilter() {
+        var sortMenuChildren: [UIMenuElement] = []
         for sort in viewModel.getSortTypeList() {
             sortMenuChildren.append(UIAction(title: sort, handler: { select in
                 guard let type = ListSortType(rawValue: select.title) else { return }

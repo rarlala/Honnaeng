@@ -49,7 +49,7 @@ final class MainViewModel {
     private var searchText: String = ""
     
     // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
-    private var refrigeraterList: [String] = ["전체 냉장고", "냉장고1", "냉장고2"]
+    private var refrigeraterList: [String] = ["냉장고1", "냉장고2"]
     
     func getFoodData() -> [FoodData] {
         let filteredFood = getFilteringData()
@@ -90,6 +90,22 @@ final class MainViewModel {
     
     func getRefrigeraterList() -> [String] {
         return self.refrigeraterList
+    }
+    
+    func addRefrigeraterList(name: String) {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if refrigeraterList.contains(name) {
+            // TODO : Error, 이미 존재하는 냉장고 이름입니다.
+        } else {
+            refrigeraterList.append(name)
+            refrigeraterList = refrigeraterList.sorted()
+        }
+    }
+    
+    func updateRefrigeraterList(name: String, idx: Int?) {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let idx = idx else { return }
+        refrigeraterList[idx] = name
     }
     
     func getSortTypeList() -> [String] {

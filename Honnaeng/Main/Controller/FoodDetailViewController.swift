@@ -323,16 +323,16 @@ final class FoodDetailViewController: UIViewController {
     }
     
     private func configureFilter() {
-        //        for refrigerater in storageList {
-        //            storageMenuChildren.append(UIAction(title: refrigerater, handler: { _ in
-        //                // TODO: 클릭에 따른 처리 필요
-        //                print("")
-        //            }))
-        //        }
-        //
-        //        storageFilter.menu = UIMenu(options: .displayInline, children: storageMenuChildren)
-        //        storageFilter.showsMenuAsPrimaryAction = true
-        //        storageFilter.changesSelectionAsPrimaryAction = true
+        for refrigerater in storageList {
+            storageMenuChildren.append(UIAction(title: refrigerater, handler: { _ in
+                // TODO: 클릭에 따른 처리 필요
+                print("")
+            }))
+        }
+
+        storageFilter.menu = UIMenu(options: .displayInline, children: storageMenuChildren)
+        storageFilter.showsMenuAsPrimaryAction = true
+        storageFilter.changesSelectionAsPrimaryAction = true
         
         
         for group in FoodGroup.allCases {
