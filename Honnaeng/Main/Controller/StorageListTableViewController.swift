@@ -46,6 +46,7 @@ class StorageListTableViewController: UITableViewController {
         var content = cell.defaultContentConfiguration()
         content.text = viewModel?.getRefrigeraterList()[indexPath.row]
         cell.contentConfiguration = content
+        cell.selectionStyle = .none
         return cell
     }
     
