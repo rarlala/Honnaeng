@@ -16,7 +16,7 @@ struct FoodData: Hashable {
     var group: FoodGroup
     var exDate: Date
     var storageType: StorageType
-    var storageName: String?
+    var storageName: String
     var image: UIImage?
     var emogi: String?
     var memo: String?

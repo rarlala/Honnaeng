@@ -9,12 +9,12 @@ import UIKit
 
 final class FoodDetailViewController: UIViewController {
     
-    enum pageMode {
+    enum PageMode {
         case add, update
     }
     
     var delegate: MainViewDelegate?
-    var mode: pageMode = .add
+    var mode: PageMode = .add
     var savedData: FoodData?
     
     override func viewDidLoad() {
@@ -54,27 +54,22 @@ final class FoodDetailViewController: UIViewController {
     private let storageLineStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
+        view.alignment = .fill
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    // TODO: 냉장고 구분 추가 시 작업
-    //    private let storageLabel: UILabel = {
-    //        let label = UILabel()
-    //        label.text = "냉장고 선택"
-    //        return label
-    //    }()
-    //
-    //    private let storageTextField: UITextField = {
-    //        let textField = UITextField()
-    //        textField.placeholder = "냉장고"
-    //        return textField
-    //    }()
+    private let storageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "냉장고 선택"
+        return label
+    }()
     
     private let storageFilter: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
+        button.titleLabel?.textAlignment = .right
         return button
     }()
     
@@ -95,7 +90,6 @@ final class FoodDetailViewController: UIViewController {
     
     private let groupFilter: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
         button.backgroundColor = UIColor(named: "purple02")
         button.setTitleColor(UIColor(named: "white"), for: .normal)
@@ -114,7 +108,7 @@ final class FoodDetailViewController: UIViewController {
     
     // MARK: - Drop down filter Setting
     // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
-    var storageList: [String] = ["전체 냉장고", "냉장고1", "냉장고2"]
+    var storageList: [String] = ["냉장고1", "냉장고2"]
     var storageMenuChildren: [UIMenuElement] = []
     
     var groupMenuChildren: [UIMenuElement] = []
@@ -244,8 +238,8 @@ final class FoodDetailViewController: UIViewController {
     }()
     
     private func configureUI() {
-        //        storageLineStackView.addArrangedSubview(storageLabel)
-        //        storageLineStackView.addArrangedSubview(storageTextField)
+        storageLineStackView.addArrangedSubview(storageLabel)
+        storageLineStackView.addArrangedSubview(storageFilter)
         
         nameLineStackView.addArrangedSubview(groupFilter)
         nameLineStackView.addArrangedSubview(nameTextField)
@@ -267,7 +261,7 @@ final class FoodDetailViewController: UIViewController {
         buttonLineStackView.addArrangedSubview(addButton)
         
         mainView.addArrangedSubview(titleLabel)
-        //        mainView.addArrangedSubview(storageLineStackView)
+        mainView.addArrangedSubview(storageLineStackView)
         mainView.addArrangedSubview(typeLabel)
         mainView.addArrangedSubview(nameLineStackView)
         mainView.addArrangedSubview(countLineStackView)
@@ -290,6 +284,7 @@ final class FoodDetailViewController: UIViewController {
             deleteButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
             
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
+            storageFilter.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.5),
             groupFilter.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.3),
             
             memoTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -329,7 +324,13 @@ final class FoodDetailViewController: UIViewController {
                 print("")
             }))
         }
-
+        
+        if mode == .update,
+           let name = savedData?.storageName,
+           let idx = storageMenuChildren.firstIndex(where: {$0.title == name}) {
+            storageMenuChildren.swapAt(idx, 0)
+        }
+        
         storageFilter.menu = UIMenu(options: .displayInline, children: storageMenuChildren)
         storageFilter.showsMenuAsPrimaryAction = true
         storageFilter.changesSelectionAsPrimaryAction = true
@@ -378,6 +379,7 @@ final class FoodDetailViewController: UIViewController {
            let countNum = Int(count),
            let selectGroup = groupFilter.currentTitle,
            let group = FoodGroup(rawValue: selectGroup),
+           let storageName = storageFilter.currentTitle,
            let emoji = emojiTextField.text,
            let memo = memoTextField.text {
             
@@ -387,6 +389,7 @@ final class FoodDetailViewController: UIViewController {
                                 group: group,
                                 exDate: datePicker.date,
                                 storageType: type,
+                                storageName: storageName,
                                 emogi: emoji,
                                 memo: memo)
             

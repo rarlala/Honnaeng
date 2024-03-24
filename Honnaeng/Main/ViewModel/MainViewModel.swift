@@ -9,6 +9,14 @@ import Foundation
 
 final class MainViewModel {
     
+//    init() {
+//        configureRefrigeraterList()
+//    }
+//    
+//    private func configureRefrigeraterList() {
+//        // TODO : 리스트 추가
+//    }
+    
     private var foodData: [FoodData] = [
         FoodData(name: "사과",
                  count: 3,
