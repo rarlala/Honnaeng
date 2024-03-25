@@ -13,9 +13,9 @@ final class PickerPopupViewController: UIViewController {
     var selectOption: String
     var completionHandler: ((String) -> Void)?
     
-    init(datas: [String]) {
+    init(datas: [String], selectOption: String) {
         self.datas = datas
-        self.selectOption = datas[0]
+        self.selectOption = selectOption
         super.init(nibName: nil, bundle: nil)
     }
     

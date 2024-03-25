@@ -35,7 +35,6 @@ final class FoodDetailViewController: UIViewController {
         }
         configureButton()
         configurePicker()
-        configureFilter()
     }
     
     private let mainView: UIStackView = {
@@ -72,7 +71,7 @@ final class FoodDetailViewController: UIViewController {
     
     private let storageLabel: UILabel = {
         let label = UILabel()
-        label.text = "냉장고 선택"
+        label.text = "냉장고명"
         return label
     }()
     
@@ -100,7 +99,7 @@ final class FoodDetailViewController: UIViewController {
         return view
     }()
     
-    private let groupFilter: UIButton = {
+    private let groupName: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = .Paragraph4
         button.backgroundColor = UIColor(named: "purple02")
@@ -247,7 +246,7 @@ final class FoodDetailViewController: UIViewController {
         storageLineStackView.addArrangedSubview(storageLabel)
         storageLineStackView.addArrangedSubview(storageName)
         
-        nameLineStackView.addArrangedSubview(groupFilter)
+        nameLineStackView.addArrangedSubview(groupName)
         nameLineStackView.addArrangedSubview(nameTextField)
         
         countLineStackView.addArrangedSubview(countLabel)
@@ -291,7 +290,7 @@ final class FoodDetailViewController: UIViewController {
             
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
             storageName.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.5),
-            groupFilter.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.3),
+            groupName.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.3),
             
             memoTextField.heightAnchor.constraint(equalToConstant: 50),
             
@@ -323,34 +322,44 @@ final class FoodDetailViewController: UIViewController {
         }
     }
     
+    // MARK: - Picker
     private func configurePicker() {
-        storageName.setTitle(viewModel.getRefrigeraterList()[0], for: .normal)
-        storageName.addTarget(self, action: #selector(showPickerPopup), for: .touchUpInside)
+        let storageTitle = mode == .update ? savedData?.storageName : viewModel.getRefrigeraterList()[0]
+        storageName.setTitle(storageTitle, for: .normal)
+        storageName.addTarget(self, action: #selector(showRefrigeraterPicker), for: .touchUpInside)
+        
+        let groupTitle = mode == .update ? savedData?.group.rawValue : FoodGroup.allCases[0].rawValue
+        groupName.setTitle(groupTitle, for: .normal)
+        groupName.addTarget(self, action: #selector(showGroupPicker), for: .touchUpInside)
     }
     
-    @objc private func showPickerPopup() {
-        let popup = PickerPopupViewController(datas: self.viewModel.getRefrigeraterList())
-        popup.completionHandler = { selectOption in
+    @objc private func showRefrigeraterPicker() {
+        guard let currentSelect = storageName.titleLabel?.text else { return }
+        showPickerPopup(datas: viewModel.getRefrigeraterList(), selectOption: currentSelect) { selectOption in
             self.storageName.setTitle(selectOption, for: .normal)
         }
+    }
+    
+    @objc private func showGroupPicker() {
+        guard let currentSelect = groupName.titleLabel?.text else { return }
+        
+        var datas: [String] = []
+        for group in FoodGroup.allCases {
+            datas.append(group.rawValue)
+        }
+                    
+        showPickerPopup(datas: datas, selectOption: currentSelect) { selectOption in
+            self.groupName.setTitle(selectOption, for: .normal)
+        }
+    }
+    
+    private func showPickerPopup(datas: [String], selectOption: String ,completionHandler: @escaping (String) -> Void) {
+        let popup = PickerPopupViewController(datas: datas, selectOption: selectOption)
+        popup.completionHandler = completionHandler
         self.present(popup, animated: true)
     }
     
-    private func configureFilter() {
-        for group in FoodGroup.allCases {
-            groupMenuChildren.append(UIAction(title: group.rawValue, handler: { _ in }))
-        }
-        
-        if mode == .update,
-           let idx = groupMenuChildren.firstIndex(where: {$0.title == savedData?.group.rawValue}) {
-            groupMenuChildren.swapAt(idx, 0)
-        }
-        
-        groupFilter.menu = UIMenu(options: .displayInline, children: groupMenuChildren)
-        groupFilter.showsMenuAsPrimaryAction = true
-        groupFilter.changesSelectionAsPrimaryAction = true
-    }
-    
+    // MARK: - Button Action
     private func configureButton() {
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         deleteButton.isHidden = mode == .add ? true : false
@@ -380,7 +389,7 @@ final class FoodDetailViewController: UIViewController {
         if let name = nameTextField.text,
            let count = countTextField.text,
            let countNum = Int(count),
-           let selectGroup = groupFilter.currentTitle,
+           let selectGroup = groupName.titleLabel?.text,
            let group = FoodGroup(rawValue: selectGroup),
            let storageName = storageName.titleLabel?.text,
            let emoji = emojiTextField.text,
