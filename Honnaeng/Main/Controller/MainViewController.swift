@@ -204,11 +204,14 @@ final class MainViewController: UIViewController, MainViewDelegate {
     
     private func configureRefrigeraterList() {
         var menuChildren: [UIMenuElement] = []
-        menuChildren.append(UIAction(title: "전체", handler: { _ in }))
+        menuChildren.append(UIAction(title: "전체", handler: { select in
+            self.viewModel.changeStorageName(name: select.title)
+            self.setUpSnapshot()
+        }))
         for refrigerater in viewModel.getRefrigeraterList() {
-            menuChildren.append(UIAction(title: refrigerater, handler: { _ in
-                // TODO: 클릭에 따른 처리 필요
-                print("")
+            menuChildren.append(UIAction(title: refrigerater, handler: { select in
+                self.viewModel.changeStorageName(name: select.title)
+                self.setUpSnapshot()
             }))
         }
         

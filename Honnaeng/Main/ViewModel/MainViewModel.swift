@@ -53,6 +53,7 @@ final class MainViewModel {
     ]
     
     private var storageType: StorageType = .all
+    private var storageName: String = "전체"
     private var sortType: ListSortType = .expirationDateimminent
     private var searchText: String = ""
     
@@ -60,10 +61,11 @@ final class MainViewModel {
     private var refrigeraterList: [String] = ["냉장고1", "냉장고2"]
     
     func getFoodData() -> [FoodData] {
-        let filteredFood = getFilteringData()
-        let sortedFood = sortedList(data: filteredFood)
-        let searchFood = searchList(data: sortedFood)
-        return searchText != "" ? searchFood : sortedFood
+        let storageTypeFilterData = getStorageTypeFilterData()
+        let storageNameFilterData = getStorageNameFilterData(data: storageTypeFilterData)
+        let sortedFoodData = sortedList(data: storageNameFilterData)
+        let searchFoodData = searchList(data: sortedFoodData)
+        return searchText != "" ? searchFoodData : sortedFoodData
     }
     
     func addFoodData(food: FoodData) {
@@ -81,7 +83,7 @@ final class MainViewModel {
         foodData.remove(at: idx)
     }
     
-    private func getFilteringData() -> [FoodData] {
+    private func getStorageTypeFilterData() -> [FoodData] {
         switch self.storageType {
         case .all:
             return foodData
@@ -94,6 +96,14 @@ final class MainViewModel {
     
     func changeStorageType(type: StorageType) {
         self.storageType = type
+    }
+    
+    private func getStorageNameFilterData(data: [FoodData]) -> [FoodData] {
+        return storageName == "전체" ? data : foodData.filter{ $0.storageName == storageName }
+    }
+    
+    func changeStorageName(name: String) {
+        self.storageName = name
     }
     
     func getRefrigeraterList() -> [String] {
