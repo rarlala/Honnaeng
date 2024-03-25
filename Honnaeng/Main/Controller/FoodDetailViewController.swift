@@ -210,9 +210,7 @@ final class FoodDetailViewController: UIViewController {
     private let memoTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "메모를 입력하세요"
-        textField.layer.borderColor = UIColor(named: "gray01")?.cgColor
-        textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 10
+        textField.textAlignment = .right
         textField.setContentHuggingPriority(.defaultLow, for: .vertical)
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -292,7 +290,7 @@ final class FoodDetailViewController: UIViewController {
             storageName.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.5),
             groupName.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.3),
             
-            memoTextField.heightAnchor.constraint(equalToConstant: 50),
+            memoTextField.heightAnchor.constraint(equalToConstant: 40),
             
             buttonLineStackView.heightAnchor.constraint(equalToConstant: 50),
             addButton.widthAnchor.constraint(equalTo: buttonLineStackView.widthAnchor, multiplier: 0.6),
