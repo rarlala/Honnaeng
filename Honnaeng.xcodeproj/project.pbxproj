@@ -31,6 +31,10 @@
 		D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */; };
 		D08ACE232BAD7DEA005D8110 /* StorageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */; };
 		D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */; };
+		D08ACE2A2BB17D50005D8110 /* Storage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE262BB17D50005D8110 /* Storage+CoreDataClass.swift */; };
+		D08ACE2B2BB17D50005D8110 /* Storage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE272BB17D50005D8110 /* Storage+CoreDataProperties.swift */; };
+		D08ACE2C2BB17D50005D8110 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE282BB17D50005D8110 /* Food+CoreDataClass.swift */; };
+		D08ACE2D2BB17D50005D8110 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE292BB17D50005D8110 /* Food+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +84,10 @@
 		D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageListTableViewController.swift; sourceTree = "<group>"; };
 		D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopupViewController.swift; sourceTree = "<group>"; };
+		D08ACE262BB17D50005D8110 /* Storage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D08ACE272BB17D50005D8110 /* Storage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D08ACE282BB17D50005D8110 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D08ACE292BB17D50005D8110 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +196,10 @@
 		D069E6E72B971F22001B0BE0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D08ACE262BB17D50005D8110 /* Storage+CoreDataClass.swift */,
+				D08ACE272BB17D50005D8110 /* Storage+CoreDataProperties.swift */,
+				D08ACE282BB17D50005D8110 /* Food+CoreDataClass.swift */,
+				D08ACE292BB17D50005D8110 /* Food+CoreDataProperties.swift */,
 				D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */,
 			);
 			path = Model;
@@ -415,6 +427,10 @@
 				D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
+				D08ACE2A2BB17D50005D8110 /* Storage+CoreDataClass.swift in Sources */,
+				D08ACE2B2BB17D50005D8110 /* Storage+CoreDataProperties.swift in Sources */,
+				D08ACE2C2BB17D50005D8110 /* Food+CoreDataClass.swift in Sources */,
+				D08ACE2D2BB17D50005D8110 /* Food+CoreDataProperties.swift in Sources */,
 				D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */,
 				D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
