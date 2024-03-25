@@ -8,9 +8,7 @@
 import UIKit
 
 protocol MainViewDelegate {
-    func addFoodData(food: FoodData)
-    func updateFoodData(food: FoodData)
-    func deleteFoodData(uid: UUID)
+    func updateMainViewData()
     func updateStorageData()
 }
 
@@ -273,24 +271,13 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     @objc func addFood() {
-        let foodAddView = FoodDetailViewController()
+        let foodAddView = FoodDetailViewController(viewModel: viewModel)
         foodAddView.modalPresentationStyle = .fullScreen
         foodAddView.delegate = self
         present(foodAddView, animated: true)
     }
     
-    func addFoodData(food: FoodData) {
-        viewModel.addFoodData(food: food)
-        setUpSnapshot()
-    }
-    
-    func updateFoodData(food: FoodData) {
-        viewModel.updateFoodData(food: food)
-        setUpSnapshot()
-    }
-    
-    func deleteFoodData(uid: UUID) {
-        viewModel.deleteFoodData(uid: uid)
+    func updateMainViewData() {
         setUpSnapshot()
     }
     
@@ -324,7 +311,7 @@ extension MainViewController: UICollectionViewDelegate {
         let idx = indexPath.row
         let foodData = viewModel.getFoodData()[idx]
         
-        let foodAddView = FoodDetailViewController()
+        let foodAddView = FoodDetailViewController(viewModel: viewModel)
         foodAddView.modalPresentationStyle = .fullScreen
         foodAddView.mode = .update
         foodAddView.savedData = foodData

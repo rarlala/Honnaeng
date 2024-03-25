@@ -13,9 +13,19 @@ final class FoodDetailViewController: UIViewController {
         case add, update
     }
     
-    var delegate: MainViewDelegate?
     var mode: PageMode = .add
+    var viewModel: MainViewModel
+    var delegate: MainViewDelegate?
     var savedData: FoodData?
+    
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +34,7 @@ final class FoodDetailViewController: UIViewController {
             setData()
         }
         configureButton()
+        configurePicker()
         configureFilter()
     }
     
@@ -65,11 +76,12 @@ final class FoodDetailViewController: UIViewController {
         return label
     }()
     
-    private let storageFilter: UIButton = {
+    private let storageName: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
-        button.titleLabel?.font = .Paragraph4
+        button.titleLabel?.font = .Paragraph3
         button.titleLabel?.textAlignment = .right
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -106,11 +118,6 @@ final class FoodDetailViewController: UIViewController {
         return textField
     }()
     
-    // MARK: - Drop down filter Setting
-    // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
-    var storageList: [String] = ["냉장고1", "냉장고2"]
-    var storageMenuChildren: [UIMenuElement] = []
-    
     var groupMenuChildren: [UIMenuElement] = []
     
     private let countLineStackView: UIStackView = {
@@ -145,7 +152,6 @@ final class FoodDetailViewController: UIViewController {
     private let dateLineStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        //        view.distribution = .fillProportionally
         view.spacing = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -239,7 +245,7 @@ final class FoodDetailViewController: UIViewController {
     
     private func configureUI() {
         storageLineStackView.addArrangedSubview(storageLabel)
-        storageLineStackView.addArrangedSubview(storageFilter)
+        storageLineStackView.addArrangedSubview(storageName)
         
         nameLineStackView.addArrangedSubview(groupFilter)
         nameLineStackView.addArrangedSubview(nameTextField)
@@ -284,7 +290,7 @@ final class FoodDetailViewController: UIViewController {
             deleteButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
             
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
-            storageFilter.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.5),
+            storageName.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.5),
             groupFilter.widthAnchor.constraint(equalTo: nameLineStackView.widthAnchor, multiplier: 0.3),
             
             memoTextField.heightAnchor.constraint(equalToConstant: 50),
@@ -317,25 +323,20 @@ final class FoodDetailViewController: UIViewController {
         }
     }
     
+    private func configurePicker() {
+        storageName.setTitle(viewModel.getRefrigeraterList()[0], for: .normal)
+        storageName.addTarget(self, action: #selector(showPickerPopup), for: .touchUpInside)
+    }
+    
+    @objc private func showPickerPopup() {
+        let popup = PickerPopupViewController(datas: self.viewModel.getRefrigeraterList())
+        popup.completionHandler = { selectOption in
+            self.storageName.setTitle(selectOption, for: .normal)
+        }
+        self.present(popup, animated: true)
+    }
+    
     private func configureFilter() {
-        for refrigerater in storageList {
-            storageMenuChildren.append(UIAction(title: refrigerater, handler: { _ in
-                // TODO: 클릭에 따른 처리 필요
-                print("")
-            }))
-        }
-        
-        if mode == .update,
-           let name = savedData?.storageName,
-           let idx = storageMenuChildren.firstIndex(where: {$0.title == name}) {
-            storageMenuChildren.swapAt(idx, 0)
-        }
-        
-        storageFilter.menu = UIMenu(options: .displayInline, children: storageMenuChildren)
-        storageFilter.showsMenuAsPrimaryAction = true
-        storageFilter.changesSelectionAsPrimaryAction = true
-        
-        
         for group in FoodGroup.allCases {
             groupMenuChildren.append(UIAction(title: group.rawValue, handler: { _ in }))
         }
@@ -361,7 +362,8 @@ final class FoodDetailViewController: UIViewController {
     @objc private func deleteButtonTapped() {
         // TODO: 삭제 전 안내 팝업
         guard let uid = savedData?.uuid else { return }
-        self.delegate?.deleteFoodData(uid: uid)
+        self.viewModel.deleteFoodData(uid: uid)
+        self.delegate?.updateMainViewData()
         self.dismiss(animated: true)
     }
     
@@ -373,13 +375,14 @@ final class FoodDetailViewController: UIViewController {
         
         let type: StorageType = typeLabel.selectedSegmentIndex == 0 ? .fridge : .frozen
         
-        // TODO : 추가할 수 있을때만, error 처리
+        // TODO : 추가할 수 있을때만 추가
+        // TODO : error 처리
         if let name = nameTextField.text,
            let count = countTextField.text,
            let countNum = Int(count),
            let selectGroup = groupFilter.currentTitle,
            let group = FoodGroup(rawValue: selectGroup),
-           let storageName = storageFilter.currentTitle,
+           let storageName = storageName.titleLabel?.text,
            let emoji = emojiTextField.text,
            let memo = memoTextField.text {
             
@@ -395,12 +398,14 @@ final class FoodDetailViewController: UIViewController {
             
             switch mode {
             case .add:
-                delegate?.addFoodData(food: food)
+                viewModel.addFoodData(food: food)
+                delegate?.updateMainViewData()
             case .update:
                 guard let data = savedData else { return }
                 food.uuid = data.uuid
                 food.createDate = data.createDate
-                delegate?.updateFoodData(food: food)
+                viewModel.updateFoodData(food: food)
+                delegate?.updateMainViewData()
             }
             
             self.dismiss(animated: true)
