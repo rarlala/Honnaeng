@@ -22,29 +22,35 @@ class StorageListTableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureUI()
-    }
-    
-    private func configureUI() {
-        
-    }
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let count = viewModel?.getRefrigeraterList().count else { return 0 }
+        guard let count = viewModel?.getStorageList().count else { return 0 }
+        
+        print(count)
+    
+        if count == 0 {
+            let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            noDataLabel.text = "+ 버튼을 클릭해 냉장고를 추가해보세요!"
+            noDataLabel.textColor = UIColor.black
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .none
+        } else {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine
+        }
+        
         return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         var content = cell.defaultContentConfiguration()
-        content.text = viewModel?.getRefrigeraterList()[indexPath.row]
+        content.text = viewModel?.getStorageList()[indexPath.row]
         cell.contentConfiguration = content
         cell.selectionStyle = .none
         return cell
@@ -53,6 +59,7 @@ class StorageListTableViewController: UITableViewController {
     // MARK: - Table Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        headerView.backgroundColor = UIColor(named: "white")
         
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width - 10, height: headerView.frame.height - 10)
@@ -88,7 +95,7 @@ class StorageListTableViewController: UITableViewController {
     
     @objc private func addButtonTapped() {
         let confirmAction: (_ name: String, _ idx: Int?) -> Void = {name, idx in
-            self.viewModel?.addRefrigeraterList(name: name)
+            self.viewModel?.addStorageList(name: name)
         }
         
         showPopup(title: "냉장고 추가", message: "추가할 냉장고 이름을 입력하세요",  confirmButtonTitle: "추가", defaultText: nil, idx: nil, confirmAction: confirmAction)
@@ -101,15 +108,23 @@ class StorageListTableViewController: UITableViewController {
     // MARK: - Table Cell Edit
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let text = viewModel?.getRefrigeraterList()[indexPath.row]
+        let text = viewModel?.getStorageList()[indexPath.row]
         let editConfirmAction: (_ name: String, _ idx: Int?) -> Void = {[self] name, idx in
-            self.viewModel?.updateRefrigeraterList(name: name, idx: idx)
+            if let viewModel = viewModel,
+                viewModel.getStorageList().contains(name) {
+                // TODO : Error, 이미 존재하는 냉장고 이름입니다.
+                print("Error, 이미 존재하는 냉장고 이름입니다.")
+            } else {
+                self.viewModel?.updateStorageList(prevName: text, newName: name, idx: idx)
+            }
         }
         let editItem = UIContextualAction(style: .normal, title: "수정") { contextualAction, view, boolValue in
             self.showPopup(title: "냉장고 이름 수정", message: "수정할 이름을 입력하세요", confirmButtonTitle: "수정", defaultText: text, idx: indexPath.row, confirmAction: editConfirmAction)
         }
         editItem.image = UIImage(systemName: "pencil")
         
+        
+        // TODO: delete 필요 여부 고민
 //        let deleteConfirmAction: (_ name: String) -> Void = {[self] name in
 ////            self.viewModel?.delete(name: name)
 //        }
@@ -119,6 +134,7 @@ class StorageListTableViewController: UITableViewController {
 //        deleteItem.image = UIImage(systemName: "trash")
         
 //        let swipeAction = UISwipeActionsConfiguration(actions: [deleteItem, editItem])
+        
         let swipeAction = UISwipeActionsConfiguration(actions: [editItem])
         return swipeAction
     }

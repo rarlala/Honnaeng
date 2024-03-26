@@ -9,13 +9,11 @@ import Foundation
 
 final class MainViewModel {
     
-//    init() {
-//        configureRefrigeraterList()
-//    }
-//    
-//    private func configureRefrigeraterList() {
-//        // TODO : 리스트 추가
-//    }
+    private let coreData = CoreDataManager.shared
+    private var storageType: StorageType = .all
+    private var storageName: String = "전체"
+    private var sortType: ListSortType = .expirationDateimminent
+    private var searchText: String = ""
     
     private var foodData: [FoodData] = [
         FoodData(name: "사과",
@@ -51,14 +49,6 @@ final class MainViewModel {
                  storageName: "냉장고2",
                  emogi: "🦑"),
     ]
-    
-    private var storageType: StorageType = .all
-    private var storageName: String = "전체"
-    private var sortType: ListSortType = .expirationDateimminent
-    private var searchText: String = ""
-    
-    // TODO: 유저가 추가한 냉장고 목록으로 변경 필요
-    private var refrigeraterList: [String] = ["냉장고1", "냉장고2"]
     
     func getFoodData() -> [FoodData] {
         let storageTypeFilterData = getStorageTypeFilterData()
@@ -106,26 +96,6 @@ final class MainViewModel {
         self.storageName = name
     }
     
-    func getRefrigeraterList() -> [String] {
-        return self.refrigeraterList
-    }
-    
-    func addRefrigeraterList(name: String) {
-        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        if refrigeraterList.contains(name) {
-            // TODO : Error, 이미 존재하는 냉장고 이름입니다.
-        } else {
-            refrigeraterList.append(name)
-            refrigeraterList = refrigeraterList.sorted()
-        }
-    }
-    
-    func updateRefrigeraterList(name: String, idx: Int?) {
-        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard let idx = idx else { return }
-        refrigeraterList[idx] = name
-    }
-    
     func getSortTypeList() -> [String] {
         var list: [String] = []
         for type in ListSortType.allCases {
@@ -153,5 +123,27 @@ final class MainViewModel {
     
     private func searchList(data: [FoodData]) -> [FoodData] {
         return data.filter { $0.name.contains(searchText) }
+    }
+    
+    // MARK: - Storage List
+    
+    func getStorageList() -> [String] {
+        return coreData.getStroageList()
+    }
+    
+    func addStorageList(name: String) {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if coreData.getStroageList().contains(name) {
+            // TODO : Error, 이미 존재하는 냉장고 이름입니다.
+            print("Error, 이미 존재하는 냉장고 이름입니다.")
+        } else {
+            coreData.createStorage(name: name)
+        }
+    }
+    
+    func updateStorageList(prevName: String?, newName: String, idx: Int?) {
+        guard let prevName = prevName else { return }
+        let newName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
+        coreData.updateStorage(prevName: prevName, newName: newName)
     }
 }

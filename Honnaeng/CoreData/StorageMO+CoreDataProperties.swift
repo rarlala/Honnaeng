@@ -1,5 +1,5 @@
 //
-//  Storage+CoreDataProperties.swift
+//  StorageMO+CoreDataProperties.swift
 //  Honnaeng
 //
 //  Created by Rarla on 3/25/24.

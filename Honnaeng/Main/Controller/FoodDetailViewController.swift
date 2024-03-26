@@ -322,7 +322,7 @@ final class FoodDetailViewController: UIViewController {
     
     // MARK: - Picker
     private func configurePicker() {
-        let storageTitle = mode == .update ? savedData?.storageName : viewModel.getRefrigeraterList()[0]
+        let storageTitle = mode == .update ? savedData?.storageName : viewModel.getStorageList()[0]
         storageName.setTitle(storageTitle, for: .normal)
         storageName.addTarget(self, action: #selector(showRefrigeraterPicker), for: .touchUpInside)
         
@@ -333,7 +333,7 @@ final class FoodDetailViewController: UIViewController {
     
     @objc private func showRefrigeraterPicker() {
         guard let currentSelect = storageName.titleLabel?.text else { return }
-        showPickerPopup(datas: viewModel.getRefrigeraterList(), selectOption: currentSelect) { selectOption in
+        showPickerPopup(datas: viewModel.getStorageList(), selectOption: currentSelect) { selectOption in
             self.storageName.setTitle(selectOption, for: .normal)
         }
     }

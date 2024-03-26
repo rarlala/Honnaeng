@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D00A4D832BB1C00B0021E800 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D7F2BB1C00B0021E800 /* FoodMO+CoreDataClass.swift */; };
+		D00A4D842BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D802BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift */; };
+		D00A4D852BB1C00B0021E800 /* StorageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D812BB1C00B0021E800 /* StorageMO+CoreDataClass.swift */; };
+		D00A4D862BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D822BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift */; };
 		D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */; };
 		D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6AF2B971844001B0BE0 /* AppDelegate.swift */; };
 		D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B12B971844001B0BE0 /* SceneDelegate.swift */; };
@@ -31,10 +35,7 @@
 		D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */; };
 		D08ACE232BAD7DEA005D8110 /* StorageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */; };
 		D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */; };
-		D08ACE2A2BB17D50005D8110 /* Storage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE262BB17D50005D8110 /* Storage+CoreDataClass.swift */; };
-		D08ACE2B2BB17D50005D8110 /* Storage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE272BB17D50005D8110 /* Storage+CoreDataProperties.swift */; };
-		D08ACE2C2BB17D50005D8110 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE282BB17D50005D8110 /* Food+CoreDataClass.swift */; };
-		D08ACE2D2BB17D50005D8110 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE292BB17D50005D8110 /* Food+CoreDataProperties.swift */; };
+		D08ACE302BB17F47005D8110 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE2F2BB17F47005D8110 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D00A4D7F2BB1C00B0021E800 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D00A4D802BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D00A4D812BB1C00B0021E800 /* StorageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D00A4D822BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D069E6AC2B971844001B0BE0 /* Honnaeng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honnaeng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D069E6AF2B971844001B0BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,10 +89,7 @@
 		D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageListTableViewController.swift; sourceTree = "<group>"; };
 		D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopupViewController.swift; sourceTree = "<group>"; };
-		D08ACE262BB17D50005D8110 /* Storage+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D08ACE272BB17D50005D8110 /* Storage+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storage+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D08ACE282BB17D50005D8110 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D08ACE292BB17D50005D8110 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D08ACE2F2BB17F47005D8110 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				D069E6AE2B971844001B0BE0 /* Honnaeng */,
-				D069E6C82B971847001B0BE0 /* HonnaengTests */,
 				D069E6D22B971847001B0BE0 /* HonnaengUITests */,
 				D069E6AD2B971844001B0BE0 /* Products */,
 			);
@@ -146,12 +147,14 @@
 		D069E6AE2B971844001B0BE0 /* Honnaeng */ = {
 			isa = PBXGroup;
 			children = (
+				D069E6C82B971847001B0BE0 /* HonnaengTests */,
 				D069E6E22B97185D001B0BE0 /* Application */,
 				D08ACDFB2BA420D5005D8110 /* Main */,
 				D057AD702B9ED26000D929FD /* Launch */,
 				D08ACE0A2BA4A4E0005D8110 /* Constatnt */,
 				D069E6E32B971E6A001B0BE0 /* Resource */,
-				D069E6E72B971F22001B0BE0 /* Model */,
+				D069E6E72B971F22001B0BE0 /* CoreData */,
+				D08ACE2E2BB17EE5005D8110 /* CoreDataManager */,
 			);
 			path = Honnaeng;
 			sourceTree = "<group>";
@@ -193,16 +196,16 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		D069E6E72B971F22001B0BE0 /* Model */ = {
+		D069E6E72B971F22001B0BE0 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				D08ACE262BB17D50005D8110 /* Storage+CoreDataClass.swift */,
-				D08ACE272BB17D50005D8110 /* Storage+CoreDataProperties.swift */,
-				D08ACE282BB17D50005D8110 /* Food+CoreDataClass.swift */,
-				D08ACE292BB17D50005D8110 /* Food+CoreDataProperties.swift */,
+				D00A4D7F2BB1C00B0021E800 /* FoodMO+CoreDataClass.swift */,
+				D00A4D802BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift */,
+				D00A4D812BB1C00B0021E800 /* StorageMO+CoreDataClass.swift */,
+				D00A4D822BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift */,
 				D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */,
 			);
-			path = Model;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		D08ACDFB2BA420D5005D8110 /* Main */ = {
@@ -280,6 +283,14 @@
 				D08ACE052BA49F18005D8110 /* FoodCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D08ACE2E2BB17EE5005D8110 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				D08ACE2F2BB17F47005D8110 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,14 +438,15 @@
 				D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
-				D08ACE2A2BB17D50005D8110 /* Storage+CoreDataClass.swift in Sources */,
-				D08ACE2B2BB17D50005D8110 /* Storage+CoreDataProperties.swift in Sources */,
-				D08ACE2C2BB17D50005D8110 /* Food+CoreDataClass.swift in Sources */,
-				D08ACE2D2BB17D50005D8110 /* Food+CoreDataProperties.swift in Sources */,
+				D08ACE302BB17F47005D8110 /* CoreDataManager.swift in Sources */,
 				D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */,
 				D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
 				D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */,
+				D00A4D832BB1C00B0021E800 /* FoodMO+CoreDataClass.swift in Sources */,
+				D00A4D842BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift in Sources */,
+				D00A4D852BB1C00B0021E800 /* StorageMO+CoreDataClass.swift in Sources */,
+				D00A4D862BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

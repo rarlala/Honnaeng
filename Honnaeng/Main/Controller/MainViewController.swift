@@ -208,7 +208,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
             self.viewModel.changeStorageName(name: select.title)
             self.setUpSnapshot()
         }))
-        for refrigerater in viewModel.getRefrigeraterList() {
+        for refrigerater in viewModel.getStorageList() {
             menuChildren.append(UIAction(title: refrigerater, handler: { select in
                 self.viewModel.changeStorageName(name: select.title)
                 self.setUpSnapshot()
