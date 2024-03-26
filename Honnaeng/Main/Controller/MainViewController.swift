@@ -123,6 +123,16 @@ final class MainViewController: UIViewController, MainViewDelegate {
         return collectionView
     }()
     
+    private let noDataLabel: UILabel = {
+        let label = UILabel()
+        label.text = "+를 눌러 재료를 추가해보세요!"
+        label.textAlignment = .center
+        label.textColor = UIColor(named: "gray03")
+        label.font = .Paragraph3
+        label.isHidden = true
+        return label
+    }()
+    
     private let searchField: UISearchTextField = {
         let textField = UISearchTextField()
         textField.textAlignment = .left
@@ -165,6 +175,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         mainView.addArrangedSubview(filterBox)
         mainView.addArrangedSubview(addFoodButton)
         mainView.addArrangedSubview(foodListView)
+        mainView.addArrangedSubview(noDataLabel)
         mainView.addArrangedSubview(searchField)
         
         
@@ -177,11 +188,9 @@ final class MainViewController: UIViewController, MainViewDelegate {
             mainView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             
             headerView.heightAnchor.constraint(equalToConstant: 50),
-            
             refrigeraterFilter.heightAnchor.constraint(equalToConstant: 30),
-            
-            foodListView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
-            foodListView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            addFoodButton.heightAnchor.constraint(equalToConstant: 50),
+            searchField.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -253,6 +262,9 @@ final class MainViewController: UIViewController, MainViewDelegate {
         snapshot.appendSections([.main])
         snapshot.appendItems(foods)
         dataSource?.apply(snapshot, animatingDifferences: true)
+        
+        foodListView.isHidden = foods.isEmpty
+        noDataLabel.isHidden = !foods.isEmpty
     }
     
     private func configurationCell() {

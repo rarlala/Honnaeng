@@ -32,9 +32,10 @@ class StorageListTableViewController: UITableViewController {
     
         if count == 0 {
             let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text = "+ 버튼을 클릭해 냉장고를 추가해보세요!"
-            noDataLabel.textColor = UIColor.black
+            noDataLabel.text = "+ 버튼을 눌러 냉장고를 추가해보세요!"
             noDataLabel.textAlignment = .center
+            noDataLabel.textColor = UIColor(named: "gray03")
+            noDataLabel.font = .Paragraph3
             tableView.backgroundView = noDataLabel
             tableView.separatorStyle = .none
         } else {
