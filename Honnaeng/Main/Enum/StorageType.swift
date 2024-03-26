@@ -8,5 +8,5 @@
 import Foundation
 
 enum StorageType: Int {
-    case all, fridge, frozen
+    case all, fridge, frozen, room
 }

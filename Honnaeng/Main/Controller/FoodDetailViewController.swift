@@ -85,7 +85,7 @@ final class FoodDetailViewController: UIViewController {
     }()
     
     private let typeLabel: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["💧 냉장", "🧊 냉동"])
+        let control = UISegmentedControl(items: ["냉장", "냉동", "실온"])
         control.selectedSegmentIndex = 0
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
@@ -305,7 +305,7 @@ final class FoodDetailViewController: UIViewController {
               let exDate = savedData?.exDate
         else { return }
         
-        typeLabel.selectedSegmentIndex = type == .fridge ? 0 : 1
+        typeLabel.selectedSegmentIndex = type.rawValue - 1
         nameTextField.text = name
         countTextField.text = String(count)
         countControl.selectedSegmentIndex = unit == .quantity ? 0 : 1
@@ -380,8 +380,6 @@ final class FoodDetailViewController: UIViewController {
     
     @objc private func confirmButtonTapped() {
         
-        let type: StorageType = typeLabel.selectedSegmentIndex == 0 ? .fridge : .frozen
-        
         // TODO : 추가할 수 있을때만 추가
         // TODO : error 처리
         if let name = nameTextField.text,
@@ -390,12 +388,14 @@ final class FoodDetailViewController: UIViewController {
            let selectGroup = groupName.titleLabel?.text,
            let group = FoodGroup(rawValue: selectGroup),
            let storageName = storageName.titleLabel?.text,
+           let type = StorageType(rawValue: typeLabel.selectedSegmentIndex + 1),
            let emoji = emojiTextField.text,
+           let unit: FoodUnit = countControl.selectedSegmentIndex == 0 ? .quantity : .weight,
            let memo = memoTextField.text {
             
             var food = FoodData(name: name,
                                 count: countNum,
-                                unit: .quantity,
+                                unit: unit,
                                 group: group,
                                 exDate: datePicker.date,
                                 storageType: type,

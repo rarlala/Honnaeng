@@ -12,7 +12,7 @@ final class MainViewModel {
     private let coreData = CoreDataManager.shared
     
     private var storageType: StorageType = .all
-    private var storageName: String = "전체"
+    private var storageName: String = "전체 냉장고"
     private var sortType: ListSortType = .expirationDateimminent
     private var searchText: String = ""
 
@@ -21,7 +21,7 @@ final class MainViewModel {
     }
     
     private func getStorageNameFilterData(data: [FoodData]) -> [FoodData] {
-        return storageName == "전체" ? data : coreData.getFoodDataList().filter{ $0.storageName == storageName }
+        return storageName == "전체 냉장고" ? data : coreData.getFoodDataList().filter{ $0.storageName == storageName }
     }
     
     func changeStorageName(name: String) {
@@ -98,6 +98,8 @@ final class MainViewModel {
             return foodData.filter{ $0.storageType == .fridge }
         case .frozen:
             return foodData.filter{ $0.storageType == .frozen }
+        case .room:
+            return foodData.filter{ $0.storageType == .room }
         }
     }
     

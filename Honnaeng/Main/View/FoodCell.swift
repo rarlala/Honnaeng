@@ -23,7 +23,7 @@ final class FoodCell: UICollectionViewCell {
         let view = UIStackView()
         view.axis = .horizontal
         view.alignment = .fill
-        view.distribution = .fillEqually
+        view.distribution = .equalSpacing
         return view
     }()
     
@@ -60,16 +60,18 @@ final class FoodCell: UICollectionViewCell {
     
     private let countView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "blue03")
-        view.layer.cornerRadius = 10
+        view.layer.borderColor = UIColor(named: "gray01")?.cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 4
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let count: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = UIColor(named: "gray02")
         label.font = .Paragraph4
-        label.textColor = UIColor(named: "white")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -93,17 +95,22 @@ final class FoodCell: UICollectionViewCell {
             infoLine.leadingAnchor.constraint(equalTo: box.leadingAnchor),
             infoLine.trailingAnchor.constraint(equalTo: box.trailingAnchor),
             
-            count.centerXAnchor.constraint(equalTo: countView.centerXAnchor),
+            countView.leadingAnchor.constraint(equalTo: count.leadingAnchor, constant: -2),
+            countView.trailingAnchor.constraint(equalTo: count.trailingAnchor, constant: 2),
             
+            count.centerYAnchor.constraint(equalTo: countView.centerYAnchor),
+            count.centerXAnchor.constraint(equalTo: countView.centerXAnchor),
+    
             name.leadingAnchor.constraint(equalTo: box.leadingAnchor),
             name.trailingAnchor.constraint(equalTo: box.trailingAnchor),
         ])
     }
     
     func setFoodCell(food: FoodData) {
-        typeEmoji.text = food.storageType == .fridge ? "💨" : "❄️"
+        typeEmoji.text = food.storageType == .frozen ? "❄️" : " "
         count.text = String(food.count) + (food.unit == .quantity ? "개" : "g")
         countView.addSubview(count)
+        
         infoLine.addArrangedSubview(typeEmoji)
         infoLine.addArrangedSubview(countView)
         box.addArrangedSubview(infoLine)

@@ -80,7 +80,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }()
     
     private let segmentControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: ["전체", "💨 냉장", "❄️ 냉동"])
+        let control = UISegmentedControl(items: ["전체", "냉장", "냉동", "실온"])
         control.selectedSegmentIndex = 0
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
@@ -212,7 +212,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
     
     private func configureRefrigeraterList() {
         var menuChildren: [UIMenuElement] = []
-        menuChildren.append(UIAction(title: "전체", handler: { select in
+        menuChildren.append(UIAction(title: "전체 냉장고", handler: { select in
             self.viewModel.changeStorageName(name: select.title)
             self.setUpSnapshot()
         }))
