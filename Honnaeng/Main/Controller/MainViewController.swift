@@ -109,10 +109,6 @@ final class MainViewController: UIViewController, MainViewDelegate {
         return button
     }()
     
-    func updateStorageData() {
-        configureRefrigeraterList()
-    }
-    
     private let addFoodButton: UIButton = {
         let button = UIButton()
         button.setTitle("➕", for: .normal)
@@ -149,6 +145,10 @@ final class MainViewController: UIViewController, MainViewDelegate {
         setUpSnapshot()
         configureAddFoodButton()
         configureSearch()
+    }
+    
+    func updateStorageData() {
+        configureRefrigeraterList()
     }
     
     private func configureUI() {
@@ -274,10 +274,15 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     @objc func addFood() {
-        let foodAddView = FoodDetailViewController(viewModel: viewModel)
-        foodAddView.modalPresentationStyle = .fullScreen
-        foodAddView.delegate = self
-        present(foodAddView, animated: true)
+        if viewModel.getStorageList().count == 0 {
+            // TODO: Error Popup
+            print("Error, 냉장고를 먼저 추가해주세요")
+        } else {
+            let foodAddView = FoodDetailViewController(viewModel: viewModel)
+            foodAddView.modalPresentationStyle = .fullScreen
+            foodAddView.delegate = self
+            present(foodAddView, animated: true)
+        }
     }
     
     func updateMainViewData() {

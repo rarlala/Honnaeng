@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FoodUnit {
+enum FoodUnit: String {
     case quantity
     case weight
 }

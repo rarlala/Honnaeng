@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D00A4D832BB1C00B0021E800 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D7F2BB1C00B0021E800 /* FoodMO+CoreDataClass.swift */; };
-		D00A4D842BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D802BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift */; };
-		D00A4D852BB1C00B0021E800 /* StorageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D812BB1C00B0021E800 /* StorageMO+CoreDataClass.swift */; };
-		D00A4D862BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D822BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift */; };
+		D00A4D9F2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9B2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift */; };
+		D00A4DA02BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */; };
+		D00A4DA12BB30EDF0021E800 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */; };
+		D00A4DA22BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */; };
 		D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */; };
 		D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6AF2B971844001B0BE0 /* AppDelegate.swift */; };
 		D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B12B971844001B0BE0 /* SceneDelegate.swift */; };
@@ -56,10 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D00A4D7F2BB1C00B0021E800 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D00A4D802BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D00A4D812BB1C00B0021E800 /* StorageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D00A4D822BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D00A4D9B2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataClass.swift"; path = "../../StorageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataProperties.swift"; path = "../../StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataClass.swift"; path = "../../FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataProperties.swift"; path = "../../FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D069E6AC2B971844001B0BE0 /* Honnaeng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honnaeng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D069E6AF2B971844001B0BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -199,11 +199,11 @@
 		D069E6E72B971F22001B0BE0 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				D00A4D7F2BB1C00B0021E800 /* FoodMO+CoreDataClass.swift */,
-				D00A4D802BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift */,
-				D00A4D812BB1C00B0021E800 /* StorageMO+CoreDataClass.swift */,
-				D00A4D822BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift */,
 				D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */,
+				D00A4D9B2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift */,
+				D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */,
+				D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */,
+				D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -430,6 +430,10 @@
 				D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */,
 				D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */,
 				D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */,
+				D00A4D9F2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift in Sources */,
+				D00A4DA02BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift in Sources */,
+				D00A4DA12BB30EDF0021E800 /* FoodMO+CoreDataClass.swift in Sources */,
+				D00A4DA22BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift in Sources */,
 				D08ACE182BA7F0B8005D8110 /* FoodDetailViewController.swift in Sources */,
 				D08ACE232BAD7DEA005D8110 /* StorageListTableViewController.swift in Sources */,
 				D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */,
@@ -443,10 +447,6 @@
 				D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
 				D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */,
-				D00A4D832BB1C00B0021E800 /* FoodMO+CoreDataClass.swift in Sources */,
-				D00A4D842BB1C00B0021E800 /* FoodMO+CoreDataProperties.swift in Sources */,
-				D00A4D852BB1C00B0021E800 /* StorageMO+CoreDataClass.swift in Sources */,
-				D00A4D862BB1C00B0021E800 /* StorageMO+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

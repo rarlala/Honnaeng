@@ -111,8 +111,8 @@ final class FoodCell: UICollectionViewCell {
         name.text = food.name
         box.addArrangedSubview(name)
         
-        if food.emogi != nil {
-            foodEmoji.text = food.emogi
+        if food.emoji != nil {
+            foodEmoji.text = food.emoji
             box.addArrangedSubview(foodEmoji)
         }
         

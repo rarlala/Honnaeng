@@ -1,8 +1,8 @@
 //
-//  FoodMO+CoreDataProperties.swift
+//  Food+CoreDataProperties.swift
 //  Honnaeng
 //
-//  Created by Rarla on 3/25/24.
+//  Created by Rarla on 3/26/24.
 //
 //
 
@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension FoodMO {
+extension Food {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FoodMO> {
-        return NSFetchRequest<FoodMO>(entityName: "Food")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Food> {
+        return NSFetchRequest<Food>(entityName: "Food")
     }
 
     @NSManaged public var count: Int16
@@ -24,13 +24,13 @@ extension FoodMO {
     @NSManaged public var image: URL?
     @NSManaged public var memo: String?
     @NSManaged public var name: String?
-    @NSManaged public var storageType: String?
+    @NSManaged public var storageType: Int16
     @NSManaged public var unit: String?
     @NSManaged public var uuid: UUID?
-    @NSManaged public var storage: FoodMO?
+    @NSManaged public var storage: Storage?
 
 }
 
-extension FoodMO : Identifiable {
+extension Food : Identifiable {
 
 }

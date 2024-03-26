@@ -311,8 +311,8 @@ final class FoodDetailViewController: UIViewController {
         countControl.selectedSegmentIndex = unit == .quantity ? 0 : 1
         datePicker.date = exDate
         
-        if let emogi = savedData?.emogi {
-            emojiTextField.text = emogi
+        if let emoji = savedData?.emoji {
+            emojiTextField.text = emoji
         }
         
         if let memo = savedData?.memo {
@@ -368,8 +368,8 @@ final class FoodDetailViewController: UIViewController {
     
     @objc private func deleteButtonTapped() {
         // TODO: 삭제 전 안내 팝업
-        guard let uid = savedData?.uuid else { return }
-        self.viewModel.deleteFoodData(uid: uid)
+        guard let food = savedData else { return }
+        self.viewModel.deleteFoodData(food: food)
         self.delegate?.updateMainViewData()
         self.dismiss(animated: true)
     }
@@ -400,7 +400,7 @@ final class FoodDetailViewController: UIViewController {
                                 exDate: datePicker.date,
                                 storageType: type,
                                 storageName: storageName,
-                                emogi: emoji,
+                                emoji: emoji,
                                 memo: memo)
             
             switch mode {
