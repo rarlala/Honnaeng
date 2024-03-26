@@ -46,10 +46,9 @@ final class MainViewController: UIViewController, MainViewDelegate {
     
     private let plusRefrigeratorButton: UIButton = {
         let button = UIButton()
-        let largeFont = UIFont.systemFont(ofSize: 20)
-        let configuration = UIImage.SymbolConfiguration(font: largeFont)
-        button.setImage(UIImage(systemName: "plus.app", withConfiguration: configuration), for: .normal)
-        button.tintColor = .black
+        if let image = UIImage(named: "icon_plus_storage")?.resized(toWidth: 25) {
+             button.setImage(image, for: .normal)
+         }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

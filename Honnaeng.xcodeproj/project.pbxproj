@@ -11,6 +11,7 @@
 		D00A4DA02BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */; };
 		D00A4DA12BB30EDF0021E800 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */; };
 		D00A4DA22BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */; };
+		D00A4DA42BB323530021E800 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4DA32BB323530021E800 /* UIImage+extension.swift */; };
 		D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */; };
 		D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6AF2B971844001B0BE0 /* AppDelegate.swift */; };
 		D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D069E6B12B971844001B0BE0 /* SceneDelegate.swift */; };
@@ -60,6 +61,7 @@
 		D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataProperties.swift"; path = "../../StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataClass.swift"; path = "../../FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataProperties.swift"; path = "../../FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D00A4DA32BB323530021E800 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D069E6AC2B971844001B0BE0 /* Honnaeng.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Honnaeng.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D069E6AF2B971844001B0BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				D08ACE0B2BA4A4F7005D8110 /* Font.swift */,
 				D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */,
 				D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */,
+				D00A4DA32BB323530021E800 /* UIImage+extension.swift */,
 			);
 			path = Constatnt;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				D069E6B42B971844001B0BE0 /* MainViewController.swift in Sources */,
 				D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */,
 				D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */,
+				D00A4DA42BB323530021E800 /* UIImage+extension.swift in Sources */,
 				D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */,
 				D00A4D9F2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift in Sources */,
 				D00A4DA02BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift in Sources */,
