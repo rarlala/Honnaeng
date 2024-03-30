@@ -108,12 +108,33 @@ final class MainViewController: UIViewController, MainViewDelegate {
         return button
     }()
     
+    private let buttonBox: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
     private let addFoodButton: UIButton = {
         let button = UIButton()
         button.setTitle("➕", for: .normal)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(named: "gray01")?.cgColor
         button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    private let addFoodToBarcodeButton: UIButton = {
+        let button = UIButton()
+        let largeFont = UIFont.systemFont(ofSize: 20)
+        let configuration = UIImage.SymbolConfiguration(font: largeFont)
+        button.setImage(UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration), for: .normal)
+        button.tintColor = .black
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(named: "gray01")?.cgColor
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -152,7 +173,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         configureFilter()
         configurationCell()
         setUpSnapshot()
-        configureAddFoodButton()
+        configureAddButtons()
         configureSearch()
     }
     
@@ -170,14 +191,16 @@ final class MainViewController: UIViewController, MainViewDelegate {
         filterBox.addArrangedSubview(refrigeraterFilter)
         filterBox.addArrangedSubview(listSortFilter)
         
+        buttonBox.addArrangedSubview(addFoodButton)
+        buttonBox.addArrangedSubview(addFoodToBarcodeButton)
+        
         mainView.addArrangedSubview(headerView)
         mainView.addArrangedSubview(segmentControl)
+        mainView.addArrangedSubview(searchField)
         mainView.addArrangedSubview(filterBox)
-        mainView.addArrangedSubview(addFoodButton)
         mainView.addArrangedSubview(foodListView)
         mainView.addArrangedSubview(noDataLabel)
-        mainView.addArrangedSubview(searchField)
-        
+        mainView.addArrangedSubview(buttonBox)
         
         self.view.addSubview(mainView)
         
@@ -280,8 +303,9 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }
     
     // MARK: - add Food Button
-    private func configureAddFoodButton() {
+    private func configureAddButtons() {
         addFoodButton.addTarget(self, action: #selector(addFood), for: .touchUpInside)
+        addFoodToBarcodeButton.addTarget(self, action: #selector(addFoodToBarcode), for: .touchUpInside)
     }
     
     @objc func addFood() {
@@ -293,6 +317,18 @@ final class MainViewController: UIViewController, MainViewDelegate {
             foodAddView.modalPresentationStyle = .fullScreen
             foodAddView.delegate = self
             present(foodAddView, animated: true)
+        }
+    }
+    
+    @objc func addFoodToBarcode() {
+        if viewModel.getStorageList().count == 0 {
+            // TODO: Error Popup
+            print("Error, 냉장고를 먼저 추가해주세요")
+        } else {
+            let foodAddToBarcodeView = BarcodeReaderViewController(viewModel: viewModel)
+            foodAddToBarcodeView.modalPresentationStyle = .fullScreen
+//            foodAddView.delegate = self
+            present(foodAddToBarcodeView, animated: true)
         }
     }
     
