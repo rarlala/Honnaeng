@@ -14,6 +14,34 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     var captureSession: AVCaptureSession?
     var previewLayer: AVCaptureVideoPreviewLayer?
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "바코드로 추가"
+        label.font = .Heading3
+        label.textAlignment = .center
+        label.textColor = UIColor(named: "white")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let barcodeBox: UIView = {
+        let view = UIView()
+        view.layer.borderColor = UIColor(named: "white")?.cgColor
+        view.layer.borderWidth = 5
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let backButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("취소", for: .normal)
+        button.layer.borderColor = UIColor(named: "white")?.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,6 +55,27 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: "black")
+        
+        view.addSubview(titleLabel)
+        view.addSubview(barcodeBox)
+        view.addSubview(backButton)
+        
+        let safeArea = self.view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
+            titleLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            
+            barcodeBox.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            barcodeBox.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
+            barcodeBox.widthAnchor.constraint(equalToConstant: 300),
+            barcodeBox.heightAnchor.constraint(equalToConstant: 300),
+            
+            backButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -40),
+            backButton.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            backButton.widthAnchor.constraint(equalToConstant: 100),
+            backButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
         captureSession = AVCaptureSession()
         
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -49,7 +98,6 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         
         guard let captureSession = captureSession else { return }
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer?.frame = view.layer.bounds
         previewLayer?.videoGravity = .resizeAspectFill
         
         guard let previewLayer = previewLayer else { return }
@@ -58,6 +106,17 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         DispatchQueue.global(qos: .background).async {
             self.captureSession?.startRunning()
         }
+        
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func backButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        previewLayer?.frame = barcodeBox.frame
     }
     
     func failed() {
