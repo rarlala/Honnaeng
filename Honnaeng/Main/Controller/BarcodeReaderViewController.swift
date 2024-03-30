@@ -93,7 +93,18 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     }
     
     func found(code: String) {
-       print(code)
+        guard let apiKey = Bundle.main.foodSafetyKoreaApiKey,
+              let urlString = URL(string: "https://openapi.foodsafetykorea.go.kr/api/\(apiKey)/C005/json/1/1/BAR_CD=\(code)") else { return }
+        
+        let session = URLSession.shared.dataTask(with: URLRequest(url: urlString)) { data, response, error in
+            guard let data = data else { return }
+            
+            let decoder = JSONDecoder()
+            if let json = try? decoder.decode(OpenFoodAPI.self, from: data) {
+                print(json.serviceId.row[0].name, json.serviceId.row[0].group)
+            }
+        }
+        session.resume()
     }
     
     override var prefersStatusBarHidden: Bool {
