@@ -165,6 +165,7 @@
 				D057AD702B9ED26000D929FD /* Launch */,
 				D08ACE0A2BA4A4E0005D8110 /* Constatnt */,
 				D069E6E32B971E6A001B0BE0 /* Resource */,
+				D07F1F3D2BBA6C0900ACDE77 /* Common */,
 				D069E6E72B971F22001B0BE0 /* CoreData */,
 				D08ACE2E2BB17EE5005D8110 /* CoreDataManager */,
 			);
@@ -227,6 +228,13 @@
 				D07F1EAF2BB74F0B00ACDE77 /* OpenFoodAPI.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		D07F1F3D2BBA6C0900ACDE77 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		D08ACDFB2BA420D5005D8110 /* Main */ = {

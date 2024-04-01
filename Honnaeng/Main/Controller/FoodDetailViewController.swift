@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVKit
+import PhotosUI
 
 final class FoodDetailViewController: UIViewController {
     
@@ -84,6 +86,33 @@ final class FoodDetailViewController: UIViewController {
         return button
     }()
     
+    private let imageBox = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let imageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(named: "blue01")?.cgColor
+        view.layer.cornerRadius = 30
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let addImageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "person.crop.square.badge.camera"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor(named: "blue01")?.cgColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private let typeLabel: UISegmentedControl = {
         let control = UISegmentedControl(items: ["냉장", "냉동", "실온"])
         control.selectedSegmentIndex = 0
@@ -132,6 +161,8 @@ final class FoodDetailViewController: UIViewController {
         label.text = "수량"
         return label
     }()
+    
+    let numberPadToolbar: UIToolbar = UIToolbar()
     
     private let countTextField: UITextField = {
         let textField = UITextField()
@@ -244,6 +275,9 @@ final class FoodDetailViewController: UIViewController {
         storageLineStackView.addArrangedSubview(storageLabel)
         storageLineStackView.addArrangedSubview(storageName)
         
+        imageBox.addSubview(imageView)
+        imageBox.addSubview(addImageButton)
+        
         nameLineStackView.addArrangedSubview(groupName)
         nameLineStackView.addArrangedSubview(nameTextField)
         
@@ -264,6 +298,7 @@ final class FoodDetailViewController: UIViewController {
         buttonLineStackView.addArrangedSubview(addButton)
         
         mainView.addArrangedSubview(titleLabel)
+        mainView.addArrangedSubview(imageBox)
         mainView.addArrangedSubview(storageLineStackView)
         mainView.addArrangedSubview(typeLabel)
         mainView.addArrangedSubview(nameLineStackView)
@@ -284,6 +319,17 @@ final class FoodDetailViewController: UIViewController {
             mainView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             
+            imageView.widthAnchor.constraint(equalToConstant: 150),
+            imageView.heightAnchor.constraint(equalToConstant: 150),
+            imageView.centerXAnchor.constraint(equalTo: imageBox.centerXAnchor),
+            
+            addImageButton.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -15),
+            addImageButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            addImageButton.widthAnchor.constraint(equalToConstant: 30),
+            addImageButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            imageBox.heightAnchor.constraint(equalTo: imageView.heightAnchor),
+            
             deleteButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
             
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
@@ -302,7 +348,8 @@ final class FoodDetailViewController: UIViewController {
               let name = savedData?.name,
               let count = savedData?.count,
               let unit = savedData?.unit,
-              let exDate = savedData?.exDate
+              let exDate = savedData?.exDate,
+              let image = savedData?.image
         else { return }
         
         typeLabel.selectedSegmentIndex = type.rawValue - 1
@@ -310,6 +357,7 @@ final class FoodDetailViewController: UIViewController {
         countTextField.text = String(count)
         countControl.selectedSegmentIndex = unit == .quantity ? 0 : 1
         datePicker.date = exDate
+        displayImage(image)
         
         if let emoji = savedData?.emoji {
             emojiTextField.text = emoji
@@ -345,7 +393,7 @@ final class FoodDetailViewController: UIViewController {
         for group in FoodGroup.allCases {
             datas.append(group.rawValue)
         }
-                    
+        
         showPickerPopup(datas: datas, selectOption: currentSelect) { selectOption in
             self.groupName.setTitle(selectOption, for: .normal)
         }
@@ -359,11 +407,27 @@ final class FoodDetailViewController: UIViewController {
     
     // MARK: - Button Action
     private func configureButton() {
+        addImageButton.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
+        
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         deleteButton.isHidden = mode == .add ? true : false
         
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func addImageButtonTapped() {
+        presentPicker()
+    }
+    
+    private func presentPicker() {
+        var configuration = PHPickerConfiguration(photoLibrary: .shared())
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
     }
     
     @objc private func deleteButtonTapped() {
@@ -400,6 +464,7 @@ final class FoodDetailViewController: UIViewController {
                                 exDate: datePicker.date,
                                 storageType: type,
                                 storageName: storageName,
+                                image: imageView.image,
                                 emoji: emoji,
                                 memo: memo)
             
@@ -416,6 +481,75 @@ final class FoodDetailViewController: UIViewController {
             }
             
             self.dismiss(animated: true)
+        }
+    }
+}
+
+extension FoodDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField == nameTextField {
+            countTextField.becomeFirstResponder()
+        }
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    @objc func countFieldNextButtonTapped() {
+        countTextField.resignFirstResponder()
+        datePicker.resignFirstResponder()
+    }
+}
+
+extension FoodDetailViewController: PHPickerViewControllerDelegate {
+    func displayImage(_ image: UIImage?) {
+        imageView.image = image
+        imageView.isHidden = image == nil
+    }
+    
+    func displayEmptyImage() {
+        displayImage(UIImage(systemName: "photo.on.rectangle.angled"))
+    }
+    
+    func displayErrorImage() {
+        displayImage(UIImage(systemName: "exclamationmark.circle"))
+    }
+    
+    func displayUnknownImage() {
+        displayImage(UIImage(systemName: "questionmark.circle"))
+    }
+    
+    func handleCompletion(object: Any?, error: Error? = nil) {
+        if let image = object as? UIImage {
+            displayImage(image)
+        } else if let error = error {
+            print("Couldn't display with error: \(error)")
+            displayErrorImage()
+        } else {
+            displayUnknownImage()
+        }
+    }
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        dismiss(animated: true)
+        
+        if results.isEmpty {
+            displayEmptyImage()
+        }
+        
+        let currentSelection = results[0]
+        let itemProvider = currentSelection.itemProvider
+        
+        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                DispatchQueue.main.async {
+                    self?.handleCompletion(object: image, error: error)
+                }
+            }
         }
     }
 }

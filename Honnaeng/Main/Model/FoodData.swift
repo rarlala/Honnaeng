@@ -29,7 +29,8 @@ struct FoodData: Hashable {
                 lhs.group == rhs.group &&
                 lhs.exDate == rhs.exDate &&
                 lhs.storageType == rhs.storageType &&
-                lhs.emoji == rhs.emoji
+                lhs.emoji == rhs.emoji &&
+                lhs.image == rhs.image   
     }
     
     func hash(into hasher: inout Hasher) {
