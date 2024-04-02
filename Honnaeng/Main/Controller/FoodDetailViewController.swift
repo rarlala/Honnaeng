@@ -334,8 +334,8 @@ final class FoodDetailViewController: UIViewController {
         countControl.selectedSegmentIndex = unit == .quantity ? 0 : 1
         datePicker.date = exDate
         
-        
-        if let image = savedData?.image {
+        if let imageUrl = savedData?.imageUrl {
+            let image = ImageFileManager.shared.loadImageFromFileSystem(fileName: imageUrl)
             displayImage(image)
         }
         
@@ -439,11 +439,11 @@ final class FoodDetailViewController: UIViewController {
                                 exDate: datePicker.date,
                                 storageType: type,
                                 storageName: storageName,
-                                image: imageView.image,
                                 memo: memo)
             
-            if imageView.image != nil {
-//                food.image = image
+            if let image = imageView.image {
+                let path = ImageFileManager.shared.saveImageToFileSystem(image: image)
+                food.imageUrl = path
             }
             
             switch mode {

@@ -110,7 +110,7 @@ final class FoodCell: UICollectionViewCell {
         name.text = food.name
         box.addArrangedSubview(name)
         
-        if food.image != nil {
+        if food.imageUrl != nil {
             box.addArrangedSubview(image)
         }
         

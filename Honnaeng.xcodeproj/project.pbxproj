@@ -26,6 +26,7 @@
 		D07F1F592BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F552BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift */; };
 		D07F1F5A2BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F562BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift */; };
 		D07F1F5B2BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */; };
+		D07F1F5D2BBBA8F100ACDE77 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F5C2BBBA8F100ACDE77 /* ImageFileManager.swift */; };
 		D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACDFF2BA44E59005D8110 /* FoodData.swift */; };
 		D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE012BA44E90005D8110 /* FoodGroup.swift */; };
 		D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE032BA45064005D8110 /* FoodUnit.swift */; };
@@ -84,6 +85,7 @@
 		D07F1F552BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D07F1F562BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataClass.swift"; path = "../../FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D07F1F5C2BBBA8F100ACDE77 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		D08ACDFF2BA44E59005D8110 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		D08ACE012BA44E90005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodGroup.swift; path = ../../../../../../../Documents/FoodGroup.swift; sourceTree = "<group>"; };
 		D08ACE032BA45064005D8110 /* FoodUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		D07F1F3D2BBA6C0900ACDE77 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D07F1F5C2BBBA8F100ACDE77 /* ImageFileManager.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 			files = (
 				D069E6B42B971844001B0BE0 /* MainViewController.swift in Sources */,
 				D07F1EB02BB74F0B00ACDE77 /* OpenFoodAPI.swift in Sources */,
+				D07F1F5D2BBBA8F100ACDE77 /* ImageFileManager.swift in Sources */,
 				D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */,
 				D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */,
 				D00A4DA42BB323530021E800 /* UIImage+extension.swift in Sources */,
