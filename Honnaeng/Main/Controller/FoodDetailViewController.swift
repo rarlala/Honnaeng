@@ -60,7 +60,7 @@ final class FoodDetailViewController: UIViewController {
     private let deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle("삭제", for: .normal)
-        button.setTitleColor(UIColor(named: "red02"), for: .normal)
+        button.setTitleColor(UIColor(named: "red01"), for: .normal)
         return button
     }()
     
@@ -391,7 +391,7 @@ final class FoodDetailViewController: UIViewController {
         addImageButton.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
         
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        deleteButton.isHidden = mode != .update ? true : false
+        deleteButton.isHidden = mode == .update ? false : true
         
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)

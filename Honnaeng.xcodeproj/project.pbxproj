@@ -147,6 +147,7 @@
 			children = (
 				D07F1EB22BB7537500ACDE77 /* .gitignore */,
 				D069E6AE2B971844001B0BE0 /* Honnaeng */,
+				D069E6C82B971847001B0BE0 /* HonnaengTests */,
 				D069E6D22B971847001B0BE0 /* HonnaengUITests */,
 				D069E6AD2B971844001B0BE0 /* Products */,
 			);
@@ -165,7 +166,6 @@
 		D069E6AE2B971844001B0BE0 /* Honnaeng */ = {
 			isa = PBXGroup;
 			children = (
-				D069E6C82B971847001B0BE0 /* HonnaengTests */,
 				D069E6E22B97185D001B0BE0 /* Application */,
 				D08ACDFB2BA420D5005D8110 /* Main */,
 				D057AD702B9ED26000D929FD /* Launch */,
