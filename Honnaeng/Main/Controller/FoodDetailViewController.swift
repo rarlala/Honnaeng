@@ -37,6 +37,7 @@ final class FoodDetailViewController: UIViewController {
         }
         configureButton()
         configurePicker()
+        configureTextField()
     }
     
     private let mainView: UIStackView = {
@@ -142,6 +143,7 @@ final class FoodDetailViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "이름"
         textField.textAlignment = .right
+        textField.returnKeyType = .done
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -162,13 +164,12 @@ final class FoodDetailViewController: UIViewController {
         return label
     }()
     
-    let numberPadToolbar: UIToolbar = UIToolbar()
-    
     private let countTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "숫자를 입력하세요"
         textField.textAlignment = .right
         textField.keyboardType = .numberPad
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -200,27 +201,6 @@ final class FoodDetailViewController: UIViewController {
         return view
     }()
     
-    private let emojiLineStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let emojiLabel: UILabel = {
-        let label = UILabel()
-        label.text = "이모지"
-        return label
-    }()
-    
-    private let emojiTextField: EmojiTextField = {
-        let textField = EmojiTextField()
-        textField.placeholder = "이모지를 입력하세요."
-        textField.textAlignment = .right
-        return textField
-    }()
-    
     private let memoLineStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -243,6 +223,7 @@ final class FoodDetailViewController: UIViewController {
         textField.placeholder = "메모를 입력하세요"
         textField.textAlignment = .right
         textField.setContentHuggingPriority(.defaultLow, for: .vertical)
+        textField.returnKeyType = .done
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -288,9 +269,6 @@ final class FoodDetailViewController: UIViewController {
         dateLineStackView.addArrangedSubview(dateLabel)
         dateLineStackView.addArrangedSubview(datePicker)
         
-        emojiLineStackView.addArrangedSubview(emojiLabel)
-        emojiLineStackView.addArrangedSubview(emojiTextField)
-        
         memoLineStackView.addArrangedSubview(memoLabel)
         memoLineStackView.addArrangedSubview(memoTextField)
         
@@ -304,7 +282,6 @@ final class FoodDetailViewController: UIViewController {
         mainView.addArrangedSubview(nameLineStackView)
         mainView.addArrangedSubview(countLineStackView)
         mainView.addArrangedSubview(dateLineStackView)
-        mainView.addArrangedSubview(emojiLineStackView)
         mainView.addArrangedSubview(memoLineStackView)
         
         mainView.addArrangedSubview(deleteButton)
@@ -348,8 +325,7 @@ final class FoodDetailViewController: UIViewController {
               let name = savedData?.name,
               let count = savedData?.count,
               let unit = savedData?.unit,
-              let exDate = savedData?.exDate,
-              let image = savedData?.image
+              let exDate = savedData?.exDate
         else { return }
         
         typeLabel.selectedSegmentIndex = type.rawValue - 1
@@ -357,10 +333,10 @@ final class FoodDetailViewController: UIViewController {
         countTextField.text = String(count)
         countControl.selectedSegmentIndex = unit == .quantity ? 0 : 1
         datePicker.date = exDate
-        displayImage(image)
         
-        if let emoji = savedData?.emoji {
-            emojiTextField.text = emoji
+        
+        if let image = savedData?.image {
+            displayImage(image)
         }
         
         if let memo = savedData?.memo {
@@ -443,8 +419,8 @@ final class FoodDetailViewController: UIViewController {
     }
     
     @objc private func confirmButtonTapped() {
-        
         // TODO : 추가할 수 있을때만 추가
+        
         // TODO : error 처리
         if let name = nameTextField.text,
            let count = countTextField.text,
@@ -453,7 +429,6 @@ final class FoodDetailViewController: UIViewController {
            let group = FoodGroup(rawValue: selectGroup),
            let storageName = storageName.titleLabel?.text,
            let type = StorageType(rawValue: typeLabel.selectedSegmentIndex + 1),
-           let emoji = emojiTextField.text,
            let unit: FoodUnit = countControl.selectedSegmentIndex == 0 ? .quantity : .weight,
            let memo = memoTextField.text {
             
@@ -465,8 +440,11 @@ final class FoodDetailViewController: UIViewController {
                                 storageType: type,
                                 storageName: storageName,
                                 image: imageView.image,
-                                emoji: emoji,
                                 memo: memo)
+            
+            if imageView.image != nil {
+//                food.image = image
+            }
             
             switch mode {
             case .add:
@@ -483,25 +461,37 @@ final class FoodDetailViewController: UIViewController {
             self.dismiss(animated: true)
         }
     }
+    
+    // MARK: - TextField
+    private func configureTextField() {
+        nameTextField.delegate = self
+        countTextField.delegate = self
+        memoTextField.delegate = self
+        
+        countTextField.inputAccessoryView = createToolbar(for: countTextField)
+    }
+    
+    private func createToolbar(for textField: UITextField) -> UIToolbar {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(dismissKeyboard))
+        
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        toolbar.items = [flexibleSpace, doneButton]
+        return toolbar
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension FoodDetailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if textField == nameTextField {
-            countTextField.becomeFirstResponder()
-        }
         return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    @objc func countFieldNextButtonTapped() {
-        countTextField.resignFirstResponder()
-        datePicker.resignFirstResponder()
     }
 }
 

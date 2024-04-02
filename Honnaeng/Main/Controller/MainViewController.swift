@@ -146,7 +146,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
     
     private let noDataLabel: UILabel = {
         let label = UILabel()
-        label.text = "+를 눌러 재료를 추가해보세요!"
+        label.text = "아래 버튼을 눌러 재료를 추가해보세요!"
         label.textAlignment = .center
         label.textColor = UIColor(named: "gray03")
         label.font = .Paragraph3

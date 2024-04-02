@@ -17,8 +17,7 @@ struct FoodData: Hashable {
     var exDate: Date
     var storageType: StorageType
     var storageName: String
-    var image: UIImage?
-    var emoji: String?
+    var image: String?
     var memo: String?
     
     static func == (lhs: FoodData, rhs: FoodData) -> Bool {
@@ -29,8 +28,7 @@ struct FoodData: Hashable {
                 lhs.group == rhs.group &&
                 lhs.exDate == rhs.exDate &&
                 lhs.storageType == rhs.storageType &&
-                lhs.emoji == rhs.emoji &&
-                lhs.image == rhs.image   
+                lhs.image == rhs.image
     }
     
     func hash(into hasher: inout Hasher) {

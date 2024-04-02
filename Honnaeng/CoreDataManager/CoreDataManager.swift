@@ -72,8 +72,7 @@ final class CoreDataManager {
                      exDate: data.expired,
                      storageType: StorageType(rawValue: Int(data.storageType)) ?? .fridge,
                      storageName: data.storage.name ?? "",
-                     // image: data.image,
-                     emoji: data.emoji,
+//                     image: data.image,
                      memo: data.memo)
         })
         return list
@@ -93,13 +92,12 @@ final class CoreDataManager {
         newFood.uuid = data.uuid
         newFood.created = data.createDate
         newFood.name = data.name
-        newFood.count = Int16(data.count)
+        newFood.count = Int64(data.count)
         newFood.unit = data.unit.rawValue
         newFood.group = data.group.rawValue
         newFood.expired = data.exDate
         newFood.storageType = Int16(data.storageType.rawValue)
-        // newFood.image = data.image
-        newFood.emoji = data.emoji
+//        newFood.image = data.image
         newFood.memo = data.memo
         
         storage.addToFood(newFood)
@@ -122,14 +120,13 @@ final class CoreDataManager {
         food.uuid = data.uuid
         food.created = data.createDate
         food.name = data.name
-        food.count = Int16(data.count)
+        food.count = Int64(data.count)
         food.unit = data.unit.rawValue
         food.group = data.group.rawValue
         food.expired = data.exDate
         food.storageType = Int16(data.storageType.rawValue)
         food.storage = storage
-        // food.image = data.image
-        food.emoji = data.emoji
+//        food.image = data.image
         food.memo = data.memo
         
         appDelegate?.saveContext()

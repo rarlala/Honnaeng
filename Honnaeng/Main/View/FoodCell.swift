@@ -27,7 +27,7 @@ final class FoodCell: UICollectionViewCell {
         return view
     }()
     
-    private let typeEmoji: UILabel = {
+    private let frozenEmoji: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font.withSize(30)
@@ -40,14 +40,6 @@ final class FoodCell: UICollectionViewCell {
         imageView.image = UIImage(systemName: "food")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-    }()
-    
-    private let foodEmoji: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font.withSize(30)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
     
     private let name: UILabel = {
@@ -107,21 +99,16 @@ final class FoodCell: UICollectionViewCell {
     }
     
     func setFoodCell(food: FoodData) {
-        typeEmoji.text = food.storageType == .frozen ? "❄️" : " "
+        frozenEmoji.text = food.storageType == .frozen ? "❄️" : " "
         count.text = String(food.count) + (food.unit == .quantity ? "개" : "g")
         countView.addSubview(count)
         
-        infoLine.addArrangedSubview(typeEmoji)
+        infoLine.addArrangedSubview(frozenEmoji)
         infoLine.addArrangedSubview(countView)
         box.addArrangedSubview(infoLine)
         
         name.text = food.name
         box.addArrangedSubview(name)
-        
-        if food.emoji != nil {
-            foodEmoji.text = food.emoji
-            box.addArrangedSubview(foodEmoji)
-        }
         
         if food.image != nil {
             box.addArrangedSubview(image)

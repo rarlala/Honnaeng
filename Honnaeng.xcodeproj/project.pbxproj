@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D00A4D9F2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9B2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift */; };
-		D00A4DA02BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */; };
-		D00A4DA12BB30EDF0021E800 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */; };
-		D00A4DA22BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */; };
 		D00A4DA42BB323530021E800 /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4DA32BB323530021E800 /* UIImage+extension.swift */; };
 		D00A4DA62BB7358E0021E800 /* BarcodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A4DA52BB7358E0021E800 /* BarcodeReaderViewController.swift */; };
 		D057AD722B9F4DA600D929FD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */; };
@@ -26,6 +22,10 @@
 		D07F1EB02BB74F0B00ACDE77 /* OpenFoodAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1EAF2BB74F0B00ACDE77 /* OpenFoodAPI.swift */; };
 		D07F1EB32BB7537500ACDE77 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D07F1EB22BB7537500ACDE77 /* .gitignore */; };
 		D07F1EB52BB753D900ACDE77 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1EB42BB753D900ACDE77 /* Bundle.swift */; };
+		D07F1F582BBBA3B300ACDE77 /* StorageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F542BBBA3B300ACDE77 /* StorageMO+CoreDataClass.swift */; };
+		D07F1F592BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F552BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift */; };
+		D07F1F5A2BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F562BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift */; };
+		D07F1F5B2BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */; };
 		D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACDFF2BA44E59005D8110 /* FoodData.swift */; };
 		D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE012BA44E90005D8110 /* FoodGroup.swift */; };
 		D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE032BA45064005D8110 /* FoodUnit.swift */; };
@@ -37,7 +37,6 @@
 		D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE132BA7E66E005D8110 /* MainViewModel.swift */; };
 		D08ACE182BA7F0B8005D8110 /* FoodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE172BA7F0B8005D8110 /* FoodDetailViewController.swift */; };
 		D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE192BAC77A8005D8110 /* ListSortType.swift */; };
-		D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */; };
 		D08ACE232BAD7DEA005D8110 /* StorageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */; };
 		D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */; };
 		D08ACE302BB17F47005D8110 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE2F2BB17F47005D8110 /* CoreDataManager.swift */; };
@@ -61,10 +60,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D00A4D9B2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataClass.swift"; path = "../../StorageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataProperties.swift"; path = "../../StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataClass.swift"; path = "../../FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
-		D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataProperties.swift"; path = "../../FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D00A4DA32BB323530021E800 /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		D00A4DA52BB7358E0021E800 /* BarcodeReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeReaderViewController.swift; sourceTree = "<group>"; };
 		D057AD712B9F4DA600D929FD /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -85,6 +80,10 @@
 		D07F1EB12BB7526D00ACDE77 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		D07F1EB22BB7537500ACDE77 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		D07F1EB42BB753D900ACDE77 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		D07F1F542BBBA3B300ACDE77 /* StorageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataClass.swift"; path = "../../StorageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D07F1F552BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D07F1F562BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FoodMO+CoreDataClass.swift"; path = "../../FoodMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D08ACDFF2BA44E59005D8110 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		D08ACE012BA44E90005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodGroup.swift; path = ../../../../../../../Documents/FoodGroup.swift; sourceTree = "<group>"; };
 		D08ACE032BA45064005D8110 /* FoodUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
@@ -97,7 +96,6 @@
 		D08ACE172BA7F0B8005D8110 /* FoodDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailViewController.swift; sourceTree = "<group>"; };
 		D08ACE192BAC77A8005D8110 /* ListSortType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSortType.swift; sourceTree = "<group>"; };
 		D08ACE1C2BAC781B005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodGroup.swift; sourceTree = "<group>"; };
-		D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTextField.swift; sourceTree = "<group>"; };
 		D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageListTableViewController.swift; sourceTree = "<group>"; };
 		D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPopupViewController.swift; sourceTree = "<group>"; };
 		D08ACE2F2BB17F47005D8110 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -214,10 +212,10 @@
 			isa = PBXGroup;
 			children = (
 				D069E6E42B971EEF001B0BE0 /* Honnaeng.xcdatamodeld */,
-				D00A4D9B2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift */,
-				D00A4D9C2BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift */,
-				D00A4D9D2BB30EDF0021E800 /* FoodMO+CoreDataClass.swift */,
-				D00A4D9E2BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift */,
+				D07F1F542BBBA3B300ACDE77 /* StorageMO+CoreDataClass.swift */,
+				D07F1F552BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift */,
+				D07F1F562BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift */,
+				D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -272,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				D08ACE0B2BA4A4F7005D8110 /* Font.swift */,
-				D08ACE1D2BACB503005D8110 /* EmojiTextField.swift */,
 				D08ACE242BB0552A005D8110 /* PickerPopupViewController.swift */,
 				D00A4DA32BB323530021E800 /* UIImage+extension.swift */,
 				D07F1EB42BB753D900ACDE77 /* Bundle.swift */,
@@ -466,17 +463,12 @@
 				D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */,
 				D00A4DA42BB323530021E800 /* UIImage+extension.swift in Sources */,
 				D069E6B02B971844001B0BE0 /* AppDelegate.swift in Sources */,
-				D00A4D9F2BB30EDF0021E800 /* StorageMO+CoreDataClass.swift in Sources */,
-				D00A4DA02BB30EDF0021E800 /* StorageMO+CoreDataProperties.swift in Sources */,
-				D00A4DA12BB30EDF0021E800 /* FoodMO+CoreDataClass.swift in Sources */,
-				D00A4DA22BB30EDF0021E800 /* FoodMO+CoreDataProperties.swift in Sources */,
 				D08ACE182BA7F0B8005D8110 /* FoodDetailViewController.swift in Sources */,
 				D08ACE232BAD7DEA005D8110 /* StorageListTableViewController.swift in Sources */,
 				D069E6B22B971844001B0BE0 /* SceneDelegate.swift in Sources */,
 				D07F1EB52BB753D900ACDE77 /* Bundle.swift in Sources */,
 				D08ACE122BA4B06D005D8110 /* StorageType.swift in Sources */,
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,
-				D08ACE1E2BACB503005D8110 /* EmojiTextField.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
 				D08ACE302BB17F47005D8110 /* CoreDataManager.swift in Sources */,
@@ -484,6 +476,10 @@
 				D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */,
 				D00A4DA62BB7358E0021E800 /* BarcodeReaderViewController.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
+				D07F1F582BBBA3B300ACDE77 /* StorageMO+CoreDataClass.swift in Sources */,
+				D07F1F592BBBA3B300ACDE77 /* StorageMO+CoreDataProperties.swift in Sources */,
+				D07F1F5A2BBBA3B300ACDE77 /* FoodMO+CoreDataClass.swift in Sources */,
+				D07F1F5B2BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift in Sources */,
 				D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

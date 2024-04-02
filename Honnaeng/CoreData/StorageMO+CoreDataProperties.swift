@@ -1,5 +1,5 @@
 //
-//  Storage+CoreDataProperties.swift
+//  StorageMO+CoreDataProperties.swift
 //  Honnaeng
 //
 //  Created by Rarla on 3/26/24.
@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension Storage {
+extension StorageMO {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Storage> {
-        return NSFetchRequest<Storage>(entityName: "Storage")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<StorageMO> {
+        return NSFetchRequest<StorageMO>(entityName: "StorageMO")
     }
 
     @NSManaged public var name: String?
@@ -22,13 +22,13 @@ extension Storage {
 }
 
 // MARK: Generated accessors for food
-extension Storage {
+extension StorageMO {
 
     @objc(addFoodObject:)
-    @NSManaged public func addToFood(_ value: Food)
+    @NSManaged public func addToFood(_ value: FoodMO)
 
     @objc(removeFoodObject:)
-    @NSManaged public func removeFromFood(_ value: Food)
+    @NSManaged public func removeFromFood(_ value: FoodMO)
 
     @objc(addFood:)
     @NSManaged public func addToFood(_ values: NSSet)
@@ -38,6 +38,6 @@ extension Storage {
 
 }
 
-extension Storage : Identifiable {
+extension StorageMO : Identifiable {
 
 }
