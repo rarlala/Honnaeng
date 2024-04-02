@@ -190,6 +190,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     func updateStorageData() {
         configureRefrigeraterList()
+        setUpSnapshot()
     }
     
     private func configureUI() {

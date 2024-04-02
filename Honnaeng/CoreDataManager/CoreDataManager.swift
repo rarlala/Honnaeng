@@ -53,6 +53,19 @@ final class CoreDataManager {
         appDelegate?.saveContext()
     }
     
+    func deleteStorage(name: String) {
+        guard let context = context else { return }
+        
+        let request = NSFetchRequest<StorageMO>(entityName: storageEntityName)
+        request.predicate = NSPredicate(format: "name = %@", name as CVarArg)
+        
+        guard let fetchData = try? context.fetch(request),
+              let storage = fetchData.first else { return }
+        
+        context.delete(storage)
+        appDelegate?.saveContext()
+    }
+    
     // MARK: - Food CRUD
     func getFoodDataList() -> [FoodData] {
         var list: [FoodData] = []

@@ -95,7 +95,7 @@ class StorageListTableViewController: UITableViewController {
     @objc private func addButtonTapped() {
         let confirmAction: (_ name: String, _ idx: Int?) -> Void = {name, idx in
             do {
-                try self.viewModel?.addStorageList(name: name)
+                try self.viewModel?.addStorage(name: name)
             } catch StorageError.nameAlreadyExists {
                 PopUp.shared.showOneButtonPopUp(self: self,
                                                 title: "냉장고 추가 실패",
@@ -141,19 +141,19 @@ class StorageListTableViewController: UITableViewController {
         }
         editItem.image = UIImage(systemName: "pencil")
         
+        let deleteConfirmAction: () -> Void = { [self] in
+            self.viewModel?.deleteStorage(name: text)
+            self.tableView.reloadData()
+        }
+        let deleteItem = UIContextualAction(style: .destructive, title: "삭제") { contextualAction, view, boolValue in
+            PopUp.shared.showTwoButtonPopUp(self: self,
+                                            title: "냉장고 삭제",
+                                            message: "냉장고를 삭제하시겠습니까? 냉장고 삭제 시 해당 냉장고 속 재료도 함께 삭제됩니다.",
+                                            completionHandler: deleteConfirmAction)
+        }
+        deleteItem.image = UIImage(systemName: "trash")
         
-        // TODO: delete 필요 여부 고민
-//        let deleteConfirmAction: (_ name: String) -> Void = {[self] name in
-////            self.viewModel?.delete(name: name)
-//        }
-//        let deleteItem = UIContextualAction(style: .destructive, title: "삭제") { contextualAction, view, boolValue in
-//             print("delete")
-//        }
-//        deleteItem.image = UIImage(systemName: "trash")
-        
-//        let swipeAction = UISwipeActionsConfiguration(actions: [deleteItem, editItem])
-        
-        let swipeAction = UISwipeActionsConfiguration(actions: [editItem])
+        let swipeAction = UISwipeActionsConfiguration(actions: [deleteItem, editItem])
         return swipeAction
     }
     

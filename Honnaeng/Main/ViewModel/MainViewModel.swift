@@ -80,7 +80,7 @@ final class MainViewModel {
         return coreData.getStroageList()
     }
     
-    func addStorageList(name: String) throws {
+    func addStorage(name: String) throws {
         let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
         if coreData.getStroageList().contains(name) {
             throw StorageError.nameAlreadyExists
@@ -93,6 +93,11 @@ final class MainViewModel {
         guard let prevName = prevName else { return }
         let newName = newName.trimmingCharacters(in: .whitespacesAndNewlines)
         coreData.updateStorage(prevName: prevName, newName: newName)
+    }
+    
+    func deleteStorage(name: String?) {
+        guard let name = name else { return }
+        coreData.deleteStorage(name: name)
     }
     
     // MARK: - FoodData List
