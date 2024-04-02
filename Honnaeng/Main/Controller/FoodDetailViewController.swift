@@ -11,14 +11,11 @@ import PhotosUI
 
 final class FoodDetailViewController: UIViewController {
     
-    enum PageMode {
-        case add, update
-    }
-    
-    var mode: PageMode = .add
+    var mode: FoodDetailPageMode = .add
     var viewModel: MainViewModel
-    var delegate: MainViewDelegate?
+    var delegate: MainViewUpdateDelegate?
     var savedData: FoodData?
+    var name: String?
     
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
@@ -34,6 +31,9 @@ final class FoodDetailViewController: UIViewController {
         configureUI()
         if mode == .update {
             setData()
+        }
+        if mode == .addToBarcode {
+            setName()
         }
         configureButton()
         configurePicker()
@@ -320,6 +320,11 @@ final class FoodDetailViewController: UIViewController {
         ])
     }
     
+    private func setName() {
+        guard let name = name else { return }
+        nameTextField.text = name
+    }
+    
     private func setData() {
         guard let type = savedData?.storageType,
               let name = savedData?.name,
@@ -386,7 +391,7 @@ final class FoodDetailViewController: UIViewController {
         addImageButton.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
         
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        deleteButton.isHidden = mode == .add ? true : false
+        deleteButton.isHidden = mode != .update ? true : false
         
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
@@ -447,7 +452,7 @@ final class FoodDetailViewController: UIViewController {
             }
             
             switch mode {
-            case .add:
+            case .add, .addToBarcode:
                 viewModel.addFoodData(food: food)
                 delegate?.updateMainViewData()
             case .update:

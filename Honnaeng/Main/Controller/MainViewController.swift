@@ -7,12 +7,16 @@
 
 import UIKit
 
-protocol MainViewDelegate {
+protocol MainViewUpdateDelegate {
     func updateMainViewData()
     func updateStorageData()
 }
 
-final class MainViewController: UIViewController, MainViewDelegate {
+protocol FoodDetailNavigationDelegate {
+    func showFoodDetail(name: String)
+}
+
+final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private let viewModel = MainViewModel()
     
@@ -340,10 +344,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
             // TODO: Error Popup
             print("Error, 냉장고를 먼저 추가해주세요")
         } else {
-            let foodAddView = FoodDetailViewController(viewModel: viewModel)
-            foodAddView.modalPresentationStyle = .fullScreen
-            foodAddView.delegate = self
-            present(foodAddView, animated: true)
+            moveFoodDetailView(mode: .add)
         }
     }
     
@@ -352,9 +353,9 @@ final class MainViewController: UIViewController, MainViewDelegate {
             // TODO: Error Popup
             print("Error, 냉장고를 먼저 추가해주세요")
         } else {
-            let foodAddToBarcodeView = BarcodeReaderViewController(viewModel: viewModel)
+            let foodAddToBarcodeView = BarcodeReaderViewController()
             foodAddToBarcodeView.modalPresentationStyle = .fullScreen
-            //            foodAddView.delegate = self
+            foodAddToBarcodeView.delegate = self
             present(foodAddToBarcodeView, animated: true)
         }
     }
@@ -366,6 +367,21 @@ final class MainViewController: UIViewController, MainViewDelegate {
     // MARK: - search
     private func configureSearch() {
         searchField.delegate = self
+    }
+    
+    // MARK: - FoodDetailView
+    func moveFoodDetailView(mode: FoodDetailPageMode, name: String? = nil, itemData: FoodData? = nil) {
+        let foodAddView = FoodDetailViewController(viewModel: viewModel)
+        foodAddView.modalPresentationStyle = .fullScreen
+        foodAddView.mode = mode
+        if let data = itemData {
+            foodAddView.savedData = data
+        }
+        if let name = name {
+            foodAddView.name = name
+        }
+        foodAddView.delegate = self
+        present(foodAddView, animated: true)
     }
 }
 
@@ -392,13 +408,7 @@ extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.row
         let foodData = viewModel.getFoodData()[idx]
-        
-        let foodAddView = FoodDetailViewController(viewModel: viewModel)
-        foodAddView.modalPresentationStyle = .fullScreen
-        foodAddView.mode = .update
-        foodAddView.savedData = foodData
-        foodAddView.delegate = self
-        present(foodAddView, animated: true)
+        moveFoodDetailView(mode: .update, itemData: foodData)
     }
 }
 
@@ -414,5 +424,14 @@ extension MainViewController: UISearchTextFieldDelegate {
         viewModel.changeSearchText(text: "")
         setUpSnapshot()
         return true
+    }
+}
+
+// MARK: - FoodDetailNavigationDelegate
+extension MainViewController: FoodDetailNavigationDelegate {
+    func showFoodDetail(name: String) {
+        DispatchQueue.main.async {
+            self.moveFoodDetailView(mode: .addToBarcode, name: name)
+        }
     }
 }

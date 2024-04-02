@@ -10,9 +10,9 @@ import UIKit
 class StorageListTableViewController: UITableViewController {
     
     let viewModel: MainViewModel?
-    let delegate: MainViewDelegate?
+    let delegate: MainViewUpdateDelegate?
     
-    init(viewModel: MainViewModel, delegate: MainViewDelegate) {
+    init(viewModel: MainViewModel, delegate: MainViewUpdateDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
         super.init(nibName: nil, bundle: nil)

@@ -10,7 +10,7 @@ import UIKit
 
 class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
-    var viewModel: MainViewModel
+    var delegate: FoodDetailNavigationDelegate?
     var captureSession: AVCaptureSession?
     var previewLayer: AVCaptureVideoPreviewLayer?
     
@@ -41,15 +41,6 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    init(viewModel: MainViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,7 +151,8 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
             
             let decoder = JSONDecoder()
             if let json = try? decoder.decode(OpenFoodAPI.self, from: data) {
-                print(json.serviceId.row[0].name, json.serviceId.row[0].group)
+                let name = json.serviceId.row[0].name
+                self.delegate?.showFoodDetail(name: name)
             }
         }
         session.resume()
