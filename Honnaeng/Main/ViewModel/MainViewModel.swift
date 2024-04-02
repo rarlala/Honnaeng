@@ -80,11 +80,10 @@ final class MainViewModel {
         return coreData.getStroageList()
     }
     
-    func addStorageList(name: String) {
+    func addStorageList(name: String) throws {
         let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
         if coreData.getStroageList().contains(name) {
-            // TODO : Error, 이미 존재하는 냉장고 이름입니다.
-            print("Error, 이미 존재하는 냉장고 이름입니다.")
+            throw StorageError.nameAlreadyExists
         } else {
             coreData.createStorage(name: name)
         }

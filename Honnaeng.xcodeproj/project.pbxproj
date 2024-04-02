@@ -28,6 +28,8 @@
 		D07F1F5B2BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */; };
 		D07F1F5D2BBBA8F100ACDE77 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F5C2BBBA8F100ACDE77 /* ImageFileManager.swift */; };
 		D07F1F5F2BBBEEB900ACDE77 /* FoodDetailPageMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F5E2BBBEEB900ACDE77 /* FoodDetailPageMode.swift */; };
+		D07F1F612BBC185B00ACDE77 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F602BBC185B00ACDE77 /* PopUp.swift */; };
+		D07F1F642BBC20CB00ACDE77 /* MainViewError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F632BBC20CB00ACDE77 /* MainViewError.swift */; };
 		D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACDFF2BA44E59005D8110 /* FoodData.swift */; };
 		D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE012BA44E90005D8110 /* FoodGroup.swift */; };
 		D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE032BA45064005D8110 /* FoodUnit.swift */; };
@@ -88,6 +90,8 @@
 		D07F1F572BBBA3B300ACDE77 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D07F1F5C2BBBA8F100ACDE77 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		D07F1F5E2BBBEEB900ACDE77 /* FoodDetailPageMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailPageMode.swift; sourceTree = "<group>"; };
+		D07F1F602BBC185B00ACDE77 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
+		D07F1F632BBC20CB00ACDE77 /* MainViewError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewError.swift; sourceTree = "<group>"; };
 		D08ACDFF2BA44E59005D8110 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		D08ACE012BA44E90005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodGroup.swift; path = ../../../../../../../Documents/FoodGroup.swift; sourceTree = "<group>"; };
 		D08ACE032BA45064005D8110 /* FoodUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				D07F1F5C2BBBA8F100ACDE77 /* ImageFileManager.swift */,
+				D07F1F602BBC185B00ACDE77 /* PopUp.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -290,6 +295,7 @@
 				D08ACE112BA4B06D005D8110 /* StorageType.swift */,
 				D08ACE192BAC77A8005D8110 /* ListSortType.swift */,
 				D07F1F5E2BBBEEB900ACDE77 /* FoodDetailPageMode.swift */,
+				D07F1F632BBC20CB00ACDE77 /* MainViewError.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -464,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D069E6B42B971844001B0BE0 /* MainViewController.swift in Sources */,
+				D07F1F612BBC185B00ACDE77 /* PopUp.swift in Sources */,
 				D07F1EB02BB74F0B00ACDE77 /* OpenFoodAPI.swift in Sources */,
 				D07F1F5D2BBBA8F100ACDE77 /* ImageFileManager.swift in Sources */,
 				D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */,
@@ -478,6 +485,7 @@
 				D08ACE122BA4B06D005D8110 /* StorageType.swift in Sources */,
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
+				D07F1F642BBC20CB00ACDE77 /* MainViewError.swift in Sources */,
 				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
 				D08ACE302BB17F47005D8110 /* CoreDataManager.swift in Sources */,
 				D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */,

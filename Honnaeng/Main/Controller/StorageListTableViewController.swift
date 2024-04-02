@@ -94,10 +94,23 @@ class StorageListTableViewController: UITableViewController {
     
     @objc private func addButtonTapped() {
         let confirmAction: (_ name: String, _ idx: Int?) -> Void = {name, idx in
-            self.viewModel?.addStorageList(name: name)
+            do {
+                try self.viewModel?.addStorageList(name: name)
+            } catch StorageError.nameAlreadyExists {
+                PopUp.shared.showOneButtonPopUp(self: self,
+                                                title: "냉장고 추가 실패",
+                                                message: "이미 존재하는 냉장고명입니다.")
+            } catch {
+                
+            }
         }
         
-        showPopup(title: "냉장고 추가", message: "추가할 냉장고 이름을 입력하세요",  confirmButtonTitle: "추가", defaultText: nil, idx: nil, confirmAction: confirmAction)
+        showPopup(title: "냉장고 추가",
+                  message: "추가할 냉장고 이름을 입력하세요",
+                  confirmButtonTitle: "추가",
+                  defaultText: nil,
+                  idx: nil,
+                  confirmAction: confirmAction)
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -111,14 +124,20 @@ class StorageListTableViewController: UITableViewController {
         let editConfirmAction: (_ name: String, _ idx: Int?) -> Void = {[self] name, idx in
             if let viewModel = viewModel,
                 viewModel.getStorageList().contains(name) {
-                // TODO : Error, 이미 존재하는 냉장고 이름입니다.
-                print("Error, 이미 존재하는 냉장고 이름입니다.")
+                    PopUp.shared.showOneButtonPopUp(self: self,
+                                                    title: "냉장고명 수정 실패",
+                                                    message: "이미 존재하는 냉장고명입니다.")
             } else {
                 self.viewModel?.updateStorageList(prevName: text, newName: name, idx: idx)
             }
         }
         let editItem = UIContextualAction(style: .normal, title: "수정") { contextualAction, view, boolValue in
-            self.showPopup(title: "냉장고 이름 수정", message: "수정할 이름을 입력하세요", confirmButtonTitle: "수정", defaultText: text, idx: indexPath.row, confirmAction: editConfirmAction)
+            self.showPopup(title: "냉장고 이름 수정", 
+                           message: "수정할 이름을 입력하세요",
+                           confirmButtonTitle: "수정",
+                           defaultText: text,
+                           idx: indexPath.row,
+                           confirmAction: editConfirmAction)
         }
         editItem.image = UIImage(systemName: "pencil")
         

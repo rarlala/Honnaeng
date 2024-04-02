@@ -15,6 +15,8 @@ final class FoodCell: UICollectionViewCell {
         view.distribution = .equalCentering
         view.alignment = .center
         view.spacing = 4
+        view.backgroundColor = UIColor(named: "white")
+        view.layer.cornerRadius = 10
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -35,9 +37,11 @@ final class FoodCell: UICollectionViewCell {
         return label
     }()
 
-    private let image: UIImageView = {
+    private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "food")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -72,6 +76,7 @@ final class FoodCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .center
         label.font = .Paragraph4
+        label.textColor = UIColor(named: "white")
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -92,6 +97,12 @@ final class FoodCell: UICollectionViewCell {
             
             count.centerYAnchor.constraint(equalTo: countView.centerYAnchor),
             count.centerXAnchor.constraint(equalTo: countView.centerXAnchor),
+            
+            imageView.widthAnchor.constraint(equalTo: box.widthAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 60),
+            
+            exDate.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 2),
+            exDate.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -2),
     
             name.leadingAnchor.constraint(equalTo: box.leadingAnchor),
             name.trailingAnchor.constraint(equalTo: box.trailingAnchor),
@@ -99,6 +110,15 @@ final class FoodCell: UICollectionViewCell {
     }
     
     func setFoodCell(food: FoodData) {
+        box.addArrangedSubview(imageView)
+        if let imageUrl = food.imageUrl {
+            let image = ImageFileManager.shared.loadImageFromFileSystem(fileName: imageUrl)
+            imageView.image = image
+        } else {
+            imageView.image = food.defaultImage
+        }
+        addShadowToView(box)
+        
         frozenEmoji.text = food.storageType == .frozen ? "❄️" : " "
         count.text = String(food.count) + (food.unit == .quantity ? "개" : "g")
         countView.addSubview(count)
@@ -106,16 +126,12 @@ final class FoodCell: UICollectionViewCell {
         infoLine.addArrangedSubview(frozenEmoji)
         infoLine.addArrangedSubview(countView)
         box.addArrangedSubview(infoLine)
-        
+    
         name.text = food.name
         box.addArrangedSubview(name)
         
-        if food.imageUrl != nil {
-            box.addArrangedSubview(image)
-        }
-        
         exDate.text = getDday(date: food.exDate)
-        box.addArrangedSubview(exDate)
+        imageView.addSubview(exDate)
         
         contentView.addSubview(box)
         
@@ -130,13 +146,21 @@ final class FoodCell: UICollectionViewCell {
         guard let dayCount = components.day else { return "" }
         
         if dayCount >= 7 {
-            exDate.textColor = UIColor(named: "blue03")
+            exDate.backgroundColor = UIColor(named: "blue03")
         } else if dayCount > 3 {
-            exDate.textColor = UIColor(named: "green02")
+            exDate.backgroundColor = UIColor(named: "green02")
         } else {
-            exDate.textColor = UIColor(named: "red01")
+            exDate.backgroundColor = UIColor(named: "red01")
         }
         
-        return "\(dayCount)일 남음"
+        return "D-\(dayCount)"
+    }
+    
+    func addShadowToView(_ view: UIView) {
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.05
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 10
+        view.clipsToBounds = false
     }
 }

@@ -534,15 +534,15 @@ extension FoodDetailViewController: PHPickerViewControllerDelegate {
         
         if results.isEmpty {
             displayEmptyImage()
-        }
-        
-        let currentSelection = results[0]
-        let itemProvider = currentSelection.itemProvider
-        
-        if itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-                DispatchQueue.main.async {
-                    self?.handleCompletion(object: image, error: error)
+        } else {
+            let currentSelection = results[0]
+            let itemProvider = currentSelection.itemProvider
+            
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                    DispatchQueue.main.async {
+                        self?.handleCompletion(object: image, error: error)
+                    }
                 }
             }
         }

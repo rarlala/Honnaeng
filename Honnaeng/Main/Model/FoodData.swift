@@ -17,6 +17,7 @@ struct FoodData: Hashable {
     var exDate: Date
     var storageType: StorageType
     var storageName: String
+    var defaultImage = UIImage(systemName: "photo.on.rectangle.angled")
     var imageUrl: String?
     var memo: String?
     

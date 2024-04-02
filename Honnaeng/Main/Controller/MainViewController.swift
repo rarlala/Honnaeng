@@ -177,7 +177,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     // MARK: - function
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         configureUI()
         configurePlusRefrigeratorButton()
         configureSegmentControl()
@@ -341,8 +341,9 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     @objc func addFood() {
         if viewModel.getStorageList().count == 0 {
-            // TODO: Error Popup
-            print("Error, 냉장고를 먼저 추가해주세요")
+            PopUp.shared.showOneButtonPopUp(self: self,
+                                            title: "냉장고 없음",
+                                            message: "왼쪽 상단 버튼을 클릭해 냉장고를 먼저 추가해주세요.")
         } else {
             moveFoodDetailView(mode: .add)
         }
@@ -350,8 +351,9 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     @objc func addFoodToBarcode() {
         if viewModel.getStorageList().count == 0 {
-            // TODO: Error Popup
-            print("Error, 냉장고를 먼저 추가해주세요")
+            PopUp.shared.showOneButtonPopUp(self: self,
+                                            title: "냉장고 없음",
+                                            message: "왼쪽 상단 버튼을 클릭해 냉장고를 먼저 추가해주세요.")
         } else {
             let foodAddToBarcodeView = BarcodeReaderViewController()
             foodAddToBarcodeView.modalPresentationStyle = .fullScreen
@@ -390,11 +392,11 @@ extension MainViewController {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .absolute(100))
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .absolute(120))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 4)
             
             let section = NSCollectionLayoutSection(group: group)
