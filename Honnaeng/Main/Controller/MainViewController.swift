@@ -47,8 +47,8 @@ final class MainViewController: UIViewController, MainViewDelegate {
     private let plusRefrigeratorButton: UIButton = {
         let button = UIButton()
         if let image = UIImage(named: "icon_plus_storage")?.resized(toWidth: 25) {
-             button.setImage(image, for: .normal)
-         }
+            button.setImage(image, for: .normal)
+        }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -95,6 +95,13 @@ final class MainViewController: UIViewController, MainViewDelegate {
     }()
     
     private let refrigeraterFilter: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor(named: "black"), for: .normal)
+        button.titleLabel?.font = .Paragraph4
+        return button
+    }()
+    
+    private let groupFilter: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
@@ -189,14 +196,15 @@ final class MainViewController: UIViewController, MainViewDelegate {
         headerView.addArrangedSubview(alertButton)
         
         filterBox.addArrangedSubview(refrigeraterFilter)
+        filterBox.addArrangedSubview(groupFilter)
         filterBox.addArrangedSubview(listSortFilter)
         
         buttonBox.addArrangedSubview(addFoodButton)
         buttonBox.addArrangedSubview(addFoodToBarcodeButton)
         
         mainView.addArrangedSubview(headerView)
-        mainView.addArrangedSubview(segmentControl)
         mainView.addArrangedSubview(searchField)
+        mainView.addArrangedSubview(segmentControl)
         mainView.addArrangedSubview(filterBox)
         mainView.addArrangedSubview(foodListView)
         mainView.addArrangedSubview(noDataLabel)
@@ -230,6 +238,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
     // MARK: - Drop down filter Setting
     private func configureFilter() {
         configureRefrigeraterList()
+        configureGroupFilter()
         configureSortFilter()
     }
     
@@ -249,6 +258,24 @@ final class MainViewController: UIViewController, MainViewDelegate {
         refrigeraterFilter.menu = UIMenu(options: .displayInline, children: menuChildren)
         refrigeraterFilter.showsMenuAsPrimaryAction =  true
         refrigeraterFilter.changesSelectionAsPrimaryAction =  true
+    }
+    
+    private func configureGroupFilter() {
+        var groupMenuChildren: [UIMenuElement] = []
+        groupMenuChildren.append(UIAction(title: "전체", handler: { select in
+            self.viewModel.changeGroupType(type: select.title)
+            self.setUpSnapshot()
+        }))
+        for group in viewModel.getGroupTypeList() {
+            groupMenuChildren.append(UIAction(title: group, handler: { select in
+                self.viewModel.changeGroupType(type: select.title)
+                self.setUpSnapshot()
+            }))
+        }
+        
+        groupFilter.menu = UIMenu(options: .displayInline, children: groupMenuChildren)
+        groupFilter.showsMenuAsPrimaryAction =  true
+        groupFilter.changesSelectionAsPrimaryAction =  true
     }
     
     private func configureSortFilter() {
@@ -327,7 +354,7 @@ final class MainViewController: UIViewController, MainViewDelegate {
         } else {
             let foodAddToBarcodeView = BarcodeReaderViewController(viewModel: viewModel)
             foodAddToBarcodeView.modalPresentationStyle = .fullScreen
-//            foodAddView.delegate = self
+            //            foodAddView.delegate = self
             present(foodAddToBarcodeView, animated: true)
         }
     }
