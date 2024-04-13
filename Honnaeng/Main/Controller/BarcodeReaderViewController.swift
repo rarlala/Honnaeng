@@ -16,17 +16,25 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "바코드로 추가"
+        label.text = "바코드로 입력"
         label.font = .Heading3
         label.textAlignment = .center
-        label.textColor = UIColor(named: "white")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let barcodeInfoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "바코드를 영역에 잘 맞춰주세요"
+        label.font = .Paragraph3
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let barcodeBox: UIView = {
         let view = UIView()
-        view.layer.borderColor = UIColor(named: "white")?.cgColor
+        view.layer.borderColor = UIColor(named: "gray00")?.cgColor
         view.layer.borderWidth = 5
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -35,19 +43,24 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     private let backButton: UIButton = {
         let button = UIButton()
         button.setTitle("취소", for: .normal)
-        button.layer.borderColor = UIColor(named: "white")?.cgColor
-        button.layer.borderWidth = 1
+        button.backgroundColor = UIColor(named: "gray03")
         button.layer.cornerRadius = 10
+        button.titleLabel?.font = .Paragraph2
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor(named: "black")
+        configureUI()
+        configureCaptureSession()
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = UIColor(named: "white")
         
         view.addSubview(titleLabel)
+        view.addSubview(barcodeInfoLabel)
         view.addSubview(barcodeBox)
         view.addSubview(backButton)
         
@@ -55,6 +68,9 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 20),
             titleLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
+            
+            barcodeInfoLabel.topAnchor.constraint(equalTo: barcodeBox.topAnchor, constant: -50),
+            barcodeInfoLabel.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             
             barcodeBox.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor),
             barcodeBox.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor),
@@ -67,6 +83,10 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
             backButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+    
+    private func configureCaptureSession() {
         captureSession = AVCaptureSession()
         
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -78,17 +98,21 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
             return
         }
         
-        captureSession?.addInput(videoInput)
+        guard let captureSession = captureSession else {
+            failed()
+            return
+        }
+        
+        captureSession.addInput(videoInput)
         
         let metadataOutput = AVCaptureMetadataOutput()
-        
-        captureSession?.addOutput(metadataOutput)
+        captureSession.addOutput(metadataOutput)
         
         metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
         
-        guard let captureSession = captureSession else { return }
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer?.frame = barcodeBox.frame
         previewLayer?.videoGravity = .resizeAspectFill
         
         guard let previewLayer = previewLayer else { return }
@@ -97,8 +121,6 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         DispatchQueue.global(qos: .background).async {
             self.captureSession?.startRunning()
         }
-        
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
     
     @objc private func backButtonTapped() {
@@ -110,28 +132,34 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         previewLayer?.frame = barcodeBox.frame
     }
     
-    func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
+    private func failed() {
+        PopUp.shared.showOneButtonPopUp(self: self,
+                                        title: "바코드로 입력 실패",
+                                        message: "해당 장치에서 카메라가 지원되지 않습니다.")
         captureSession = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.global(qos: .background).async {
-            self.captureSession?.startRunning()
+        guard let captureSession = captureSession else { return }
+        if !captureSession.isRunning {
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                self?.captureSession?.startRunning()
+            }
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        captureSession?.stopRunning()
+        guard let captureSession = captureSession else { return }
+        if captureSession.isRunning {
+            DispatchQueue.global(qos: .background).async { [weak self] in
+                self?.captureSession?.stopRunning()
+            }
+        }
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession?.stopRunning()
-        
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
@@ -147,12 +175,14 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
               let urlString = URL(string: "https://openapi.foodsafetykorea.go.kr/api/\(apiKey)/C005/json/1/1/BAR_CD=\(code)") else { return }
         
         let session = URLSession.shared.dataTask(with: URLRequest(url: urlString)) { data, response, error in
-            guard let data = data else { return }
+            guard let data = data, error == nil else { return }
             
             let decoder = JSONDecoder()
             if let json = try? decoder.decode(OpenFoodAPI.self, from: data) {
-                let name = json.serviceId.row[0].name
-                self.delegate?.showFoodDetail(name: name)
+                DispatchQueue.main.async {
+                    let name = json.serviceId.row[0].name
+                    self.delegate?.showFoodDetail(name: name)
+                }
             }
         }
         session.resume()
