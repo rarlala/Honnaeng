@@ -59,7 +59,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private let logoLabel: UILabel = {
         let label = UILabel()
-        label.text = "혼냉"
+        label.text = "재료 리스트"
         label.font = .Heading3
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +85,12 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private let segmentControl: UISegmentedControl = {
         let control = UISegmentedControl(items: ["전체", "냉장", "냉동", "실온"])
+        if let font: UIFont = .Paragraph3 {
+            let normalTextAttributes: [NSAttributedString.Key: Any] = [
+                .font: font
+            ]
+            control.setTitleTextAttributes(normalTextAttributes, for: .normal)
+        }
         control.selectedSegmentIndex = 0
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
@@ -100,22 +106,28 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private let refrigeraterFilter: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
+        button.setTitleColor(UIColor(named: "blue03"), for: .normal)
+        button.backgroundColor = UIColor(named: "blue00")
+        button.layer.cornerRadius = 10
         return button
     }()
     
     private let groupFilter: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
+        button.setTitleColor(UIColor(named: "blue03"), for: .normal)
+        button.backgroundColor = UIColor(named: "blue00")
+        button.layer.cornerRadius = 10
         return button
     }()
     
     private let listSortFilter: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor(named: "black"), for: .normal)
         button.titleLabel?.font = .Paragraph4
+        button.setTitleColor(UIColor(named: "blue03"), for: .normal)
+        button.backgroundColor = UIColor(named: "blue00")
+        button.layer.cornerRadius = 10
         return button
     }()
     
@@ -129,23 +141,24 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private let addFoodButton: UIButton = {
         let button = UIButton()
-        button.setTitle("➕", for: .normal)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(named: "gray01")?.cgColor
+        let largeFont = UIFont.systemFont(ofSize: 20, weight: .bold)
+        let configuration = UIImage.SymbolConfiguration(font: largeFont)
+        button.setImage(UIImage(systemName: "plus", withConfiguration: configuration), for: .normal)
+        button.backgroundColor = UIColor(named: "blue03")
+        button.tintColor = UIColor(named: "white")
         button.layer.cornerRadius = 10
         return button
     }()
     
     private let addFoodToBarcodeButton: UIButton = {
         let button = UIButton()
-        let largeFont = UIFont.systemFont(ofSize: 20)
+        let largeFont = UIFont.systemFont(ofSize: 20, weight: .bold)
         let configuration = UIImage.SymbolConfiguration(font: largeFont)
         button.setImage(UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration), for: .normal)
-        button.tintColor = .black
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(named: "gray01")?.cgColor
+        button.tintColor = UIColor(named: "white")
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "blue03")
         return button
     }()
     
@@ -169,7 +182,8 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         let textField = UISearchTextField()
         textField.textAlignment = .left
         textField.clearButtonMode = .whileEditing
-        textField.backgroundColor = UIColor(named: "gray00")
+        textField.backgroundColor = UIColor(named: "white")
+        textField.placeholder = "재료를 검색해보세요"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -204,15 +218,15 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         filterBox.addArrangedSubview(groupFilter)
         filterBox.addArrangedSubview(listSortFilter)
         
-        buttonBox.addArrangedSubview(addFoodButton)
         buttonBox.addArrangedSubview(addFoodToBarcodeButton)
+        buttonBox.addArrangedSubview(addFoodButton)
         
         mainView.addArrangedSubview(headerView)
-        mainView.addArrangedSubview(searchField)
         mainView.addArrangedSubview(segmentControl)
         mainView.addArrangedSubview(filterBox)
         mainView.addArrangedSubview(foodListView)
         mainView.addArrangedSubview(noDataLabel)
+        mainView.addArrangedSubview(searchField)
         mainView.addArrangedSubview(buttonBox)
         
         self.view.addSubview(mainView)
@@ -224,7 +238,11 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
             mainView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             
             headerView.heightAnchor.constraint(equalToConstant: 50),
+            refrigeraterFilter.widthAnchor.constraint(equalToConstant: 100),
             refrigeraterFilter.heightAnchor.constraint(equalToConstant: 30),
+            groupFilter.widthAnchor.constraint(equalToConstant: 100),
+            listSortFilter.widthAnchor.constraint(equalToConstant: 100),
+            
             addFoodButton.heightAnchor.constraint(equalToConstant: 50),
             searchField.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -267,7 +285,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private func configureGroupFilter() {
         var groupMenuChildren: [UIMenuElement] = []
-        groupMenuChildren.append(UIAction(title: "전체", handler: { select in
+        groupMenuChildren.append(UIAction(title: "전체 분류", handler: { select in
             self.viewModel.changeGroupType(type: select.title)
             self.setUpSnapshot()
         }))
@@ -325,8 +343,8 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     private func configurationCell() {
         foodListView.delegate = self
         
-        let foodBoxRegistration = UICollectionView.CellRegistration<FoodCell, FoodData> { cell, indexPath, itemIdentifier in
-            cell.setFoodCell(food: itemIdentifier)
+        let foodBoxRegistration = UICollectionView.CellRegistration<FoodCardCell, FoodData> { cell, indexPath, itemIdentifier in
+            cell.setFoodCardCell(food: itemIdentifier)
         }
         
         dataSource = DataSource(collectionView: foodListView) { (collectionView, indexPath, identifier) -> UICollectionViewCell in
@@ -338,6 +356,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     private func configureAddButtons() {
         addFoodButton.addTarget(self, action: #selector(addFood), for: .touchUpInside)
         addFoodToBarcodeButton.addTarget(self, action: #selector(addFoodToBarcode), for: .touchUpInside)
+        alertButton.addTarget(self, action: #selector(moveToAlertList), for: .touchUpInside)
     }
     
     @objc func addFood() {
@@ -361,6 +380,12 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
             foodAddToBarcodeView.delegate = self
             present(foodAddToBarcodeView, animated: true)
         }
+    }
+    
+    @objc func moveToAlertList() {
+        let alertListView = AlertListTableViewController()
+        alertListView.modalPresentationStyle = .fullScreen
+        present(alertListView, animated: true)
     }
     
     func updateMainViewData() {
@@ -393,11 +418,11 @@ extension MainViewController {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .absolute(120))
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0 / 4), heightDimension: .absolute(124))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 4, bottom: 8, trailing: 4)
             
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(120))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(124))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 4)
             
             let section = NSCollectionLayoutSection(group: group)

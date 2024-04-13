@@ -30,10 +30,12 @@
 		D07F1F722BBC323E00ACDE77 /* FoodMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F6E2BBC323E00ACDE77 /* FoodMO+CoreDataProperties.swift */; };
 		D07F1F732BBC323E00ACDE77 /* StorageMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F6F2BBC323E00ACDE77 /* StorageMO+CoreDataClass.swift */; };
 		D07F1F742BBC323E00ACDE77 /* StorageMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F702BBC323E00ACDE77 /* StorageMO+CoreDataProperties.swift */; };
+		D07F1F762BBD575C00ACDE77 /* FoodUsageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F752BBD575C00ACDE77 /* FoodUsageCell.swift */; };
+		D07F1F7A2BC7EA9100ACDE77 /* AlertListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07F1F792BC7EA9100ACDE77 /* AlertListTableViewController.swift */; };
 		D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACDFF2BA44E59005D8110 /* FoodData.swift */; };
 		D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE012BA44E90005D8110 /* FoodGroup.swift */; };
 		D08ACE042BA45064005D8110 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE032BA45064005D8110 /* FoodUnit.swift */; };
-		D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE052BA49F18005D8110 /* FoodCell.swift */; };
+		D08ACE062BA49F18005D8110 /* FoodCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE052BA49F18005D8110 /* FoodCardCell.swift */; };
 		D08ACE0C2BA4A4F8005D8110 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08ACE0B2BA4A4F7005D8110 /* Font.swift */; };
 		D08ACE0F2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D08ACE0D2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf */; };
 		D08ACE102BA4A6DE005D8110 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */; };
@@ -92,10 +94,12 @@
 		D07F1F6E2BBC323E00ACDE77 /* FoodMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D07F1F6F2BBC323E00ACDE77 /* StorageMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StorageMO+CoreDataClass.swift"; path = "../../StorageMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D07F1F702BBC323E00ACDE77 /* StorageMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StorageMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D07F1F752BBD575C00ACDE77 /* FoodUsageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUsageCell.swift; sourceTree = "<group>"; };
+		D07F1F792BC7EA9100ACDE77 /* AlertListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertListTableViewController.swift; sourceTree = "<group>"; };
 		D08ACDFF2BA44E59005D8110 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		D08ACE012BA44E90005D8110 /* FoodGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FoodGroup.swift; path = ../../../../../../../Documents/FoodGroup.swift; sourceTree = "<group>"; };
 		D08ACE032BA45064005D8110 /* FoodUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
-		D08ACE052BA49F18005D8110 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		D08ACE052BA49F18005D8110 /* FoodCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCardCell.swift; sourceTree = "<group>"; };
 		D08ACE0B2BA4A4F7005D8110 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		D08ACE0D2BA4A6DE005D8110 /* NotoSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		D08ACE0E2BA4A6DE005D8110 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Medium.ttf"; sourceTree = "<group>"; };
@@ -307,6 +311,7 @@
 				D08ACE172BA7F0B8005D8110 /* FoodDetailViewController.swift */,
 				D08ACE222BAD7DEA005D8110 /* StorageListTableViewController.swift */,
 				D00A4DA52BB7358E0021E800 /* BarcodeReaderViewController.swift */,
+				D07F1F792BC7EA9100ACDE77 /* AlertListTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,7 +327,8 @@
 		D08ACE212BACBD95005D8110 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D08ACE052BA49F18005D8110 /* FoodCell.swift */,
+				D08ACE052BA49F18005D8110 /* FoodCardCell.swift */,
+				D07F1F752BBD575C00ACDE77 /* FoodUsageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -490,12 +496,14 @@
 				D08ACE002BA44E59005D8110 /* FoodData.swift in Sources */,
 				D08ACE022BA44E90005D8110 /* FoodGroup.swift in Sources */,
 				D07F1F642BBC20CB00ACDE77 /* MainViewError.swift in Sources */,
-				D08ACE062BA49F18005D8110 /* FoodCell.swift in Sources */,
+				D08ACE062BA49F18005D8110 /* FoodCardCell.swift in Sources */,
 				D08ACE302BB17F47005D8110 /* CoreDataManager.swift in Sources */,
+				D07F1F762BBD575C00ACDE77 /* FoodUsageCell.swift in Sources */,
 				D08ACE1A2BAC77A8005D8110 /* ListSortType.swift in Sources */,
 				D08ACE252BB0552A005D8110 /* PickerPopupViewController.swift in Sources */,
 				D00A4DA62BB7358E0021E800 /* BarcodeReaderViewController.swift in Sources */,
 				D069E6E62B971EEF001B0BE0 /* Honnaeng.xcdatamodeld in Sources */,
+				D07F1F7A2BC7EA9100ACDE77 /* AlertListTableViewController.swift in Sources */,
 				D08ACE142BA7E66E005D8110 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

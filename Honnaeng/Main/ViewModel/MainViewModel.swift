@@ -14,7 +14,7 @@ final class MainViewModel {
     private var storageType: StorageType = .all
     private var storageName: String = "전체 냉장고"
     private var sortType: ListSortType = .expirationDateimminent
-    private var groupType: String = "전체"
+    private var groupType: String = "전체 분류"
     private var searchText: String = ""
 
     func changeStorageType(type: StorageType) {
@@ -42,7 +42,7 @@ final class MainViewModel {
     }
     
     private func getSelectedGroupList(data: [FoodData]) -> [FoodData] {
-        return groupType == "전체" ? data : data.filter { $0.group == FoodGroup(rawValue: groupType) }
+        return groupType == "전체 분류" ? data : data.filter { $0.group == FoodGroup(rawValue: groupType) }
     }
     
     func getSortTypeList() -> [String] {
