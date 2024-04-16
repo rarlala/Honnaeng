@@ -17,6 +17,8 @@ final class FoodDetailViewController: UIViewController {
     var savedData: FoodData?
     var name: String?
     
+    var activeTextField: UITextField?
+    
     init(viewModel: MainViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -39,6 +41,16 @@ final class FoodDetailViewController: UIViewController {
         configurePicker()
         configureTextField()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let mainView: UIStackView = {
         let view = UIStackView()
@@ -358,18 +370,25 @@ final class FoodDetailViewController: UIViewController {
         mainView.addArrangedSubview(countLineStackView)
         mainView.addArrangedSubview(dateLineStackView)
         mainView.addArrangedSubview(memoLineStackView)
+        mainView.addArrangedSubview(buttonLineStackView)
+        mainView.addArrangedSubview(buttonLineStackView)
         
-        mainView.addArrangedSubview(buttonLineStackView)
-        mainView.addArrangedSubview(buttonLineStackView)
+        scrollView.addSubview(mainView)
         
         view.backgroundColor = UIColor(named: "white")
-        view.addSubview(mainView)
+        view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10),
-            mainView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            mainView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: 10),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            
+            mainView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            mainView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            mainView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            mainView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mainView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             imageView.widthAnchor.constraint(equalToConstant: 150),
             imageView.heightAnchor.constraint(equalToConstant: 150),
@@ -494,7 +513,7 @@ final class FoodDetailViewController: UIViewController {
         
         PopUp.shared.showTwoButtonPopUp(self: self,
                                         title: "재료를 삭제하시겠습니까?",
-                                        message: "삭제 시 복구 불가능합니다.") { [weak self] in    
+                                        message: "삭제 시 복구 불가능합니다.") { [weak self] in
             self?.viewModel.deleteFoodData(food: food)
             self?.delegate?.updateMainViewData()
             self?.dismiss(animated: true)
@@ -556,6 +575,9 @@ final class FoodDetailViewController: UIViewController {
         countTextField.delegate = self
         memoTextField.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboarWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         countTextField.inputAccessoryView = createToolbar(for: countTextField)
     }
     
@@ -574,6 +596,31 @@ final class FoodDetailViewController: UIViewController {
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+            
+            if let activeTextField = self.activeTextField {
+                var aRect = self.view.frame
+                aRect.size.height -= keyboardHeight
+                if !aRect.contains(activeTextField.frame.origin) {
+                    scrollView.scrollRectToVisible(activeTextField.frame, animated: true)
+                }
+            }
+        }
+    }
+    
+    @objc private func keyboarWillHide() {
+        view.frame.origin.y = 0
+        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
 }
 
 extension FoodDetailViewController: UITextFieldDelegate {
@@ -584,11 +631,18 @@ extension FoodDetailViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
-        
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
         return updatedText.count <= 20
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeTextField = nil
     }
 }
 

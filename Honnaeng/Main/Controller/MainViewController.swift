@@ -492,17 +492,6 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 extension MainViewController: UISearchTextFieldDelegate {
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
-//        if let textRange = Range(range, in: text) {
-//            let updateText = text.replacingCharacters(in: textRange, with: string)
-//            print(updateText)
-//            viewModel.changeSearchText(text: updateText)
-//            setUpSnapshot()
-//        }
-//        return true
-//    }
-    
     @objc func textFieldDidChange(_ notification: Notification) {
         if let textField = notification.object as? UITextField, textField == searchField {
             viewModel.changeSearchText(text: textField.text ?? "")
