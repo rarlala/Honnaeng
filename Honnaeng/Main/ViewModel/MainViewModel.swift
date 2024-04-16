@@ -16,6 +16,8 @@ final class MainViewModel {
     private var sortType: ListSortType = .expirationDateimminent
     private var groupType: String = "전체 분류"
     private var searchText: String = ""
+    
+    lazy var isEmpty = coreData.getFoodDataList().count == 0
 
     func changeStorageType(type: StorageType) {
         self.storageType = type

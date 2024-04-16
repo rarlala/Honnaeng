@@ -29,6 +29,8 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     
     private var dataSource: DataSource?
     
+    var searchScrollViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK: - UI Components
     private let mainView: UIStackView = {
         let view = UIStackView()
@@ -178,6 +180,12 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         return label
     }()
     
+    private let searchScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let searchField: UISearchTextField = {
         let textField = UISearchTextField()
         textField.textAlignment = .left
@@ -191,7 +199,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     // MARK: - function
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         configureUI()
         configurePlusRefrigeratorButton()
         configureSegmentControl()
@@ -200,6 +208,10 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         setUpSnapshot()
         configureAddButtons()
         configureSearch()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func updateStorageData() {
@@ -218,6 +230,8 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         filterBox.addArrangedSubview(groupFilter)
         filterBox.addArrangedSubview(listSortFilter)
         
+        searchScrollView.addSubview(searchField)
+        
         buttonBox.addArrangedSubview(addFoodToBarcodeButton)
         buttonBox.addArrangedSubview(addFoodButton)
         
@@ -226,7 +240,7 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         mainView.addArrangedSubview(filterBox)
         mainView.addArrangedSubview(foodListView)
         mainView.addArrangedSubview(noDataLabel)
-        mainView.addArrangedSubview(searchField)
+        mainView.addArrangedSubview(searchScrollView)
         mainView.addArrangedSubview(buttonBox)
         
         self.view.addSubview(mainView)
@@ -244,8 +258,16 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
             listSortFilter.widthAnchor.constraint(equalToConstant: 100),
             
             addFoodButton.heightAnchor.constraint(equalToConstant: 50),
-            searchField.heightAnchor.constraint(equalToConstant: 30)
+            
+            searchField.topAnchor.constraint(equalTo: searchScrollView.contentLayoutGuide.topAnchor),
+            searchField.heightAnchor.constraint(equalToConstant: 30),
+            searchField.leadingAnchor.constraint(equalTo: searchScrollView.contentLayoutGuide.leadingAnchor),
+            searchField.trailingAnchor.constraint(equalTo: searchScrollView.contentLayoutGuide.trailingAnchor),
+            searchField.widthAnchor.constraint(equalTo: searchScrollView.frameLayoutGuide.widthAnchor),
         ])
+        
+        searchScrollViewHeightConstraint = searchScrollView.heightAnchor.constraint(equalTo: searchField.heightAnchor)
+        searchScrollViewHeightConstraint.isActive = true
     }
     
     private func configurePlusRefrigeratorButton() {
@@ -338,6 +360,14 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
         
         foodListView.isHidden = foods.isEmpty
         noDataLabel.isHidden = !foods.isEmpty
+        
+        if searchField.text != "" {
+            noDataLabel.text = "검색 결과가 없습니다"
+        } else if self.viewModel.isEmpty {
+            noDataLabel.text = "아래 버튼을 눌러 재료를 추가해보세요!"
+        } else {
+            noDataLabel.text = "선택한 필터에 맞는 재료가 없습니다"
+        }
     }
     
     private func configurationCell() {
@@ -395,6 +425,27 @@ final class MainViewController: UIViewController, MainViewUpdateDelegate {
     // MARK: - search
     private func configureSearch() {
         searchField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboarWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldDidChange(_:)), name: UITextField.textDidChangeNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            
+            searchScrollViewHeightConstraint.constant = keyboardHeight - addFoodButton.frame.height - 36
+            searchScrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            searchScrollView.scrollIndicatorInsets = searchScrollView.contentInset
+            searchScrollView.isScrollEnabled = false
+        }
+    }
+    
+    @objc func keyboarWillHide() {
+        searchScrollView.contentInset = .zero
+        searchScrollView.scrollIndicatorInsets = .zero
+        searchScrollViewHeightConstraint.constant = searchField.frame.height - 24
     }
     
     // MARK: - FoodDetailView
@@ -441,16 +492,32 @@ extension MainViewController: UICollectionViewDelegate {
 }
 
 extension MainViewController: UISearchTextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard let searchText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
-        viewModel.changeSearchText(text: searchText)
-        setUpSnapshot()
-        return true
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return false }
+//        if let textRange = Range(range, in: text) {
+//            let updateText = text.replacingCharacters(in: textRange, with: string)
+//            print(updateText)
+//            viewModel.changeSearchText(text: updateText)
+//            setUpSnapshot()
+//        }
+//        return true
+//    }
+    
+    @objc func textFieldDidChange(_ notification: Notification) {
+        if let textField = notification.object as? UITextField, textField == searchField {
+            viewModel.changeSearchText(text: textField.text ?? "")
+            setUpSnapshot()
+        }
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         viewModel.changeSearchText(text: "")
         setUpSnapshot()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
 }
