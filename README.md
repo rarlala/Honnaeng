@@ -20,11 +20,11 @@ UI : `Code based UI` `Collection View` `Diffable DataSource`
 ## 대표적인 구현 화면
 | **재료 리스트 화면** | **재료 추가 화면** |
 |:-----------------------------------------------------:|:-----------------------------------------------------:|
-| ![재료 리스트 화면](https://file.notion.so/f/f/72300c4e-dbcf-4962-8496-36c9bcdb8c50/41b08716-6a7a-4c3e-b295-0601e84f0268/IMG_7882.png?table=block&id=770c3830-3721-4dfa-bf12-c1e198c391bf&spaceId=72300c4e-dbcf-4962-8496-36c9bcdb8c50&expirationTimestamp=1726250400000&signature=d3jHrxNWusfOxbKJWRu0eIOa-ARM_lajp3SPeVufF40&downloadName=IMG_7882.PNG.png) | ![재료 추가 화면](https://file.notion.so/f/f/72300c4e-dbcf-4962-8496-36c9bcdb8c50/f96ffaee-3258-401e-a1fb-f2f5b01973db/IMG_7885.png?table=block&id=fe22e67c-e20e-4cb5-a792-d8c4b05136c4&spaceId=72300c4e-dbcf-4962-8496-36c9bcdb8c50&expirationTimestamp=1726250400000&signature=PEGPtU7WKF1eICqytKoOGT2f2HH1tC-l6WXtcHZKG28&downloadName=IMG_7885.PNG.png) |
+| ![재료 리스트 화면](https://i.ibb.co/8zs4KC3/IMG-7893.png) | ![재료 추가 화면](https://i.ibb.co/g6FFYd7/Simulator-Screenshot-i-Phone-15-2024-04-13-at-17-11-44.png) |
 
 | **바코드로 입력 화면** | **냉장고 관리 화면** |
 |:-----------------------------------------------------:|:-----------------------------------------------------:|
-| ![바코드로 입력 화면](https://file.notion.so/f/f/72300c4e-dbcf-4962-8496-36c9bcdb8c50/581c0fab-2c0e-42b9-8231-581c41334832/IMG_7884.png?table=block&id=2f528846-2ea5-4537-a68c-89f50d9ec0a9&spaceId=72300c4e-dbcf-4962-8496-36c9bcdb8c50&expirationTimestamp=1726250400000&signature=EQYsq-2GygKbImuD4eCVTnSBPOoOc0shUn4Dxd9I8o0&downloadName=IMG_7884.PNG.png) | ![냉장고 관리 화면](https://file.notion.so/f/f/72300c4e-dbcf-4962-8496-36c9bcdb8c50/4b1f029c-e8f6-4176-b23e-3c07c57d31e0/IMG_7881.png?table=block&id=abd0c2a9-2b34-48cc-9315-70f129b02633&spaceId=72300c4e-dbcf-4962-8496-36c9bcdb8c50&expirationTimestamp=1726250400000&signature=NFon9ysFfHF5jEgMygjSk-SL3Z0UjSKCKOwKmJJLp38&downloadName=IMG_7881.PNG.png) |
+| ![바코드로 입력 화면](https://i.ibb.co/LRjmhFc/Simulator-Screenshot-i-Phone-15-2025-01-18-at-08-16-51.png) | ![냉장고 관리 화면](https://i.ibb.co/F6prm9M/IMG-7890.png) |
 
 <br />
 
